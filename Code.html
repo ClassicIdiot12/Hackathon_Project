@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HallPass — Tyee Community Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <a href="hallpass.html">HallPass</a>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f7f3ec;
+      --bg2: #ede7dc;
+      --card: #ffffff;
+      --navy: #1c2b4a;
+      --coral: #e8523f;
+      --green: #3a9e7a;
+      --amber: #f0a218;
+      --peri: #5b6ee8;
+      --text: #1e1e1e;
+      --muted: #6b6b6b;
+      --border: rgba(0, 0, 0, 0.08);
+      --sh-sm: 0 2px 8px rgba(0, 0, 0, 0.07);
+      --sh-md: 0 4px 20px rgba(0, 0, 0, 0.10);
+      --sh-lg: 0 8px 40px rgba(0, 0, 0, 0.15);
+      --r: 12px;
+      --r-sm: 8px;
+      --display: 'Fraunces', serif;
+      --body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 15% 60%, rgba(212, 169, 106, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 85% 15%, rgba(91, 110, 232, 0.07) 0%, transparent 40%);
+    }
+
+    /* AUTH SCREEN */
+    #auth-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .auth-box {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 48px 44px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: var(--sh-lg);
+      border: 1px solid var(--border);
+      animation: popIn .4s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(.92) translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .auth-logo {
+      font-family: var(--display);
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .auth-logo span {
+      color: var(--amber);
+    }
+
+    .auth-tagline {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: var(--bg2);
+      border-radius: var(--r);
+      padding: 4px;
+      margin-bottom: 28px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 9px;
+      border-radius: var(--r-sm);
+      border: none;
+      background: transparent;
+      font-family: var(--body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .18s;
+    }
+
+    .auth-tab.active {
+      background: var(--card);
+      color: var(--navy);
+      box-shadow: var(--sh-sm);
+    }
+
+    .auth-form-row {
+      margin-bottom: 16px;
+    }
+
+    .auth-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .auth-input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: var(--r-sm);
+      border: 2px solid var(--border);
+      font-family: var(--body);
+      font-size: 15px;
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .auth-input:focus {
+      border-color: var(--peri);
+      background: var(--card);
+    }
+
+    .auth-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .auth-submit {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--r);
+      border: none;
+      background: var(--navy);
+      color: #fff;
+      font-family: var(--body);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+      margin-top: 4px;
+    }
+
+    .auth-submit:hover {
+      background: #2a3f6b;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(28, 43, 74, .3);
+    }
+
+    .auth-error {
+      background: rgba(232, 82, 63, 0.09);
+      border: 1px solid rgba(232, 82, 63, 0.25);
+      border-radius: var(--r-sm);
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--coral);
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .auth-footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    /* MAIN APP */
+    #main-app {
+      display: none;
+    }
+
+    header {
+      background: var(--navy);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.22);
+    }
+
+    .logo {
+      font-family: var(--display);
+      font-size: 26px;
+      font-weight: 900;
+      color: #fff;
+      padding: 18px 0;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .logo span {
+      color: var(--amber);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .nav-tab {
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.55);
+      cursor: pointer;
+      transition: all .2s;
+      border: none;
+      background: none;
+      font-family: var(--body);
+    }
+
+    .nav-tab:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-tab.active {
+      color: var(--navy);
+      background: #fff;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.10);
+      border-radius: 20px;
+      padding: 6px 14px 6px 8px;
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--amber);
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--display);
+    }
+
+    .user-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .logout-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      color: rgba(255, 255, 255, 0.65);
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .post-btn {
+      background: var(--amber);
+      color: var(--navy);
+      border: none;
+      padding: 10px 22px;
+      border-radius: 24px;
+      font-family: var(--body);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+
+    .post-btn:hover {
+      background: #fbb62a;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(240, 162, 24, 0.45);
+    }
+
+    /* LAYOUT & COMPONENTS */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .stat-chip {
+      background: var(--card);
+      border-radius: var(--r);
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--sh-sm);
+      border: 1px solid var(--border);
+    }
+
+    .stat-chip .num {
+      font-family: var(--display);
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .stat-chip .lbl {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .lf-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .scard {
+      background: var(--card);
+      border-radius: var(--r);
+      padding: 20px;
+      box-shadow: var(--sh-sm);
+      border: 1px solid var(--border);
+    }
+
+    .scard-title {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .filter-btn {
+      padding: 8px 14px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      font-family: var(--body);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      text-align: left;
+      transition: all .15s;
+    }
+
+    .filter-btn:hover {
+      background: var(--bg2);
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+
+    /* MY STATS */
+    .my-stats {
+      background: linear-gradient(135deg, var(--navy) 0%, #2d4470 100%);
+      border-radius: var(--r);
+      padding: 20px;
+      color: #fff;
+    }
+
+    .my-stats-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 12px;
+    }
+
+    .my-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .my-stat {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--r-sm);
+      padding: 10px 12px;
+    }
+
+    .my-stat .n {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+    }
+
+    .my-stat .l {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 3px;
+    }
+
+    /* LEADERBOARD */
+    .leader-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .leader-rank {
+      font-size: 18px;
+      width: 28px;
+      text-align: center;
+    }
+
+    .leader-name {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .leader-pts {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--amber);
+      background: rgba(240, 162, 24, 0.12);
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    /* ITEM CARDS */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 20px;
+    }
+
+    .item-card {
+      background: var(--card);
+      border-radius: var(--r);
+      padding: 20px;
+      box-shadow: var(--sh-sm);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--acc);
+      cursor: pointer;
+      transition: transform .28s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s;
+      position: relative;
+      transform: rotate(var(--tilt));
+    }
+
+    .item-card::before {
+      content: '📌';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 22px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+      transition: transform .28s;
+    }
+
+    .item-card:hover {
+      transform: rotate(0deg) translateY(-5px) scale(1.02);
+      box-shadow: var(--sh-lg);
+      z-index: 3;
+    }
+
+    .item-card.found {
+      opacity: 0.65;
+    }
+
+    .status-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .status-badge.open {
+      background: rgba(232, 82, 63, 0.12);
+      color: var(--coral);
+    }
+
+    .status-badge.found {
+      background: rgba(58, 158, 122, 0.12);
+      color: var(--green);
+    }
+
+    .card-title {
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+
+    /* MODAL */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 43, 74, 0.52);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--bg);
+      border-radius: 24px 24px 0 0;
+      width: 100%;
+      max-width: 680px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 32px;
+      box-shadow: 0 -8px 50px rgba(0, 0, 0, 0.22);
+      animation: slideUp .32s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .handle {
+      width: 48px;
+      height: 4px;
+      background: var(--bg2);
+      border-radius: 2px;
+      margin: 0 auto 26px;
+    }
+
+    /* FORMS */
+    .finput,
+    .ftextarea,
+    .fselect {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: var(--r-sm);
+      border: 2px solid var(--border);
+      font-family: var(--body);
+      font-size: 14px;
+      background: var(--card);
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    .sbtn {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--r);
+      border: none;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* CHILL ZONE */
+    .chill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .chill-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 32px 26px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform .2s;
+    }
+
+    .chill-card:hover {
+      transform: translateY(-5px);
+    }
+
+    @media (max-width: 780px) {
+      .lf-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="auth-screen">
+    <div class="auth-box">
+      <div class="auth-logo">📌 Hall<span>Pass</span></div>
+      <div class="auth-tagline">Tyee Middle School Community Board</div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login" onclick="authTab('login')">Log In</button>
+        <button class="auth-tab" id="tab-signup" onclick="authTab('signup')">Create Account</button>
+      </div>
+
+      <div id="auth-error" class="auth-error"></div>
+
+      <div id="form-login">
+        <div class="auth-form-row">
+          <label class="auth-label">Username</label>
+          <input class="auth-input" id="li-user" type="text" placeholder="e.g. jayden_k">
+        </div>
+        <div class="auth-form-row">
+          <label class="auth-label">Password</label>
+          <input class="auth-input" id="li-pass" type="password" placeholder="••••••••">
+        </div>
+        <button class="auth-submit" onclick="doLogin()">Log In →</button>
+      </div>
+
+      <div id="form-signup" style="display:none">
+        <div class="auth-2col">
+          <div class="auth-form-row">
+            <label class="auth-label">First Name</label>
+            <input class="auth-input" id="su-first" type="text" placeholder="Jayden">
+          </div>
+          <div class="auth-form-row">
+            <label class="auth-label">Last Initial</label>
+            <input class="auth-input" id="su-last" type="text" placeholder="K" maxlength="1">
+          </div>
+        </div>
+        <div class="auth-form-row">
+          <label class="auth-label">Username</label>
+          <input class="auth-input" id="su-user" type="text" placeholder="jayden_k">
+        </div>
+        <div class="auth-form-row">
+          <label class="auth-label">Password</label>
+          <input class="auth-input" id="su-pass" type="password" placeholder="Choose password">
+        </div>
+        <div class="auth-form-row">
+          <label class="auth-label">Role</label>
+          <select class="auth-input" id="su-role">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher / Staff</option>
+          </select>
+        </div>
+        <button class="auth-submit" onclick="doSignup()">Create Account →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="main-app">
+    <header>
+      <div class="logo">📌 Hall<span>Pass</span></div>
+      <nav class="nav-tabs">
+        <button class="nav-tab active" id="btn-lost" onclick="switchTab('lost')">🔍 Lost & Found</button>
+        <button class="nav-tab" id="btn-sub" onclick="switchTab('sub')">📋 Sub Board</button>
+        <button class="nav-tab" id="btn-chill" onclick="switchTab('chill')">🧘 Chill Zone</button>
+      </nav>
+      <div class="header-right">
+        <div class="user-pill">
+          <div class="user-avatar" id="hdr-avatar">?</div>
+          <span class="user-name" id="hdr-name">User</span>
+        </div>
+        <button class="logout-btn" onclick="doLogout()">Log Out</button>
+        <button class="post-btn" id="post-btn" onclick="openPostModal()">+ Post Item</button>
+      </div>
+    </header>
+    <main class="container">
+      <div id="app"></div>
+    </main>
+  </div>
+
+  <div id="overlay" class="overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    // 1. ACCOUNT MANAGER (STORES ALL DATA IN LOCALSTORAGE)
+    class AccountManager {
+      constructor() {
+        this.storageKey = 'hallpass_accounts_v1';
+        this.accounts = this.loadFromDisk();
+        if (Object.keys(this.accounts).length === 0) this.seedInitialUsers();
+      }
+      seedInitialUsers() {
+        const defaults = [
+          { username: 'jayden_k', password: 'pass123', first: 'Jayden', last: 'K', role: 'student', points: 50 },
+          { username: 'ms_peterson', password: 'teach1', first: 'Ms.', last: 'Peterson', role: 'teacher', points: 0 }
+        ];
+        defaults.forEach(u => this.addAccount(u.username, u));
+      }
+      addAccount(username, data) {
+        this.accounts[username.toLowerCase()] = {
+          username: username.toLowerCase(),
+          ...data,
+          createdAt: new Date().toISOString()
+        };
+        this.saveToDisk();
+      }
+      getAccount(username, password) {
+        const user = this.accounts[username.toLowerCase()];
+        return (user && user.password === password) ? user : null;
+      }
+      saveToDisk() { localStorage.setItem(this.storageKey, JSON.stringify(this.accounts)); }
+      loadFromDisk() {
+        const data = localStorage.getItem(this.storageKey);
+        return data ? JSON.parse(data) : {};
+      }
+    }
+
+    // 2. APP STATE
+    const manager = new AccountManager();
+    let currentUser = null;
+    let currentTab = 'lost', filter = 'all', uid = 500;
+
+    // 3. AUTH LOGIC
+    function authTab(t) {
+      document.getElementById('tab-login').classList.toggle('active', t === 'login');
+      document.getElementById('tab-signup').classList.toggle('active', t === 'signup');
+      document.getElementById('form-login').style.display = (t === 'login') ? 'block' : 'none';
+      document.getElementById('form-signup').style.display = (t === 'signup') ? 'block' : 'none';
+      hideErr();
+    }
+
+    function showErr(m) { const e = document.getElementById('auth-error'); e.textContent = m; e.style.display = 'block'; }
+    function hideErr() { document.getElementById('auth-error').style.display = 'none'; }
+
+    function doLogin() {
+      const u = document.getElementById('li-user').value.trim();
+      const p = document.getElementById('li-pass').value;
+      const user = manager.getAccount(u, p);
+      if (!user) { showErr('Incorrect username or password!'); return; }
+      loginAs(user);
+    }
+
+    function doSignup() {
+      const first = document.getElementById('su-first').value.trim();
+      const last = document.getElementById('su-last').value.trim();
+      const u = document.getElementById('su-user').value.trim();
+      const p = document.getElementById('su-pass').value;
+      const role = document.getElementById('su-role').value;
+
+      if (!first || !u || !p) { showErr('Please fill in required fields!'); return; }
+      if (manager.accounts[u.toLowerCase()]) { showErr('Username already exists!'); return; }
+
+      const newUser = { password: p, first, last, role, points: 0 };
+      manager.addAccount(u, newUser);
+      loginAs(manager.accounts[u.toLowerCase()]);
+    }
+
+    function loginAs(user) {
+      currentUser = user;
+      document.getElementById('auth-screen').style.display = 'none';
+      document.getElementById('main-app').style.display = 'block';
+      document.getElementById('hdr-avatar').textContent = user.first[0];
+      document.getElementById('hdr-name').textContent = user.first + " " + (user.last ? user.last + "." : "");
+      switchTab(user.role === 'teacher' ? 'sub' : 'lost');
+    }
+
+    function doLogout() {
+      currentUser = null;
+      document.getElementById('main-app').style.display = 'none';
+      document.getElementById('auth-screen').style.display = 'flex';
+      authTab('login');
+    }
+
+    // 4. NAVIGATION & DATA
+    function switchTab(t) {
+      currentTab = t;
+      document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`btn-${t}`).classList.add('active');
+      document.getElementById('post-btn').style.display = (t === 'chill') ? 'none' : 'block';
+      render();
+    }
+
+    // MOCK DATA
+    let items = [
+      { id: 1, title: 'Creeper Keychain', cat: '🔑', loc: 'Office', by: 'Tyler W.', status: 'open', acc: '#3a9e7a', tilt: -2 },
+      { id: 2, title: 'Stanley Cup', cat: '🍱', loc: 'Cafeteria', by: 'Priya K.', status: 'found', acc: '#5b6ee8', tilt: 1.5 }
+    ];
+
+    // 5. RENDERING
+    function render() {
+      const app = document.getElementById('app');
+      if (currentTab === 'lost') app.innerHTML = renderLost();
+      else if (currentTab === 'sub') app.innerHTML = `<h2>Sub Board</h2><p style="margin-top:20px; color:var(--muted)">Teacher instructions will appear here.</p>`;
+      else app.innerHTML = renderChill();
+    }
+
+    function renderLost() {
+      return `
+    <div class="lf-layout">
+        <aside class="sidebar">
+            <div class="my-stats">
+                <div class="my-stats-title">Your Balance</div>
+                <div class="my-stat"><div class="n">${currentUser.points}</div><div class="l">HallPass Points</div></div>
+            </div>
+            <div class="scard">
+                <div class="scard-title">Filter</div>
+                <button class="filter-btn active">All Items</button>
+            </div>
+        </aside>
+        <div class="items-grid">
+            ${items.map(i => `
+                <div class="item-card ${i.status}" style="--acc:${i.acc}; --tilt:${i.tilt}deg">
+                    <div class="status-badge ${i.status}">${i.status}</div>
+                    <div style="font-size:30px; margin:10px 0">${i.cat}</div>
+                    <div class="card-title">${i.title}</div>
+                    <div style="font-size:12px; color:var(--muted)">📍 ${i.loc}</div>
+                </div>
+            `).join('')}
+        </div>
+    </div>`;
+    }
+
+    function renderChill() {
+      return `
+    <div class="chill-grid">
+        <div class="chill-card"><h3>🌬️ Breathing</h3><p>Focus on the rhythm.</p></div>
+        <div class="chill-card"><h3>🌸 Garden</h3><p>Grow digital flowers.</p></div>
+    </div>`;
+    }
+
+    function openPostModal() {
+      setModal(`
+        <div class="handle"></div>
+        <h3>Post Lost Item</h3>
+        <input class="finput" id="p-title" placeholder="What did you lose?">
+        <textarea class="ftextarea" id="p-desc" placeholder="Details..."></textarea>
+        <button class="sbtn" onclick="submitPost()">Post Item</button>
+    `);
+    }
+
+    function submitPost() {
+      const title = document.getElementById('p-title').value;
+      if (!title) return;
+      items.unshift({ id: uid++, title, cat: '❓', loc: 'Unknown', by: currentUser.first, status: 'open', acc: '#e8523f', tilt: 1 });
+      closeModal(); render();
+    }
+
+    function setModal(html) { document.getElementById('modal-body').innerHTML = html; document.getElementById('overlay').classList.add('open'); }
+    function closeModal() { document.getElementById('overlay').classList.remove('open'); }
+  </script>
+</body>
+
+</html>
