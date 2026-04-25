@@ -10,7 +10,6 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <a href="hallpass.html">HallPass</a>
   <style>
     *,
     *::before,
@@ -245,6 +244,7 @@
       display: flex;
       gap: 4px;
       flex: 1;
+      flex-wrap: wrap;
     }
 
     .nav-tab {
@@ -583,6 +583,363 @@
       margin-bottom: 5px;
     }
 
+    /* ============================== */
+    /* HOMEWORK & HELP TAB            */
+    /* ============================== */
+    .hw-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .hw-feed-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .hw-feed-header h2 {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+
+    .hw-feed-header .sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hw-empty {
+      background: var(--card);
+      border-radius: var(--r);
+      padding: 48px 24px;
+      text-align: center;
+      border: 2px dashed var(--border);
+      color: var(--muted);
+    }
+
+    .hw-empty .em {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .hw-empty h4 {
+      font-family: var(--display);
+      font-size: 18px;
+      color: var(--navy);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .hw-post {
+      background: var(--card);
+      border-radius: var(--r);
+      box-shadow: var(--sh-sm);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--peri);
+      overflow: hidden;
+      transition: box-shadow .2s;
+    }
+
+    .hw-post:hover {
+      box-shadow: var(--sh-md);
+    }
+
+    .hw-post-head {
+      padding: 18px 22px 12px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .hw-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--peri), #8794f0);
+      color: #fff;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hw-avatar.teacher {
+      background: linear-gradient(135deg, var(--amber), #f5bf57);
+      color: var(--navy);
+    }
+
+    .hw-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .hw-author {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .hw-author .role-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      margin-left: 6px;
+      vertical-align: 2px;
+    }
+
+    .hw-author .role-tag.student {
+      background: rgba(91, 110, 232, 0.15);
+      color: var(--peri);
+    }
+
+    .hw-author .role-tag.teacher {
+      background: rgba(240, 162, 24, 0.18);
+      color: #b87a0a;
+    }
+
+    .hw-time {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .hw-body {
+      padding: 4px 22px 18px;
+    }
+
+    .hw-topic {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    .hw-details {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .hw-actions {
+      padding: 10px 22px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .reply-count {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .reply-count strong {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .reply-btn {
+      margin-left: auto;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-family: var(--body);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all .18s;
+    }
+
+    .reply-btn:hover {
+      background: #2a3f6b;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(28, 43, 74, 0.28);
+    }
+
+    .reply-btn.alt {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+    }
+
+    .reply-btn.alt:hover {
+      background: var(--bg2);
+      color: var(--navy);
+      transform: none;
+      box-shadow: none;
+    }
+
+    .hw-replies {
+      background: var(--bg);
+      padding: 4px 22px 18px;
+      display: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .hw-replies.open {
+      display: block;
+      animation: fadeIn .25s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reply-item {
+      display: flex;
+      gap: 10px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .reply-item:last-child {
+      border-bottom: none;
+    }
+
+    .reply-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #5fc498);
+      color: #fff;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .reply-avatar.teacher {
+      background: linear-gradient(135deg, var(--amber), #f5bf57);
+      color: var(--navy);
+    }
+
+    .reply-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .reply-author {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .reply-author .role-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 1px 6px;
+      border-radius: 9px;
+      margin-left: 5px;
+      vertical-align: 2px;
+    }
+
+    .reply-author .role-tag.student {
+      background: rgba(91, 110, 232, 0.15);
+      color: var(--peri);
+    }
+
+    .reply-author .role-tag.teacher {
+      background: rgba(240, 162, 24, 0.18);
+      color: #b87a0a;
+    }
+
+    .reply-time {
+      font-size: 11px;
+      color: var(--muted);
+      margin-left: 4px;
+    }
+
+    .reply-text {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text);
+      margin-top: 3px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .reply-form {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
+      margin-top: 4px;
+    }
+
+    .reply-form textarea {
+      flex: 1;
+      min-height: 64px;
+      padding: 10px 14px;
+      border-radius: var(--r-sm);
+      border: 2px solid var(--border);
+      font-family: var(--body);
+      font-size: 14px;
+      background: var(--card);
+      outline: none;
+      resize: vertical;
+      transition: border-color .15s;
+    }
+
+    .reply-form textarea:focus {
+      border-color: var(--peri);
+    }
+
+    .reply-form button {
+      background: var(--peri);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: var(--r-sm);
+      font-family: var(--body);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      align-self: stretch;
+      transition: all .18s;
+    }
+
+    .reply-form button:hover {
+      background: #4a5dd6;
+    }
+
     /* MODAL */
     .overlay {
       position: fixed;
@@ -631,6 +988,236 @@
       margin: 0 auto 26px;
     }
 
+    .modal h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .modal-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      margin-top: 6px;
+    }
+
+    /* ITEM DETAIL MODAL */
+    .detail-hero {
+      text-align: center;
+      padding: 18px 0 22px;
+      background: var(--bg2);
+      border-radius: var(--r);
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .detail-emoji {
+      font-size: 72px;
+      line-height: 1;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .detail-hero .status-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .detail-row .lbl {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--muted);
+      min-width: 76px;
+    }
+
+    .sbtn.ghost {
+      background: transparent;
+      color: var(--navy);
+      border: 2px solid var(--border);
+      margin-top: 6px;
+    }
+
+    .sbtn.ghost:hover {
+      background: var(--bg2);
+      border-color: var(--navy);
+    }
+
+    .sbtn.coral {
+      background: var(--coral);
+    }
+
+    .sbtn.coral:hover {
+      background: #d3422f;
+    }
+
+    .sbtn.green {
+      background: var(--green);
+    }
+
+    .sbtn.green:hover {
+      background: #2f8767;
+    }
+
+    /* BREATHING EXERCISE */
+    .breathe-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 16px 32px;
+      gap: 24px;
+    }
+
+    .breathe-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #8794f0, var(--peri) 70%);
+      box-shadow: 0 12px 50px rgba(91, 110, 232, 0.45);
+      transform: scale(0.5);
+      transition: transform 4s ease-in-out;
+    }
+
+    .breathe-circle.expand {
+      transform: scale(1.15);
+    }
+
+    .breathe-label {
+      font-family: var(--display);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.5px;
+      min-height: 36px;
+    }
+
+    .breathe-cycle-count {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* GARDEN */
+    .garden-stage {
+      position: relative;
+      width: 100%;
+      height: 360px;
+      border-radius: var(--r);
+      background: linear-gradient(180deg, #c5e8f5 0%, #cfe9b8 55%, #97c976 100%);
+      overflow: hidden;
+      cursor: crosshair;
+      margin-bottom: 14px;
+      box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .garden-stage::before {
+      content: '☀️';
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 32px;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+    }
+
+    .garden-flower {
+      position: absolute;
+      transform: translate(-50%, -50%) scale(0);
+      animation: bloom .55s cubic-bezier(.34, 1.56, .64, 1) forwards;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+      user-select: none;
+    }
+
+    @keyframes bloom {
+      0% {
+        transform: translate(-50%, -50%) scale(0) rotate(-30deg);
+      }
+
+      60% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(8deg);
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      }
+    }
+
+    .garden-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .garden-info .count {
+      background: var(--bg2);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    /* CHILL CARD ENHANCEMENTS */
+    .chill-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chill-card h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .chill-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .chill-card .chill-cta {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--peri);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
     /* FORMS */
     .finput,
     .ftextarea,
@@ -644,6 +1231,18 @@
       background: var(--card);
       outline: none;
       margin-bottom: 10px;
+      transition: border-color .15s;
+    }
+
+    .finput:focus,
+    .ftextarea:focus {
+      border-color: var(--peri);
+    }
+
+    .ftextarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.5;
     }
 
     .sbtn {
@@ -655,6 +1254,15 @@
       color: #fff;
       font-weight: 700;
       cursor: pointer;
+      font-family: var(--body);
+      font-size: 15px;
+      transition: all .18s;
+      margin-top: 8px;
+    }
+
+    .sbtn:hover {
+      background: #2a3f6b;
+      transform: translateY(-1px);
     }
 
     /* CHILL ZONE */
@@ -680,6 +1288,11 @@
     @media (max-width: 780px) {
       .lf-layout {
         grid-template-columns: 1fr;
+      }
+
+      .nav-tab {
+        padding: 8px 12px;
+        font-size: 13px;
       }
     }
   </style>
@@ -748,6 +1361,7 @@
       <nav class="nav-tabs">
         <button class="nav-tab active" id="btn-lost" onclick="switchTab('lost')">🔍 Lost & Found</button>
         <button class="nav-tab" id="btn-sub" onclick="switchTab('sub')">📋 Sub Board</button>
+        <button class="nav-tab" id="btn-homework" onclick="switchTab('homework')">📚 Homework & Help</button>
         <button class="nav-tab" id="btn-chill" onclick="switchTab('chill')">🧘 Chill Zone</button>
       </nav>
       <div class="header-right">
@@ -808,6 +1422,7 @@
     const manager = new AccountManager();
     let currentUser = null;
     let currentTab = 'lost', filter = 'all', uid = 500;
+    let openReplyBox = null; // tracks which post id has its reply form expanded
 
     // 3. AUTH LOGIC
     function authTab(t) {
@@ -863,9 +1478,21 @@
     // 4. NAVIGATION & DATA
     function switchTab(t) {
       currentTab = t;
+      openReplyBox = null;
       document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
       document.getElementById(`btn-${t}`).classList.add('active');
-      document.getElementById('post-btn').style.display = (t === 'chill') ? 'none' : 'block';
+
+      // Update post button visibility & label per tab
+      const postBtn = document.getElementById('post-btn');
+      if (t === 'chill' || t === 'sub') {
+        postBtn.style.display = 'none';
+      } else if (t === 'homework') {
+        postBtn.style.display = 'block';
+        postBtn.textContent = '+ Ask for Help';
+      } else {
+        postBtn.style.display = 'block';
+        postBtn.textContent = '+ Post Item';
+      }
       render();
     }
 
@@ -875,15 +1502,65 @@
       { id: 2, title: 'Stanley Cup', cat: '🍱', loc: 'Cafeteria', by: 'Priya K.', status: 'found', acc: '#5b6ee8', tilt: 1.5 }
     ];
 
+    // HOMEWORK & HELP DATA - posts have topic, details, author info, replies
+    let homeworkPosts = [
+      {
+        id: 'hw1',
+        topic: 'Stuck on quadratic equations — what does "completing the square" actually mean?',
+        details: "We're on chapter 4 in Algebra and I can solve them with the quadratic formula but Mr. Liu wants us to show completing the square. I get lost after moving the constant. Anyone have a clear way to think about it?",
+        authorName: 'Jayden K.',
+        authorRole: 'student',
+        timestamp: Date.now() - 1000 * 60 * 60 * 5, // 5h ago
+        replies: [
+          {
+            author: 'Ms. Peterson',
+            role: 'teacher',
+            text: "Great question! Think of it as turning x² + bx into a perfect square. Take half of b, square it, then add AND subtract that number. Want me to walk through one in office hours tomorrow?",
+            timestamp: Date.now() - 1000 * 60 * 60 * 4
+          }
+        ]
+      },
+      {
+        id: 'hw2',
+        topic: 'Need help citing a YouTube video in MLA format',
+        details: "It's for the science fair report. Do I use the channel name or the uploader's real name? And how do I handle the timestamp if I'm only quoting one part?",
+        authorName: 'Priya K.',
+        authorRole: 'student',
+        timestamp: Date.now() - 1000 * 60 * 90, // 90 min ago
+        replies: []
+      }
+    ];
+
     // 5. RENDERING
     function render() {
       const app = document.getElementById('app');
       if (currentTab === 'lost') app.innerHTML = renderLost();
       else if (currentTab === 'sub') app.innerHTML = `<h2>Sub Board</h2><p style="margin-top:20px; color:var(--muted)">Teacher instructions will appear here.</p>`;
+      else if (currentTab === 'homework') app.innerHTML = renderHomework();
       else app.innerHTML = renderChill();
     }
 
     function renderLost() {
+      const visible = items.filter(i => filter === 'all' ? true : i.status === filter);
+      const counts = {
+        all: items.length,
+        open: items.filter(i => i.status === 'open').length,
+        found: items.filter(i => i.status === 'found').length
+      };
+
+      const grid = visible.length === 0
+        ? `<div class="hw-empty"><div class="em">🔎</div><h4>No items here yet</h4><p>Try a different filter or post one.</p></div>`
+        : `<div class="items-grid">
+            ${visible.map(i => `
+              <div class="item-card ${i.status}" style="--acc:${i.acc}; --tilt:${i.tilt}deg" onclick="openItemDetail(${i.id})">
+                <div class="status-badge ${i.status}">${i.status}</div>
+                <div style="font-size:30px; margin:10px 0">${i.cat}</div>
+                <div class="card-title">${escapeHTML(i.title)}</div>
+                <div style="font-size:12px; color:var(--muted)">📍 ${escapeHTML(i.loc)}</div>
+              </div>
+            `).join('')}
+          </div>`;
+
       return `
     <div class="lf-layout">
         <aside class="sidebar">
@@ -893,49 +1570,402 @@
             </div>
             <div class="scard">
                 <div class="scard-title">Filter</div>
-                <button class="filter-btn active">All Items</button>
+                <div class="filter-group">
+                  <button class="filter-btn ${filter === 'all' ? 'active' : ''}" onclick="applyFilter('all')">All Items <span style="float:right;opacity:.6">${counts.all}</span></button>
+                  <button class="filter-btn ${filter === 'open' ? 'active' : ''}" onclick="applyFilter('open')">Still Lost <span style="float:right;opacity:.6">${counts.open}</span></button>
+                  <button class="filter-btn ${filter === 'found' ? 'active' : ''}" onclick="applyFilter('found')">Found <span style="float:right;opacity:.6">${counts.found}</span></button>
+                </div>
             </div>
         </aside>
-        <div class="items-grid">
-            ${items.map(i => `
-                <div class="item-card ${i.status}" style="--acc:${i.acc}; --tilt:${i.tilt}deg">
-                    <div class="status-badge ${i.status}">${i.status}</div>
-                    <div style="font-size:30px; margin:10px 0">${i.cat}</div>
-                    <div class="card-title">${i.title}</div>
-                    <div style="font-size:12px; color:var(--muted)">📍 ${i.loc}</div>
-                </div>
-            `).join('')}
-        </div>
+        ${grid}
     </div>`;
+    }
+
+    function applyFilter(f) {
+      filter = f;
+      render();
     }
 
     function renderChill() {
+      const activities = [
+        { id: 'breathing', emoji: '🌬️', title: 'Breathing', desc: 'Follow the rhythm. Slow inhale, slow exhale — reset in two minutes.' },
+        { id: 'garden', emoji: '🌸', title: 'Garden', desc: 'Tap anywhere on the grass to plant a flower. No goals, just bloom.' }
+      ];
       return `
     <div class="chill-grid">
-        <div class="chill-card"><h3>🌬️ Breathing</h3><p>Focus on the rhythm.</p></div>
-        <div class="chill-card"><h3>🌸 Garden</h3><p>Grow digital flowers.</p></div>
+      ${activities.map(a => `
+        <div class="chill-card" onclick="openChillActivity('${a.id}')">
+          <h3>${a.emoji} ${a.title}</h3>
+          <p>${a.desc}</p>
+          <span class="chill-cta">Start →</span>
+        </div>
+      `).join('')}
     </div>`;
     }
 
+    // ========== HOMEWORK & HELP RENDERING ==========
+    function renderHomework() {
+      const sorted = [...homeworkPosts].sort((a, b) => b.timestamp - a.timestamp);
+
+      const feedHTML = sorted.length === 0
+        ? `<div class="hw-empty">
+              <div class="em">📚</div>
+              <h4>No questions yet</h4>
+              <p>Be the first to ask for help — anyone can post here.</p>
+           </div>`
+        : sorted.map(p => renderHomeworkPost(p)).join('');
+
+      return `
+        <div class="hw-feed">
+          <div class="hw-feed-header">
+            <h2>Homework & Help</h2>
+            <span class="sub">Stuck on something? Ask the community — students and teachers welcome.</span>
+          </div>
+          ${feedHTML}
+        </div>
+      `;
+    }
+
+    function renderHomeworkPost(p) {
+      const initial = p.authorName ? p.authorName.charAt(0).toUpperCase() : '?';
+      const avatarClass = p.authorRole === 'teacher' ? 'hw-avatar teacher' : 'hw-avatar';
+      const roleTag = `<span class="role-tag ${p.authorRole}">${p.authorRole === 'teacher' ? 'Teacher' : 'Student'}</span>`;
+      const formOpen = openReplyBox === p.id;
+
+      const repliesHTML = p.replies.map(r => {
+        const rInit = r.author.charAt(0).toUpperCase();
+        const rAvatar = r.role === 'teacher' ? 'reply-avatar teacher' : 'reply-avatar';
+        const rTag = `<span class="role-tag ${r.role}">${r.role === 'teacher' ? 'Teacher' : 'Student'}</span>`;
+        return `
+          <div class="reply-item">
+            <div class="${rAvatar}">${rInit}</div>
+            <div class="reply-content">
+              <div class="reply-author">${escapeHTML(r.author)} ${rTag}<span class="reply-time">· ${formatTime(r.timestamp)}</span></div>
+              <div class="reply-text">${escapeHTML(r.text)}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const replyFormHTML = formOpen ? `
+        <div class="reply-form">
+          <textarea id="reply-text-${p.id}" placeholder="Share what you know — be helpful and kind."></textarea>
+          <button onclick="submitReply('${p.id}')">Post Reply</button>
+        </div>
+      ` : '';
+
+      // Show the replies block if there are any replies OR the form is open
+      const showBlock = p.replies.length > 0 || formOpen;
+
+      return `
+        <article class="hw-post" id="post-${p.id}">
+          <div class="hw-post-head">
+            <div class="${avatarClass}">${initial}</div>
+            <div class="hw-meta">
+              <div class="hw-author">${escapeHTML(p.authorName)} ${roleTag}</div>
+              <div class="hw-time">${formatTime(p.timestamp)}</div>
+            </div>
+          </div>
+          <div class="hw-body">
+            <div class="hw-topic">${escapeHTML(p.topic)}</div>
+            <div class="hw-details">${escapeHTML(p.details)}</div>
+          </div>
+          <div class="hw-actions">
+            <span class="reply-count">💬 <strong>${p.replies.length}</strong> ${p.replies.length === 1 ? 'reply' : 'replies'}</span>
+            <button class="reply-btn" onclick="toggleReplyForm('${p.id}')">${formOpen ? '✕ Cancel' : '↩ Reply'}</button>
+          </div>
+          <div class="hw-replies ${showBlock ? 'open' : ''}">
+            ${repliesHTML}
+            ${replyFormHTML}
+          </div>
+        </article>
+      `;
+    }
+
+    function toggleReplyForm(postId) {
+      openReplyBox = (openReplyBox === postId) ? null : postId;
+      render();
+      // Auto-focus the newly opened textarea
+      if (openReplyBox === postId) {
+        setTimeout(() => {
+          const ta = document.getElementById(`reply-text-${postId}`);
+          if (ta) ta.focus();
+        }, 30);
+      }
+    }
+
+    function submitReply(postId) {
+      const ta = document.getElementById(`reply-text-${postId}`);
+      if (!ta) return;
+      const text = ta.value.trim();
+      if (!text) {
+        ta.style.borderColor = 'var(--coral)';
+        ta.focus();
+        return;
+      }
+      const post = homeworkPosts.find(p => p.id === postId);
+      if (!post) return;
+
+      post.replies.push({
+        author: currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : ''),
+        role: currentUser.role,
+        text: text,
+        timestamp: Date.now()
+      });
+      openReplyBox = null;
+      render();
+    }
+
+    // ========== POST CREATION (TAB-AWARE) ==========
     function openPostModal() {
+      if (currentTab === 'homework') {
+        openHomeworkPostModal();
+      } else {
+        openLostItemModal();
+      }
+    }
+
+    function openLostItemModal() {
       setModal(`
         <div class="handle"></div>
         <h3>Post Lost Item</h3>
         <input class="finput" id="p-title" placeholder="What did you lose?">
         <textarea class="ftextarea" id="p-desc" placeholder="Details..."></textarea>
         <button class="sbtn" onclick="submitPost()">Post Item</button>
-    `);
+      `);
+    }
+
+    function openHomeworkPostModal() {
+      setModal(`
+        <div class="handle"></div>
+        <h3>Ask for Homework Help</h3>
+        <p class="modal-sub">Anyone in the community can answer — be specific so it's easy to help you.</p>
+
+        <label class="field-label">Topic / Subject</label>
+        <input class="finput" id="hw-topic" placeholder="e.g. Algebra — solving for x in word problems" maxlength="160">
+
+        <label class="field-label">More Details</label>
+        <textarea class="ftextarea" id="hw-details" placeholder="What are you stuck on? Include the question, what you've tried, and where you got confused."></textarea>
+
+        <button class="sbtn" onclick="submitHomeworkPost()">Post Question</button>
+      `);
     }
 
     function submitPost() {
       const title = document.getElementById('p-title').value;
       if (!title) return;
       items.unshift({ id: uid++, title, cat: '❓', loc: 'Unknown', by: currentUser.first, status: 'open', acc: '#e8523f', tilt: 1 });
-      closeModal(); render();
+      closeModal();
+      render();
+    }
+
+    // ========== LOST ITEM DETAIL ==========
+    function openItemDetail(itemId) {
+      const item = items.find(i => i.id === itemId);
+      if (!item) return;
+
+      const isFound = item.status === 'found';
+      const userName = currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : '');
+
+      setModal(`
+        <div class="handle"></div>
+        <div class="detail-hero">
+          <div class="status-badge ${item.status}">${item.status}</div>
+          <div class="detail-emoji">${item.cat}</div>
+        </div>
+        <h3>${escapeHTML(item.title)}</h3>
+        <p class="modal-sub">${isFound ? 'This item has been found and reunited.' : 'Still missing — help out if you spot it!'}</p>
+
+        <div class="detail-row"><span class="lbl">Location</span><span>📍 ${escapeHTML(item.loc)}</span></div>
+        <div class="detail-row"><span class="lbl">Posted by</span><span>👤 ${escapeHTML(item.by)}</span></div>
+        <div class="detail-row"><span class="lbl">Status</span><span>${isFound ? '✅ Found' : '🔍 Still lost'}</span></div>
+
+        <button class="sbtn ${isFound ? 'ghost' : 'green'}" onclick="toggleItemStatus(${item.id})">
+          ${isFound ? 'Mark as Still Lost' : "I Found This — Mark as Found"}
+        </button>
+        <button class="sbtn ghost" onclick="closeModal()">Close</button>
+      `);
+    }
+
+    function toggleItemStatus(itemId) {
+      const item = items.find(i => i.id === itemId);
+      if (!item) return;
+      item.status = item.status === 'open' ? 'found' : 'open';
+      closeModal();
+      render();
+    }
+
+    // ========== CHILL ZONE ACTIVITIES ==========
+    let breathingTimer = null;
+    let gardenFlowers = [];
+
+    function openChillActivity(type) {
+      if (type === 'breathing') openBreathing();
+      else if (type === 'garden') openGarden();
+    }
+
+    function openBreathing() {
+      setModal(`
+        <div class="handle"></div>
+        <h3 style="text-align:center">🌬️ Breathing</h3>
+        <p class="modal-sub" style="text-align:center">Follow the circle. 4 in, hold 2, 4 out.</p>
+        <div class="breathe-stage">
+          <div class="breathe-circle" id="breathe-circle"></div>
+          <div class="breathe-label" id="breathe-label">Get ready…</div>
+          <div class="breathe-cycle-count" id="breathe-cycles">Cycle 0</div>
+        </div>
+        <button class="sbtn ghost" onclick="closeModal()">Done</button>
+      `);
+      startBreathingAnim();
+    }
+
+    function startBreathingAnim() {
+      const circle = document.getElementById('breathe-circle');
+      const label = document.getElementById('breathe-label');
+      const cyclesEl = document.getElementById('breathe-cycles');
+      if (!circle || !label) return;
+
+      // Phases: inhale 4s -> hold 2s -> exhale 4s -> rest 1s = 11s cycle
+      const phases = [
+        { text: 'Breathe in…', dur: 4000, expand: true },
+        { text: 'Hold', dur: 2000, expand: true },
+        { text: 'Breathe out…', dur: 4000, expand: false },
+        { text: 'Rest', dur: 1000, expand: false }
+      ];
+      let phaseIdx = 0;
+      let cycles = 0;
+
+      function nextPhase() {
+        const p = phases[phaseIdx];
+        label.textContent = p.text;
+        circle.classList.toggle('expand', p.expand);
+        if (phaseIdx === 0) {
+          cycles++;
+          cyclesEl.textContent = `Cycle ${cycles}`;
+        }
+        phaseIdx = (phaseIdx + 1) % phases.length;
+        breathingTimer = setTimeout(nextPhase, p.dur);
+      }
+      // Small delay so transition kicks in cleanly
+      breathingTimer = setTimeout(nextPhase, 300);
+    }
+
+    function stopBreathingAnim() {
+      if (breathingTimer) {
+        clearTimeout(breathingTimer);
+        breathingTimer = null;
+      }
+    }
+
+    function openGarden() {
+      setModal(`
+        <div class="handle"></div>
+        <h3 style="text-align:center">🌸 Garden</h3>
+        <p class="modal-sub" style="text-align:center">Tap the grass to plant. Each one stays for the session.</p>
+        <div class="garden-stage" id="garden-stage" onclick="plantFlower(event)">
+          ${gardenFlowers.map(f => `<span class="garden-flower" style="left:${f.x}%; top:${f.y}%; font-size:${f.size}px">${f.emoji}</span>`).join('')}
+        </div>
+        <div class="garden-info">
+          <span class="count" id="garden-count">${gardenFlowers.length} planted</span>
+          <span>Each tap blooms a new flower 🌱</span>
+          <button class="reply-btn alt" style="margin-left:auto" onclick="resetGarden()">Clear</button>
+        </div>
+      `);
+    }
+
+    function plantFlower(event) {
+      const stage = document.getElementById('garden-stage');
+      if (!stage) return;
+      const rect = stage.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+      // Keep flowers in the lower 60% (the "grass") for a natural look
+      const clampedY = Math.max(35, Math.min(95, y));
+
+      const emojis = ['🌸', '🌺', '🌷', '🌻', '🌹', '🌼', '🪷', '💐'];
+      const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+      const size = 24 + Math.floor(Math.random() * 18); // 24-42px
+
+      const flower = { x, y: clampedY, emoji, size };
+      gardenFlowers.push(flower);
+
+      // Append directly without re-rendering the whole modal (preserves animation)
+      const span = document.createElement('span');
+      span.className = 'garden-flower';
+      span.style.left = `${x}%`;
+      span.style.top = `${clampedY}%`;
+      span.style.fontSize = `${size}px`;
+      span.textContent = emoji;
+      stage.appendChild(span);
+
+      const counter = document.getElementById('garden-count');
+      if (counter) counter.textContent = `${gardenFlowers.length} planted`;
+    }
+
+    function resetGarden() {
+      gardenFlowers = [];
+      openGarden();
+    }
+
+    function submitHomeworkPost() {
+      const topicEl = document.getElementById('hw-topic');
+      const detailsEl = document.getElementById('hw-details');
+      const topic = topicEl.value.trim();
+      const details = detailsEl.value.trim();
+
+      if (!topic) {
+        topicEl.style.borderColor = 'var(--coral)';
+        topicEl.focus();
+        return;
+      }
+      if (!details) {
+        detailsEl.style.borderColor = 'var(--coral)';
+        detailsEl.focus();
+        return;
+      }
+
+      homeworkPosts.unshift({
+        id: 'hw' + (uid++),
+        topic: topic,
+        details: details,
+        authorName: currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : ''),
+        authorRole: currentUser.role,
+        timestamp: Date.now(),
+        replies: []
+      });
+      closeModal();
+      render();
     }
 
     function setModal(html) { document.getElementById('modal-body').innerHTML = html; document.getElementById('overlay').classList.add('open'); }
-    function closeModal() { document.getElementById('overlay').classList.remove('open'); }
+    function closeModal() {
+      stopBreathingAnim();
+      document.getElementById('overlay').classList.remove('open');
+    }
+
+    // ========== UTILITIES ==========
+    function escapeHTML(str) {
+      if (str == null) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatTime(ts) {
+      const diff = Date.now() - ts;
+      const mins = Math.floor(diff / 60000);
+      if (mins < 1) return 'just now';
+      if (mins < 60) return mins + 'm ago';
+      const hrs = Math.floor(mins / 60);
+      if (hrs < 24) return hrs + 'h ago';
+      const days = Math.floor(hrs / 24);
+      if (days < 7) return days + 'd ago';
+      return new Date(ts).toLocaleDateString();
+    }
   </script>
 </body>
 
