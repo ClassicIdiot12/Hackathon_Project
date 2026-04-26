@@ -134,6 +134,312 @@
       padding: 5px 12px; border-radius: 16px; cursor: pointer; transition: all .15s;
     }
     .logout-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+
+    /* POINTS BUTTON IN HEADER */
+    .points-btn {
+      position: relative;
+      background: linear-gradient(135deg, var(--amber), #fbb62a);
+      color: var(--navy); border: none;
+      padding: 7px 14px 7px 11px; border-radius: 20px;
+      font-family: var(--body); font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all .15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .points-btn:hover {
+      background: linear-gradient(135deg, #fbb62a, #ffc944);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(240, 162, 24, 0.4);
+    }
+    .points-icon { font-size: 15px; line-height: 1; }
+    .points-label { line-height: 1; }
+    .points-dot {
+      position: absolute; top: -3px; right: -3px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--coral);
+      border: 2px solid var(--navy);
+      display: none;
+      animation: dotPulse 1.4s ease-in-out infinite;
+    }
+    .points-dot.active { display: block; }
+    @keyframes dotPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(232, 82, 63, 0.6); }
+      50%      { transform: scale(1.15); box-shadow: 0 0 0 8px rgba(232, 82, 63, 0); }
+    }
+
+    /* NOTIFICATION TOASTS (slide in from right when student logs in with pending awards) */
+    .notif-stack {
+      position: fixed; top: 86px; right: 24px;
+      z-index: 250; display: flex; flex-direction: column; gap: 12px;
+      pointer-events: none;
+    }
+    .notif-toast {
+      background: var(--card); border-radius: 14px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+      border: 1px solid var(--border);
+      padding: 16px 22px 14px;
+      min-width: 280px; max-width: 380px;
+      position: relative; overflow: hidden;
+      animation: notifSlide .4s cubic-bezier(.34, 1.56, .64, 1);
+      pointer-events: auto;
+    }
+    .notif-toast.closing { animation: notifSlideOut .35s ease-in forwards; }
+    @keyframes notifSlide {
+      from { transform: translateX(120%); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes notifSlideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to   { transform: translateX(120%); opacity: 0; }
+    }
+    .notif-icon {
+      display: inline-block; font-size: 20px; margin-right: 8px;
+      vertical-align: -2px;
+    }
+    .notif-text {
+      display: inline-block; font-size: 14.5px; font-weight: 600;
+      color: var(--navy); line-height: 1.4;
+    }
+    .notif-sub {
+      font-size: 12px; color: var(--muted);
+      margin-top: 4px; font-weight: 500;
+    }
+    .notif-progress {
+      position: absolute; bottom: 0; left: 0;
+      height: 4px; background: var(--peri);
+      width: 100%;
+      animation: notifShrink var(--notif-dur, 5s) linear forwards;
+    }
+    @keyframes notifShrink {
+      from { width: 100%; }
+      to   { width: 0%; }
+    }
+
+    /* POINTS PAGE (full-screen overlay, similar in feel to auth screen) */
+    #points-page {
+      display: none;
+      min-height: 100vh;
+      padding: 0;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(240, 162, 24, 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 80% 90%, rgba(91, 110, 232, 0.08) 0%, transparent 50%),
+        var(--bg);
+      animation: fadeIn .25s ease;
+    }
+    .pts-topbar {
+      padding: 18px 32px;
+      display: flex; align-items: center; gap: 16px;
+      background: var(--navy); box-shadow: 0 2px 20px rgba(0,0,0,0.18);
+    }
+    .pts-back {
+      background: rgba(255,255,255,0.12); color: #fff; border: none;
+      padding: 8px 18px; border-radius: 20px;
+      font-family: var(--body); font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all .15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pts-back:hover { background: rgba(255,255,255,0.22); transform: translateX(-2px); }
+    .pts-topbar-title {
+      font-family: var(--display); font-size: 20px; font-weight: 800; color: #fff;
+      flex: 1; display: flex; align-items: center; gap: 10px;
+    }
+    .pts-content {
+      max-width: 880px; margin: 0 auto;
+      padding: 32px 24px 60px;
+      display: flex; flex-direction: column; gap: 22px;
+    }
+
+    .pts-intro {
+      background: linear-gradient(135deg, rgba(240, 162, 24, 0.12), rgba(91, 110, 232, 0.08));
+      border-radius: 16px; padding: 22px 26px;
+      border: 1px solid var(--border);
+    }
+    .pts-intro h2 {
+      font-family: var(--display); font-size: 22px; font-weight: 800;
+      color: var(--navy); margin-bottom: 8px;
+    }
+    .pts-intro p { font-size: 14px; line-height: 1.6; color: var(--text); }
+
+    .pts-account-card {
+      background: var(--card); border-radius: 16px;
+      padding: 22px; border: 1px solid var(--border);
+      box-shadow: var(--sh-sm);
+    }
+    .pts-account-title {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--muted); margin-bottom: 14px;
+    }
+    .pts-account-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .pts-info-cell {
+      background: var(--bg2); border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .pts-info-cell .lbl {
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px;
+      color: var(--muted); margin-bottom: 4px;
+    }
+    .pts-info-cell .val {
+      font-family: var(--display); font-size: 17px; font-weight: 700; color: var(--navy);
+    }
+    .pts-info-cell .val.role-student { color: var(--peri); }
+    .pts-info-cell .val.role-teacher { color: #b87a0a; }
+
+    /* STUDENT POINTS GRAPHIC */
+    .pts-student-display {
+      background: linear-gradient(135deg, var(--navy) 0%, #2d4470 50%, #4055a8 100%);
+      border-radius: 24px; padding: 50px 24px;
+      text-align: center; color: #fff;
+      position: relative; overflow: hidden;
+      box-shadow: 0 10px 40px rgba(28, 43, 74, 0.3);
+    }
+    .pts-student-display::before, .pts-student-display::after {
+      content: ''; position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(240, 162, 24, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pts-student-display::before { top: -80px; left: -80px; width: 280px; height: 280px; }
+    .pts-student-display::after  { bottom: -100px; right: -100px; width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(91, 110, 232, 0.22) 0%, transparent 70%); }
+    .pts-coin-graphic {
+      font-size: 110px; line-height: 1;
+      animation: coinSpin 4s ease-in-out infinite;
+      filter: drop-shadow(0 12px 30px rgba(240, 162, 24, 0.55));
+      display: inline-block; margin-bottom: 14px;
+      position: relative; z-index: 2;
+    }
+    @keyframes coinSpin {
+      0%, 100% { transform: rotateY(0deg) translateY(0); }
+      25%      { transform: rotateY(180deg) translateY(-8px); }
+      50%      { transform: rotateY(360deg) translateY(0); }
+      75%      { transform: rotateY(540deg) translateY(-8px); }
+    }
+    .pts-balance-num {
+      font-family: var(--display); font-size: 92px; font-weight: 900;
+      color: var(--amber); line-height: 1;
+      text-shadow: 0 4px 24px rgba(240, 162, 24, 0.5);
+      position: relative; z-index: 2;
+      letter-spacing: -2px;
+    }
+    .pts-balance-label {
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 8px; position: relative; z-index: 2;
+    }
+    .pts-history-hint {
+      font-size: 13px; color: rgba(255, 255, 255, 0.65);
+      margin-top: 22px; position: relative; z-index: 2;
+      max-width: 420px; margin-left: auto; margin-right: auto; line-height: 1.55;
+    }
+    .pts-recent {
+      margin-top: 22px; padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      position: relative; z-index: 2;
+      max-width: 420px; margin-left: auto; margin-right: auto;
+    }
+    .pts-recent-title {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+      color: rgba(255, 255, 255, 0.5); margin-bottom: 10px;
+    }
+    .pts-recent-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; padding: 6px 0;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .pts-recent-row .amt { color: var(--amber); font-weight: 800; }
+
+    /* TEACHER AWARD FORM */
+    .pts-award-card {
+      background: var(--card); border-radius: 16px;
+      padding: 26px; border: 1px solid var(--border);
+      box-shadow: var(--sh-sm);
+    }
+    .pts-award-card h3 {
+      font-family: var(--display); font-size: 22px; font-weight: 800;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    .pts-award-card .desc {
+      font-size: 13px; color: var(--muted); margin-bottom: 18px; line-height: 1.5;
+    }
+    .pts-award-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pts-field { margin-bottom: 12px; }
+    .pts-field label {
+      display: block; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .6px;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .pts-field input {
+      width: 100%; padding: 11px 14px; border-radius: var(--r-sm);
+      border: 2px solid var(--border); font-family: var(--body); font-size: 14px;
+      background: var(--bg); outline: none; transition: border-color .15s;
+    }
+    .pts-field input:focus { border-color: var(--peri); background: var(--card); }
+    .pts-amount-suggestions {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;
+    }
+    .pts-amount-pill {
+      padding: 6px 14px; border-radius: 16px;
+      border: 2px solid var(--border); background: var(--card);
+      font-family: var(--body); font-size: 12px; font-weight: 700;
+      color: var(--muted); cursor: pointer; transition: all .15s;
+    }
+    .pts-amount-pill:hover { background: var(--bg2); color: var(--text); }
+    .pts-award-feedback {
+      margin-top: 12px; padding: 10px 14px;
+      border-radius: 8px; font-size: 13px; font-weight: 600;
+      display: none;
+    }
+    .pts-award-feedback.success {
+      display: block; background: rgba(58, 158, 122, 0.10);
+      border: 1px solid rgba(58, 158, 122, 0.3); color: var(--green);
+    }
+    .pts-award-feedback.error {
+      display: block; background: rgba(232, 82, 63, 0.10);
+      border: 1px solid rgba(232, 82, 63, 0.3); color: var(--coral);
+    }
+    .pts-give-btn {
+      width: 100%; padding: 14px; border-radius: var(--r);
+      border: none; background: linear-gradient(135deg, var(--amber), #fbb62a);
+      color: var(--navy); font-family: var(--body);
+      font-size: 15px; font-weight: 800; cursor: pointer;
+      transition: all .2s; margin-top: 6px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .pts-give-btn:hover {
+      background: linear-gradient(135deg, #fbb62a, #ffc944);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(240, 162, 24, 0.45);
+    }
+
+    .pts-recent-awards {
+      margin-top: 22px; padding-top: 18px;
+      border-top: 1px dashed var(--border);
+    }
+    .pts-recent-awards-title {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--muted); margin-bottom: 10px;
+    }
+    .pts-recent-award-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pts-recent-award-row:last-child { border-bottom: none; }
+    .pts-recent-award-row .who { color: var(--navy); font-weight: 600; }
+    .pts-recent-award-row .when { color: var(--muted); font-size: 11px; margin-left: 6px; }
+    .pts-recent-award-row .amt { color: var(--amber); font-weight: 800; font-family: var(--display); }
+
+    @media (max-width: 600px) {
+      .pts-award-row { grid-template-columns: 1fr; }
+      .pts-balance-num { font-size: 64px; }
+      .pts-coin-graphic { font-size: 80px; }
+      .notif-stack { right: 12px; left: 12px; }
+      .notif-toast { min-width: 0; max-width: none; }
+      .points-label { display: none; }
+      .points-btn { padding: 7px 11px; }
+    }
     .post-btn {
       background: var(--amber); color: var(--navy); border: none;
       padding: 10px 22px; border-radius: 24px;
@@ -559,10 +865,27 @@
           <span class="user-name" id="hdr-name">User</span>
         </div>
         <button class="logout-btn" onclick="doLogout()">Log Out</button>
+        <button class="points-btn" id="points-btn" onclick="openPointsPage()" title="HallPass Points">
+          <span class="points-icon">🪙</span>
+          <span class="points-label">Points</span>
+          <span class="points-dot" id="points-dot"></span>
+        </button>
         <button class="post-btn" id="post-btn" onclick="openPostModal()">+ Post Item</button>
       </div>
     </header>
+
+    <!-- Notification toast container (shown briefly when student logs in with pending awards) -->
+    <div id="notif-stack" class="notif-stack"></div>
     <main class="container"><div id="app"></div></main>
+  </div>
+
+  <!-- POINTS PAGE (separate full-screen view) -->
+  <div id="points-page">
+    <div class="pts-topbar">
+      <button class="pts-back" onclick="closePointsPage()">← Back to HallPass</button>
+      <div class="pts-topbar-title">🪙 HallPass Points</div>
+    </div>
+    <div class="pts-content" id="points-content"></div>
   </div>
 
   <div id="overlay" class="overlay" onclick="closeModal()">
@@ -588,6 +911,13 @@
         this.storageKey = 'hallpass_accounts_v1';
         this.accounts = this.loadFromDisk();
         if (Object.keys(this.accounts).length === 0) this.seedInitialUsers();
+        // Migrate older accounts that don't have the new fields
+        Object.values(this.accounts).forEach(acc => {
+          if (!Array.isArray(acc.pendingAwards)) acc.pendingAwards = [];
+          if (!Array.isArray(acc.awardHistory)) acc.awardHistory = [];
+          if (typeof acc.points !== 'number') acc.points = 0;
+        });
+        this.saveToDisk();
       }
       seedInitialUsers() {
         const defaults = [
@@ -597,12 +927,75 @@
         defaults.forEach(u => this.addAccount(u.username, u));
       }
       addAccount(username, data) {
-        this.accounts[username.toLowerCase()] = { username: username.toLowerCase(), ...data, createdAt: new Date().toISOString() };
+        this.accounts[username.toLowerCase()] = {
+          username: username.toLowerCase(), ...data,
+          pendingAwards: data.pendingAwards || [],
+          awardHistory: data.awardHistory || [],
+          createdAt: new Date().toISOString()
+        };
         this.saveToDisk();
       }
       getAccount(username, password) {
         const user = this.accounts[username.toLowerCase()];
         return (user && user.password === password) ? user : null;
+      }
+      // Award points: validates target identity (username + first name + last initial all must match)
+      // Adds to pendingAwards (shown as a notification next time the student logs in)
+      // and to awardHistory (for the teacher's own log)
+      awardPoints(targetUsername, expectedFirst, expectedLastInitial, amount, fromTeacher) {
+        const target = this.accounts[targetUsername.toLowerCase()];
+        if (!target) return { ok: false, reason: 'No student account exists with that username.' };
+        if (target.role !== 'student') return { ok: false, reason: 'You can only award points to student accounts.' };
+        // Identity check (case-insensitive)
+        const firstMatch = (target.first || '').toLowerCase() === (expectedFirst || '').toLowerCase();
+        const li = (target.last || '').charAt(0).toLowerCase();
+        const liMatch = li === (expectedLastInitial || '').charAt(0).toLowerCase();
+        if (!firstMatch || !liMatch) {
+          return { ok: false, reason: "The name doesn't match that username's account. Double-check spelling and last initial." };
+        }
+        if (!Number.isFinite(amount) || amount <= 0) return { ok: false, reason: 'Amount must be a positive number.' };
+        if (amount > 500) return { ok: false, reason: 'Max 500 points per award. Send multiple if needed.' };
+
+        const award = {
+          id: 'aw_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+          amount: Math.floor(amount),
+          fromUsername: fromTeacher.username,
+          fromName: fromTeacher.first + (fromTeacher.last ? ' ' + fromTeacher.last + '.' : ''),
+          timestamp: Date.now(),
+          delivered: false
+        };
+        target.pendingAwards.push(award);
+        target.points = (target.points || 0) + Math.floor(amount);
+        // Teacher-side log
+        const teacherAcc = this.accounts[fromTeacher.username.toLowerCase()];
+        if (teacherAcc) {
+          if (!Array.isArray(teacherAcc.awardHistory)) teacherAcc.awardHistory = [];
+          teacherAcc.awardHistory.unshift({
+            ...award,
+            toUsername: target.username,
+            toName: target.first + (target.last ? ' ' + target.last + '.' : '')
+          });
+          if (teacherAcc.awardHistory.length > 30) teacherAcc.awardHistory.length = 30;
+        }
+        this.saveToDisk();
+        return { ok: true, award };
+      }
+      // Mark all currently-pending awards as delivered (called after we show the notifications)
+      markAwardsDelivered(username) {
+        const acc = this.accounts[username.toLowerCase()];
+        if (!acc) return;
+        (acc.pendingAwards || []).forEach(a => a.delivered = true);
+        this.saveToDisk();
+      }
+      // Returns awards that haven't been delivered yet
+      getPendingAwards(username) {
+        const acc = this.accounts[username.toLowerCase()];
+        if (!acc) return [];
+        return (acc.pendingAwards || []).filter(a => !a.delivered);
+      }
+      // Get the live, freshest copy of the user (so points reflect changes from another login)
+      refreshAccount(username) {
+        return this.accounts[username.toLowerCase()] || null;
       }
       saveToDisk() { localStorage.setItem(this.storageKey, JSON.stringify(this.accounts)); }
       loadFromDisk() { const data = localStorage.getItem(this.storageKey); return data ? JSON.parse(data) : {}; }
@@ -656,10 +1049,34 @@
       document.getElementById('hdr-avatar').textContent = user.first[0];
       document.getElementById('hdr-name').textContent = user.first + " " + (user.last ? user.last + "." : "");
       switchTab(user.role === 'teacher' ? 'sub' : 'lost');
+
+      // Show pending award notifications (students only — teachers don't receive points)
+      if (user.role === 'student') {
+        const pending = manager.getPendingAwards(user.username);
+        if (pending.length > 0) {
+          // Red dot is shown on the points button until they visit the page
+          document.getElementById('points-dot').classList.add('active');
+          // Show one toast per award, staggered slightly
+          pending.forEach((award, i) => {
+            setTimeout(() => showAwardNotification(award), i * 600);
+          });
+          // Mark them all delivered so reloading won't replay them
+          manager.markAwardsDelivered(user.username);
+          // Refresh our currentUser since markAwardsDelivered mutated the data
+          currentUser = manager.refreshAccount(user.username);
+        } else {
+          document.getElementById('points-dot').classList.remove('active');
+        }
+      } else {
+        document.getElementById('points-dot').classList.remove('active');
+      }
     }
     function doLogout() {
       currentUser = null;
       document.getElementById('main-app').style.display = 'none';
+      document.getElementById('points-page').style.display = 'none';
+      document.getElementById('points-dot').classList.remove('active');
+      document.getElementById('notif-stack').innerHTML = '';
       document.getElementById('auth-screen').style.display = 'flex';
       authTab('login');
     }
@@ -2044,6 +2461,228 @@ Last 10 min: journal entry — "Write about a time you kept going despite a hard
           </div>
           <button class="as-start-btn" style="margin-top:16px" onclick="anagramShowStart()">Play Again →</button>
         </div>`;
+    }
+
+    // ═══════════════════════════════════════════════
+    // POINTS PAGE & NOTIFICATIONS
+    // ═══════════════════════════════════════════════
+
+    // Show a notification toast for an award (red dot stays on button until they visit page)
+    function showAwardNotification(award) {
+      const stack = document.getElementById('notif-stack');
+      if (!stack) return;
+      const dur = 5000; // 5 seconds — the blue line shrinks across this duration
+      const el = document.createElement('div');
+      el.className = 'notif-toast';
+      el.style.setProperty('--notif-dur', dur + 'ms');
+      el.innerHTML = `
+        <span class="notif-icon">🪙</span>
+        <span class="notif-text">You earned ${award.amount} HallPass point${award.amount === 1 ? '' : 's'}!</span>
+        <div class="notif-sub">From ${escapeHTML(award.fromName || 'a teacher')}</div>
+        <div class="notif-progress"></div>
+      `;
+      stack.appendChild(el);
+      // Allow click to dismiss early
+      el.addEventListener('click', () => closeNotif(el));
+      // Auto-remove when the blue line finishes shrinking
+      setTimeout(() => closeNotif(el), dur);
+    }
+
+    function closeNotif(el) {
+      if (!el || el.classList.contains('closing')) return;
+      el.classList.add('closing');
+      setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); }, 350);
+    }
+
+    // ═══════════════════════════════════════════════
+    // POINTS PAGE — open / close / render
+    // ═══════════════════════════════════════════════
+    function openPointsPage() {
+      if (!currentUser) return;
+      // Clear the red dot once they've visited the page
+      document.getElementById('points-dot').classList.remove('active');
+      // Always pull the freshest copy of the user (points may have changed across sessions)
+      currentUser = manager.refreshAccount(currentUser.username) || currentUser;
+      document.getElementById('main-app').style.display = 'none';
+      document.getElementById('points-page').style.display = 'block';
+      renderPointsPage();
+    }
+    function closePointsPage() {
+      document.getElementById('points-page').style.display = 'none';
+      document.getElementById('main-app').style.display = 'block';
+    }
+
+    function renderPointsPage() {
+      const el = document.getElementById('points-content');
+      if (!el || !currentUser) return;
+
+      // Always read freshest data
+      currentUser = manager.refreshAccount(currentUser.username) || currentUser;
+
+      const intro = `
+        <div class="pts-intro">
+          <h2>🪙 What are HallPass Points?</h2>
+          <p>HallPass Points are a reward system where teachers can recognize students for great work, kindness, helping classmates, or anything else they want to celebrate. Teachers decide what points can be redeemed for — show your teacher your balance to claim a prize, a privilege, or whatever they've set up. Earn them, save them, spend them — it's up to you and your teachers!</p>
+        </div>`;
+
+      const account = `
+        <div class="pts-account-card">
+          <div class="pts-account-title">Your Account</div>
+          <div class="pts-account-grid">
+            <div class="pts-info-cell">
+              <div class="lbl">Username</div>
+              <div class="val">@${escapeHTML(currentUser.username)}</div>
+            </div>
+            <div class="pts-info-cell">
+              <div class="lbl">Name</div>
+              <div class="val">${escapeHTML(currentUser.first)}${currentUser.last ? ' ' + escapeHTML(currentUser.last) + '.' : ''}</div>
+            </div>
+            <div class="pts-info-cell">
+              <div class="lbl">Role</div>
+              <div class="val role-${currentUser.role}">${currentUser.role === 'teacher' ? 'Teacher / Staff' : 'Student'}</div>
+            </div>
+          </div>
+        </div>`;
+
+      let main;
+      if (currentUser.role === 'student') {
+        main = renderStudentPointsView();
+      } else {
+        main = renderTeacherAwardView();
+      }
+
+      el.innerHTML = intro + account + main;
+    }
+
+    function renderStudentPointsView() {
+      const points = currentUser.points || 0;
+      // Grab the most recent awards from the pending+delivered list (last 5)
+      const awards = (currentUser.pendingAwards || []).slice().sort((a, b) => b.timestamp - a.timestamp).slice(0, 5);
+      const recentHTML = awards.length === 0 ? '' : `
+        <div class="pts-recent">
+          <div class="pts-recent-title">Recent Awards</div>
+          ${awards.map(a => `
+            <div class="pts-recent-row">
+              <span>From ${escapeHTML(a.fromName || 'a teacher')} · ${formatTime(a.timestamp)}</span>
+              <span class="amt">+${a.amount}</span>
+            </div>
+          `).join('')}
+        </div>`;
+      return `
+        <div class="pts-student-display">
+          <div class="pts-coin-graphic">🪙</div>
+          <div class="pts-balance-num">${points.toLocaleString()}</div>
+          <div class="pts-balance-label">HallPass Points</div>
+          <div class="pts-history-hint">Show your teacher this page to redeem points for whatever rewards they've set up. Keep being awesome to earn more!</div>
+          ${recentHTML}
+        </div>`;
+    }
+
+    function renderTeacherAwardView() {
+      const history = currentUser.awardHistory || [];
+      const recentHTML = history.length === 0
+        ? '<div style="font-size:13px;color:var(--muted);padding:10px 0;text-align:center;font-style:italic">No awards given yet — your first one will show up here.</div>'
+        : history.slice(0, 8).map(a => `
+            <div class="pts-recent-award-row">
+              <span>
+                <span class="who">${escapeHTML(a.toName || a.toUsername)}</span>
+                <span class="when">${formatTime(a.timestamp)}</span>
+              </span>
+              <span class="amt">+${a.amount}</span>
+            </div>
+          `).join('');
+
+      return `
+        <div class="pts-award-card">
+          <h3>🎁 Award HallPass Points</h3>
+          <p class="desc">Recognize a student for something great. They'll see a notification next time they log in.</p>
+
+          <div class="pts-award-row">
+            <div class="pts-field">
+              <label>Student Username</label>
+              <input id="aw-username" type="text" placeholder="e.g. jayden_k" autocomplete="off">
+            </div>
+            <div class="pts-field">
+              <label>Amount</label>
+              <input id="aw-amount" type="number" min="1" max="500" placeholder="e.g. 10">
+            </div>
+          </div>
+
+          <div class="pts-award-row">
+            <div class="pts-field">
+              <label>Student First Name</label>
+              <input id="aw-first" type="text" placeholder="e.g. Jayden" autocomplete="off">
+            </div>
+            <div class="pts-field">
+              <label>Last Initial</label>
+              <input id="aw-last" type="text" placeholder="K" maxlength="1" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="pts-amount-suggestions">
+            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);align-self:center;margin-right:4px">Quick:</span>
+            <button class="pts-amount-pill" onclick="setAwardAmount(5)">+5</button>
+            <button class="pts-amount-pill" onclick="setAwardAmount(10)">+10</button>
+            <button class="pts-amount-pill" onclick="setAwardAmount(25)">+25</button>
+            <button class="pts-amount-pill" onclick="setAwardAmount(50)">+50</button>
+            <button class="pts-amount-pill" onclick="setAwardAmount(100)">+100</button>
+          </div>
+
+          <div class="pts-award-feedback" id="aw-feedback"></div>
+
+          <button class="pts-give-btn" onclick="submitAward()">🪙 Award Points</button>
+
+          <div class="pts-recent-awards">
+            <div class="pts-recent-awards-title">Your Recent Awards</div>
+            ${recentHTML}
+          </div>
+        </div>`;
+    }
+
+    function setAwardAmount(n) {
+      const el = document.getElementById('aw-amount');
+      if (el) { el.value = n; el.focus(); }
+    }
+
+    function submitAward() {
+      const fb = document.getElementById('aw-feedback');
+      const username = (document.getElementById('aw-username').value || '').trim().toLowerCase();
+      const first    = (document.getElementById('aw-first').value || '').trim();
+      const last     = (document.getElementById('aw-last').value || '').trim();
+      const amountRaw = (document.getElementById('aw-amount').value || '').trim();
+      const amount = parseInt(amountRaw, 10);
+
+      // Inline validation
+      if (!username) { showAwardFb('Enter the student\'s username.', 'error'); return; }
+      if (!first)    { showAwardFb('Enter the student\'s first name.', 'error'); return; }
+      if (!last)     { showAwardFb('Enter the student\'s last initial.', 'error'); return; }
+      if (!Number.isFinite(amount) || amount <= 0) { showAwardFb('Enter a positive amount.', 'error'); return; }
+
+      const result = manager.awardPoints(username, first, last, amount, currentUser);
+      if (!result.ok) {
+        showAwardFb(result.reason, 'error');
+        return;
+      }
+      // Refresh teacher copy (their awardHistory just changed)
+      currentUser = manager.refreshAccount(currentUser.username) || currentUser;
+      showAwardFb(`✓ Awarded ${result.award.amount} point${result.award.amount === 1 ? '' : 's'} to @${username}. They'll see it next login!`, 'success');
+      // Reset amount but keep the rest in case teacher awards same student again
+      document.getElementById('aw-amount').value = '';
+      // Re-render the recent-awards section (full re-render is fine — we're already on this page)
+      renderPointsPage();
+    }
+
+    function showAwardFb(msg, cls) {
+      const fb = document.getElementById('aw-feedback');
+      if (!fb) return;
+      fb.textContent = msg;
+      fb.className = 'pts-award-feedback ' + cls;
+      if (cls === 'success') {
+        // Auto-fade success after a few seconds (but keep the new history visible)
+        setTimeout(() => {
+          if (fb.textContent === msg) fb.className = 'pts-award-feedback';
+        }, 4500);
+      }
     }
   </script>
 </body>
