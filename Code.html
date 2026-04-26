@@ -299,6 +299,67 @@
     .sbtn { width: 100%; padding: 14px; border-radius: var(--r); border: none; background: var(--navy); color: #fff; font-weight: 700; cursor: pointer; font-family: var(--body); font-size: 15px; transition: all .18s; margin-top: 8px; }
     .sbtn:hover { background: #2a3f6b; transform: translateY(-1px); }
 
+    /* SUB BOARD */
+    .sub-feed { display: flex; flex-direction: column; gap: 22px; }
+    .sub-feed-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; flex-wrap: wrap; gap: 8px; }
+    .sub-feed-header h2 { font-family: var(--display); font-size: 28px; font-weight: 900; color: var(--navy); letter-spacing: -0.5px; }
+    .sub-feed-header .sub { font-size: 13px; color: var(--muted); }
+    .sub-role-banner {
+      background: rgba(91, 110, 232, 0.08);
+      border: 1px solid rgba(91, 110, 232, 0.2);
+      border-radius: var(--r);
+      padding: 12px 16px; margin-bottom: 4px;
+      font-size: 13px; color: var(--navy); display: flex; align-items: center; gap: 8px;
+    }
+    .sub-role-banner .ico { font-size: 18px; }
+
+    .sub-card-item {
+      background: var(--card); border-radius: var(--r);
+      box-shadow: var(--sh-sm); border: 1px solid var(--border);
+      border-left: 4px solid var(--amber); overflow: hidden; transition: box-shadow .2s;
+    }
+    .sub-card-item:hover { box-shadow: var(--sh-md); }
+    .sub-card-head { padding: 18px 22px 14px; display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap; }
+    .sub-card-head .hw-avatar { width: 42px; height: 42px; font-size: 17px; }
+    .sub-card-meta { flex: 1; min-width: 200px; }
+    .sub-card-teacher { font-family: var(--display); font-size: 19px; font-weight: 800; color: var(--navy); }
+    .sub-card-subject { font-size: 14px; color: var(--text); margin-top: 2px; line-height: 1.4; }
+    .sub-card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .sub-tag {
+      font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 14px;
+      background: var(--bg2); color: var(--navy); display: inline-flex; align-items: center; gap: 4px;
+    }
+    .sub-tag.date { background: rgba(240, 162, 24, 0.15); color: #b87a0a; }
+    .sub-tag.room { background: rgba(91, 110, 232, 0.10); color: var(--peri); }
+    .sub-tag.periods { background: rgba(58, 158, 122, 0.10); color: var(--green); }
+    .sub-card-time { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+    .sub-card-body { padding: 4px 22px 18px; }
+    .sub-section-label {
+      font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--muted); margin: 14px 0 6px;
+    }
+    .sub-section-label:first-child { margin-top: 4px; }
+    .sub-section-text {
+      font-size: 14px; line-height: 1.6; color: var(--text);
+      white-space: pre-wrap; word-break: break-word;
+    }
+    .sub-notes-box {
+      background: rgba(232, 82, 63, 0.06);
+      border-left: 3px solid var(--coral);
+      border-radius: 6px; padding: 12px 14px; margin-top: 4px;
+    }
+    .sub-notes-box .sub-section-text { color: var(--navy); font-weight: 500; }
+
+    .sub-card-actions {
+      padding: 10px 22px; border-top: 1px solid var(--border);
+      background: var(--bg); display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .sub-comment-count { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .sub-comment-count strong { color: var(--navy); font-weight: 700; }
+    .sub-comments { background: var(--bg); padding: 4px 22px 18px; display: none; border-top: 1px solid var(--border); }
+    .sub-comments.open { display: block; animation: fadeIn .25s ease; }
+
     /* ════════════════════════════════════════════
        MINIGAMES (Logic Grid, Word Ladder, Anagram Sprint)
     ════════════════════════════════════════════ */
@@ -615,7 +676,16 @@
       document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
       document.getElementById(`btn-${t}`).classList.add('active');
       const postBtn = document.getElementById('post-btn');
-      if (t === 'chill' || t === 'sub') { postBtn.style.display = 'none'; }
+      if (t === 'chill') { postBtn.style.display = 'none'; }
+      else if (t === 'sub') {
+        // Sub Board: only teachers can post
+        if (currentUser && currentUser.role === 'teacher') {
+          postBtn.style.display = 'block';
+          postBtn.textContent = '+ Post Sub Plan';
+        } else {
+          postBtn.style.display = 'none';
+        }
+      }
       else if (t === 'homework') { postBtn.style.display = 'block'; postBtn.textContent = '+ Ask for Help'; }
       else { postBtn.style.display = 'block'; postBtn.textContent = '+ Post Item'; }
       render();
@@ -650,13 +720,53 @@
       }
     ];
 
+    // SUB BOARD DATA (only teachers can create these; students can comment)
+    let openSubReplyBox = null; // tracks which sub plan has its comment form expanded
+    let subPlans = [
+      {
+        id: 'sub1',
+        teacher: 'Ms. Peterson',
+        room: '205',
+        subject: '7th Grade Math — Chapter 4 Review',
+        dateLabel: 'Today',
+        periods: 'All periods (1–6)',
+        activities: `1. Take attendance using the seating chart on my desk (top drawer).
+2. Hand out the Ch. 4 Review Worksheet (yellow stack on the desk).
+3. Students work independently for 25 minutes, then peer-check answers.
+4. If they finish early, log in to Khan Academy (class code on the whiteboard).
+5. Collect all worksheets before dismissal.`,
+        materials: 'Worksheets in the yellow folder on the desk. Answer key in the red folder — do NOT hand out.',
+        notes: '3rd period: Jamie & Alex have extended time — please let them finish. Bathroom passes: one at a time only.',
+        timestamp: Date.now() - 1000 * 60 * 60 * 2,
+        comments: []
+      },
+      {
+        id: 'sub2',
+        teacher: 'Mr. Thompson',
+        room: '112',
+        subject: '8th Grade English — Holes Discussion',
+        dateLabel: 'Tomorrow',
+        periods: 'All periods',
+        activities: `Silent reading for the first 15 minutes (Holes, wherever each student is).
+Then open class discussion using the questions on the whiteboard:
+  • Why does Stanley keep digging even when things get worse?
+  • What does "destiny" mean to Stanley vs. Zero?
+Students may use their books during discussion.
+Last 10 min: journal entry — "Write about a time you kept going despite a hard situation."`,
+        materials: "Class set of Holes in the left-wall cabinet. Discussion questions on the whiteboard — please don't erase.",
+        notes: "5th period: one student is selectively mute — don't cold-call them, but they can participate by writing. All other classes: cold-calling is encouraged.",
+        timestamp: Date.now() - 1000 * 60 * 60 * 24,
+        comments: []
+      }
+    ];
+
     // ═══════════════════════════════════════════════
     // 6. RENDER ROUTING
     // ═══════════════════════════════════════════════
     function render() {
       const app = document.getElementById('app');
       if (currentTab === 'lost') app.innerHTML = renderLost();
-      else if (currentTab === 'sub') app.innerHTML = `<h2>Sub Board</h2><p style="margin-top:20px; color:var(--muted)">Teacher instructions will appear here.</p>`;
+      else if (currentTab === 'sub') app.innerHTML = renderSubBoard();
       else if (currentTab === 'homework') app.innerHTML = renderHomework();
       else if (currentTab === 'chill') {
         app.innerHTML = renderChill();
@@ -694,6 +804,195 @@
     }
 
     function applyFilter(f) { filter = f; render(); }
+
+    // ═══════════════════════════════════════════════
+    // SUB BOARD — teachers post, students can comment
+    // ═══════════════════════════════════════════════
+    function renderSubBoard() {
+      const sorted = [...subPlans].sort((a, b) => b.timestamp - a.timestamp);
+      const isTeacher = currentUser && currentUser.role === 'teacher';
+
+      const banner = isTeacher
+        ? `<div class="sub-role-banner"><span class="ico">📋</span><span>You're a teacher — use the <strong>+ Post Sub Plan</strong> button up top to leave instructions for substitutes.</span></div>`
+        : `<div class="sub-role-banner"><span class="ico">👀</span><span>Only teachers can post sub plans. You can read them and add comments to help your sub.</span></div>`;
+
+      const feedHTML = sorted.length === 0
+        ? `<div class="hw-empty"><div class="em">📋</div><h4>No sub plans yet</h4><p>${isTeacher ? "Click + Post Sub Plan to create one." : "Check back later — teachers post here when they need a sub."}</p></div>`
+        : sorted.map(p => renderSubPlan(p)).join('');
+
+      return `
+        <div class="sub-feed">
+          <div class="sub-feed-header">
+            <h2>Sub Board</h2>
+            <span class="sub">Sub plans posted by teachers — comments open to everyone.</span>
+          </div>
+          ${banner}
+          ${feedHTML}
+        </div>`;
+    }
+
+    function renderSubPlan(p) {
+      const initial = p.teacher.charAt(0).toUpperCase();
+      const formOpen = openSubReplyBox === p.id;
+
+      const commentsHTML = p.comments.map(c => {
+        const cInit = c.author.charAt(0).toUpperCase();
+        const cAvatar = c.role === 'teacher' ? 'reply-avatar teacher' : 'reply-avatar';
+        const cTag = `<span class="role-tag ${c.role}">${c.role === 'teacher' ? 'Teacher' : 'Student'}</span>`;
+        return `<div class="reply-item">
+          <div class="${cAvatar}">${cInit}</div>
+          <div class="reply-content">
+            <div class="reply-author">${escapeHTML(c.author)} ${cTag}<span class="reply-time">· ${formatTime(c.timestamp)}</span></div>
+            <div class="reply-text">${escapeHTML(c.text)}</div>
+          </div>
+        </div>`;
+      }).join('');
+
+      const formHTML = formOpen ? `
+        <div class="reply-form">
+          <textarea id="sub-comment-${p.id}" placeholder="Add a comment — questions, helpful tips for the sub, or context."></textarea>
+          <button onclick="submitSubComment('${p.id}')">Post Comment</button>
+        </div>` : '';
+
+      const showBlock = p.comments.length > 0 || formOpen;
+
+      return `
+        <article class="sub-card-item" id="sub-${p.id}">
+          <div class="sub-card-head">
+            <div class="hw-avatar teacher">${initial}</div>
+            <div class="sub-card-meta">
+              <div class="sub-card-teacher">${escapeHTML(p.teacher)}</div>
+              <div class="sub-card-subject">${escapeHTML(p.subject)}</div>
+              <div class="sub-card-tags">
+                <span class="sub-tag date">📅 ${escapeHTML(p.dateLabel)}</span>
+                <span class="sub-tag room">📍 Room ${escapeHTML(p.room)}</span>
+                <span class="sub-tag periods">🕐 ${escapeHTML(p.periods)}</span>
+              </div>
+              <div class="sub-card-time">Posted ${formatTime(p.timestamp)}</div>
+            </div>
+          </div>
+          <div class="sub-card-body">
+            <div class="sub-section-label">📋 Activities</div>
+            <div class="sub-section-text">${escapeHTML(p.activities)}</div>
+            <div class="sub-section-label">📦 Materials</div>
+            <div class="sub-section-text">${escapeHTML(p.materials)}</div>
+            <div class="sub-section-label" style="color:var(--coral)">⚠️ Important Notes</div>
+            <div class="sub-notes-box"><div class="sub-section-text">${escapeHTML(p.notes)}</div></div>
+          </div>
+          <div class="sub-card-actions">
+            <span class="sub-comment-count">💬 <strong>${p.comments.length}</strong> ${p.comments.length === 1 ? 'comment' : 'comments'}</span>
+            <button class="reply-btn" style="margin-left:auto" onclick="toggleSubCommentForm('${p.id}')">${formOpen ? '✕ Cancel' : '↩ Comment'}</button>
+          </div>
+          <div class="sub-comments ${showBlock ? 'open' : ''}">
+            ${commentsHTML}
+            ${formHTML}
+          </div>
+        </article>`;
+    }
+
+    function toggleSubCommentForm(planId) {
+      openSubReplyBox = (openSubReplyBox === planId) ? null : planId;
+      render();
+      if (openSubReplyBox === planId) {
+        setTimeout(() => { const ta = document.getElementById(`sub-comment-${planId}`); if (ta) ta.focus(); }, 30);
+      }
+    }
+
+    function submitSubComment(planId) {
+      const ta = document.getElementById(`sub-comment-${planId}`);
+      if (!ta) return;
+      const text = ta.value.trim();
+      if (!text) { ta.style.borderColor = 'var(--coral)'; ta.focus(); return; }
+      const plan = subPlans.find(p => p.id === planId);
+      if (!plan) return;
+      plan.comments.push({
+        author: currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : ''),
+        role: currentUser.role,
+        text: text,
+        timestamp: Date.now()
+      });
+      openSubReplyBox = null;
+      render();
+    }
+
+    function openSubPlanModal() {
+      // Safety: only teachers can open this
+      if (!currentUser || currentUser.role !== 'teacher') {
+        alert('Only teachers can post sub plans.');
+        return;
+      }
+      const teacherName = currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : '');
+      setModal(`<div class="handle"></div>
+        <h3>Post a Sub Plan</h3>
+        <p class="modal-sub">Posting as <strong>${escapeHTML(teacherName)}</strong> · leave clear instructions for your substitute.</p>
+
+        <label class="field-label">Subject / Class *</label>
+        <input class="finput" id="sp-subject" placeholder="e.g. 7th Grade Math — Chapter 4 Review" maxlength="120">
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
+          <div>
+            <label class="field-label">Room Number *</label>
+            <input class="finput" id="sp-room" placeholder="e.g. 205">
+          </div>
+          <div>
+            <label class="field-label">Date</label>
+            <select class="fselect finput" id="sp-date">
+              <option value="Today">Today</option>
+              <option value="Tomorrow">Tomorrow</option>
+              <option value="This Week">This Week</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="field-label">Periods</label>
+        <input class="finput" id="sp-periods" placeholder="e.g. All periods (1–6) / Period 2 & 4">
+
+        <label class="field-label">Activities / Instructions *</label>
+        <textarea class="ftextarea" id="sp-activities" placeholder="Step-by-step what the sub should do…"></textarea>
+
+        <label class="field-label">Materials *</label>
+        <textarea class="ftextarea" id="sp-materials" placeholder="Where to find handouts, answer keys, supplies…" style="min-height:80px"></textarea>
+
+        <label class="field-label">Important Notes for Sub</label>
+        <textarea class="ftextarea" id="sp-notes" placeholder="Accommodations, behavior notes, anything critical…" style="min-height:80px"></textarea>
+
+        <button class="sbtn" onclick="submitSubPlan()">📋 Post Sub Plan</button>`);
+    }
+
+    function submitSubPlan() {
+      // Re-check permissions
+      if (!currentUser || currentUser.role !== 'teacher') {
+        alert('Only teachers can post sub plans.');
+        closeModal();
+        return;
+      }
+      const subject    = document.getElementById('sp-subject').value.trim();
+      const room       = document.getElementById('sp-room').value.trim();
+      const date       = document.getElementById('sp-date').value;
+      const periods    = document.getElementById('sp-periods').value.trim() || 'All periods';
+      const activities = document.getElementById('sp-activities').value.trim();
+      const materials  = document.getElementById('sp-materials').value.trim();
+      const notes      = document.getElementById('sp-notes').value.trim() || 'No special notes.';
+
+      // Validate required fields
+      if (!subject)    { document.getElementById('sp-subject').style.borderColor = 'var(--coral)';    document.getElementById('sp-subject').focus(); return; }
+      if (!room)       { document.getElementById('sp-room').style.borderColor = 'var(--coral)';       document.getElementById('sp-room').focus(); return; }
+      if (!activities) { document.getElementById('sp-activities').style.borderColor = 'var(--coral)'; document.getElementById('sp-activities').focus(); return; }
+      if (!materials)  { document.getElementById('sp-materials').style.borderColor = 'var(--coral)';  document.getElementById('sp-materials').focus(); return; }
+
+      const teacherName = currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : '');
+      subPlans.unshift({
+        id: 'sub' + (uid++),
+        teacher: teacherName,
+        room, subject, dateLabel: date, periods,
+        activities, materials, notes,
+        timestamp: Date.now(),
+        comments: []
+      });
+      closeModal();
+      render();
+    }
+    // ═══════════════════════════════════════════════
 
     // ═══════════════════════════════════════════════
     // 7. CHILL ZONE — menu + activity routing
@@ -898,7 +1197,11 @@
     // ═══════════════════════════════════════════════
     // 11. POST CREATION (tab-aware)
     // ═══════════════════════════════════════════════
-    function openPostModal() { if (currentTab === 'homework') openHomeworkPostModal(); else openLostItemModal(); }
+    function openPostModal() {
+      if (currentTab === 'homework') openHomeworkPostModal();
+      else if (currentTab === 'sub') openSubPlanModal();
+      else openLostItemModal();
+    }
     function openLostItemModal() {
       setModal(`<div class="handle"></div><h3>Post Lost Item</h3>
         <input class="finput" id="p-title" placeholder="What did you lose?">
