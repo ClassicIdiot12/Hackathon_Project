@@ -8,42 +8,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;800&display=swap"
     rel="stylesheet">
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f7f3ec;
-      --bg2: #ede7dc;
-      --card: #ffffff;
-      --navy: #1c2b4a;
-      --coral: #e8523f;
-      --green: #3a9e7a;
-      --amber: #f0a218;
-      --peri: #5b6ee8;
-      --text: #1e1e1e;
-      --muted: #6b6b6b;
+      --bg: #f7f3ec; --bg2: #ede7dc; --card: #ffffff;
+      --navy: #1c2b4a; --coral: #e8523f; --green: #3a9e7a;
+      --amber: #f0a218; --peri: #5b6ee8;
+      --text: #1e1e1e; --muted: #6b6b6b;
       --border: rgba(0, 0, 0, 0.08);
       --sh-sm: 0 2px 8px rgba(0, 0, 0, 0.07);
       --sh-md: 0 4px 20px rgba(0, 0, 0, 0.10);
       --sh-lg: 0 8px 40px rgba(0, 0, 0, 0.15);
-      --r: 12px;
-      --r-sm: 8px;
+      --r: 12px; --r-sm: 8px;
       --display: 'Fraunces', serif;
       --body: 'Plus Jakarta Sans', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
     }
 
     body {
       font-family: var(--body);
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg); color: var(--text);
       min-height: 100vh;
       background-image:
         radial-gradient(circle at 15% 60%, rgba(212, 169, 106, 0.12) 0%, transparent 50%),
@@ -51,1567 +38,445 @@
     }
 
     /* AUTH SCREEN */
-    #auth-screen {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
+    #auth-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
     .auth-box {
-      background: var(--card);
-      border-radius: 24px;
-      padding: 48px 44px;
-      width: 100%;
-      max-width: 440px;
-      box-shadow: var(--sh-lg);
-      border: 1px solid var(--border);
+      background: var(--card); border-radius: 24px; padding: 48px 44px;
+      width: 100%; max-width: 440px;
+      box-shadow: var(--sh-lg); border: 1px solid var(--border);
       animation: popIn .4s cubic-bezier(.34, 1.56, .64, 1);
     }
-
     @keyframes popIn {
-      from {
-        opacity: 0;
-        transform: scale(.92) translateY(16px);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
+      from { opacity: 0; transform: scale(.92) translateY(16px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
-
     .auth-logo {
-      font-family: var(--display);
-      font-size: 36px;
-      font-weight: 900;
-      color: var(--navy);
-      text-align: center;
-      margin-bottom: 6px;
+      font-family: var(--display); font-size: 36px; font-weight: 900;
+      color: var(--navy); text-align: center; margin-bottom: 6px;
     }
-
-    .auth-logo span {
-      color: var(--amber);
-    }
-
-    .auth-tagline {
-      text-align: center;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 32px;
-    }
-
-    .auth-tabs {
-      display: flex;
-      background: var(--bg2);
-      border-radius: var(--r);
-      padding: 4px;
-      margin-bottom: 28px;
-    }
-
+    .auth-logo span { color: var(--amber); }
+    .auth-tagline { text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+    .auth-tabs { display: flex; background: var(--bg2); border-radius: var(--r); padding: 4px; margin-bottom: 28px; }
     .auth-tab {
-      flex: 1;
-      padding: 9px;
-      border-radius: var(--r-sm);
-      border: none;
-      background: transparent;
-      font-family: var(--body);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all .18s;
+      flex: 1; padding: 9px; border-radius: var(--r-sm); border: none;
+      background: transparent; font-family: var(--body);
+      font-size: 14px; font-weight: 600; color: var(--muted);
+      cursor: pointer; transition: all .18s;
     }
-
-    .auth-tab.active {
-      background: var(--card);
-      color: var(--navy);
-      box-shadow: var(--sh-sm);
-    }
-
-    .auth-form-row {
-      margin-bottom: 16px;
-    }
-
+    .auth-tab.active { background: var(--card); color: var(--navy); box-shadow: var(--sh-sm); }
+    .auth-form-row { margin-bottom: 16px; }
     .auth-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .6px;
-      color: var(--muted);
-      margin-bottom: 7px;
+      display: block; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .6px;
+      color: var(--muted); margin-bottom: 7px;
     }
-
     .auth-input {
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: var(--r-sm);
-      border: 2px solid var(--border);
-      font-family: var(--body);
-      font-size: 15px;
-      background: var(--bg);
-      color: var(--text);
-      outline: none;
-      transition: border-color .2s;
+      width: 100%; padding: 12px 16px; border-radius: var(--r-sm);
+      border: 2px solid var(--border); font-family: var(--body);
+      font-size: 15px; background: var(--bg); color: var(--text);
+      outline: none; transition: border-color .2s;
     }
-
-    .auth-input:focus {
-      border-color: var(--peri);
-      background: var(--card);
-    }
-
-    .auth-2col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
+    .auth-input:focus { border-color: var(--peri); background: var(--card); }
+    .auth-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .auth-submit {
-      width: 100%;
-      padding: 14px;
-      border-radius: var(--r);
-      border: none;
-      background: var(--navy);
-      color: #fff;
-      font-family: var(--body);
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .2s;
-      margin-top: 4px;
+      width: 100%; padding: 14px; border-radius: var(--r); border: none;
+      background: var(--navy); color: #fff;
+      font-family: var(--body); font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: all .2s; margin-top: 4px;
     }
-
-    .auth-submit:hover {
-      background: #2a3f6b;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(28, 43, 74, .3);
-    }
-
+    .auth-submit:hover { background: #2a3f6b; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(28, 43, 74, .3); }
     .auth-error {
-      background: rgba(232, 82, 63, 0.09);
-      border: 1px solid rgba(232, 82, 63, 0.25);
-      border-radius: var(--r-sm);
-      padding: 10px 14px;
-      font-size: 13px;
-      color: var(--coral);
-      margin-bottom: 16px;
-      display: none;
+      background: rgba(232, 82, 63, 0.09); border: 1px solid rgba(232, 82, 63, 0.25);
+      border-radius: var(--r-sm); padding: 10px 14px;
+      font-size: 13px; color: var(--coral); margin-bottom: 16px; display: none;
     }
-
-    .auth-footer {
-      text-align: center;
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 20px;
-      line-height: 1.6;
-    }
+    .auth-footer { text-align: center; font-size: 12px; color: var(--muted); margin-top: 20px; line-height: 1.6; }
 
     /* MAIN APP */
-    #main-app {
-      display: none;
-    }
-
+    #main-app { display: none; }
     header {
-      background: var(--navy);
-      padding: 0 32px;
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: var(--navy); padding: 0 32px;
+      display: flex; align-items: center; gap: 28px;
+      position: sticky; top: 0; z-index: 100;
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.22);
     }
-
     .logo {
-      font-family: var(--display);
-      font-size: 26px;
-      font-weight: 900;
-      color: #fff;
-      padding: 18px 0;
-      letter-spacing: -0.5px;
-      white-space: nowrap;
-      user-select: none;
+      font-family: var(--display); font-size: 26px; font-weight: 900;
+      color: #fff; padding: 18px 0; letter-spacing: -0.5px;
+      white-space: nowrap; user-select: none;
     }
-
-    .logo span {
-      color: var(--amber);
-    }
-
-    .nav-tabs {
-      display: flex;
-      gap: 4px;
-      flex: 1;
-      flex-wrap: wrap;
-    }
-
+    .logo span { color: var(--amber); }
+    .nav-tabs { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
     .nav-tab {
-      padding: 8px 20px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.55);
-      cursor: pointer;
-      transition: all .2s;
-      border: none;
-      background: none;
-      font-family: var(--body);
+      padding: 8px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      color: rgba(255, 255, 255, 0.55); cursor: pointer; transition: all .2s;
+      border: none; background: none; font-family: var(--body);
     }
-
-    .nav-tab:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .nav-tab.active {
-      color: var(--navy);
-      background: #fff;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .nav-tab:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+    .nav-tab.active { color: var(--navy); background: #fff; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
     .user-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      display: flex; align-items: center; gap: 8px;
       background: rgba(255, 255, 255, 0.10);
-      border-radius: 20px;
-      padding: 6px 14px 6px 8px;
+      border-radius: 20px; padding: 6px 14px 6px 8px;
     }
-
     .user-avatar {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--amber);
-      color: var(--navy);
-      font-size: 13px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--amber); color: var(--navy);
+      font-size: 13px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
       font-family: var(--display);
     }
-
-    .user-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: #fff;
-    }
-
+    .user-name { font-size: 13px; font-weight: 600; color: #fff; }
     .logout-btn {
-      background: rgba(255, 255, 255, 0.12);
-      border: none;
+      background: rgba(255, 255, 255, 0.12); border: none;
       color: rgba(255, 255, 255, 0.65);
-      font-family: var(--body);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 5px 12px;
-      border-radius: 16px;
-      cursor: pointer;
-      transition: all .15s;
+      font-family: var(--body); font-size: 12px; font-weight: 600;
+      padding: 5px 12px; border-radius: 16px; cursor: pointer; transition: all .15s;
     }
-
-    .logout-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-    }
-
+    .logout-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
     .post-btn {
-      background: var(--amber);
-      color: var(--navy);
-      border: none;
-      padding: 10px 22px;
-      border-radius: 24px;
-      font-family: var(--body);
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .2s;
-      white-space: nowrap;
+      background: var(--amber); color: var(--navy); border: none;
+      padding: 10px 22px; border-radius: 24px;
+      font-family: var(--body); font-size: 14px; font-weight: 700;
+      cursor: pointer; transition: all .2s; white-space: nowrap;
     }
+    .post-btn:hover { background: #fbb62a; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(240, 162, 24, 0.45); }
 
-    .post-btn:hover {
-      background: #fbb62a;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(240, 162, 24, 0.45);
-    }
-
-    /* LAYOUT & COMPONENTS */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 32px 24px;
-    }
-
-    .stats-bar {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-    }
-
+    /* LAYOUT */
+    .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+    .stats-bar { display: flex; gap: 14px; margin-bottom: 32px; flex-wrap: wrap; }
     .stat-chip {
-      background: var(--card);
-      border-radius: var(--r);
-      padding: 14px 22px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: var(--sh-sm);
-      border: 1px solid var(--border);
+      background: var(--card); border-radius: var(--r);
+      padding: 14px 22px; display: flex; align-items: center; gap: 10px;
+      box-shadow: var(--sh-sm); border: 1px solid var(--border);
     }
-
-    .stat-chip .num {
-      font-family: var(--display);
-      font-size: 30px;
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1;
-    }
-
-    .stat-chip .lbl {
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
-      line-height: 1.4;
-    }
-
-    .lf-layout {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .scard {
-      background: var(--card);
-      border-radius: var(--r);
-      padding: 20px;
-      box-shadow: var(--sh-sm);
-      border: 1px solid var(--border);
-    }
-
-    .scard-title {
-      font-family: var(--display);
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 14px;
-    }
-
-    .filter-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
+    .stat-chip .num { font-family: var(--display); font-size: 30px; font-weight: 700; color: var(--navy); line-height: 1; }
+    .stat-chip .lbl { font-size: 11px; color: var(--muted); font-weight: 500; line-height: 1.4; }
+    .lf-layout { display: grid; grid-template-columns: 260px 1fr; gap: 24px; align-items: start; }
+    .sidebar { display: flex; flex-direction: column; gap: 16px; }
+    .scard { background: var(--card); border-radius: var(--r); padding: 20px; box-shadow: var(--sh-sm); border: 1px solid var(--border); }
+    .scard-title { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+    .filter-group { display: flex; flex-direction: column; gap: 6px; }
     .filter-btn {
-      padding: 8px 14px;
-      border-radius: var(--r-sm);
-      border: 1px solid var(--border);
-      background: transparent;
-      font-family: var(--body);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted);
-      cursor: pointer;
-      text-align: left;
-      transition: all .15s;
+      padding: 8px 14px; border-radius: var(--r-sm); border: 1px solid var(--border);
+      background: transparent; font-family: var(--body);
+      font-size: 13px; font-weight: 500; color: var(--muted);
+      cursor: pointer; text-align: left; transition: all .15s;
     }
+    .filter-btn:hover { background: var(--bg2); color: var(--text); }
+    .filter-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
 
-    .filter-btn:hover {
-      background: var(--bg2);
-      color: var(--text);
-    }
+    .my-stats { background: linear-gradient(135deg, var(--navy) 0%, #2d4470 100%); border-radius: var(--r); padding: 20px; color: #fff; }
+    .my-stats-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255, 255, 255, 0.5); margin-bottom: 12px; }
+    .my-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .my-stat { background: rgba(255, 255, 255, 0.08); border-radius: var(--r-sm); padding: 10px 12px; }
+    .my-stat .n { font-family: var(--display); font-size: 22px; font-weight: 700; color: var(--amber); line-height: 1; }
+    .my-stat .l { font-size: 11px; color: rgba(255, 255, 255, 0.6); margin-top: 3px; }
 
-    .filter-btn.active {
-      background: var(--navy);
-      color: #fff;
-      border-color: var(--navy);
-    }
+    .leader-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .leader-rank { font-size: 18px; width: 28px; text-align: center; }
+    .leader-name { flex: 1; font-size: 13px; font-weight: 600; }
+    .leader-pts { font-size: 12px; font-weight: 700; color: var(--amber); background: rgba(240, 162, 24, 0.12); padding: 3px 8px; border-radius: 20px; }
 
-    /* MY STATS */
-    .my-stats {
-      background: linear-gradient(135deg, var(--navy) 0%, #2d4470 100%);
-      border-radius: var(--r);
-      padding: 20px;
-      color: #fff;
-    }
-
-    .my-stats-title {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 12px;
-    }
-
-    .my-stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .my-stat {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: var(--r-sm);
-      padding: 10px 12px;
-    }
-
-    .my-stat .n {
-      font-family: var(--display);
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--amber);
-      line-height: 1;
-    }
-
-    .my-stat .l {
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.6);
-      margin-top: 3px;
-    }
-
-    /* LEADERBOARD */
-    .leader-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .leader-rank {
-      font-size: 18px;
-      width: 28px;
-      text-align: center;
-    }
-
-    .leader-name {
-      flex: 1;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .leader-pts {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--amber);
-      background: rgba(240, 162, 24, 0.12);
-      padding: 3px 8px;
-      border-radius: 20px;
-    }
-
-    /* ITEM CARDS */
-    .items-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 20px;
-    }
-
+    .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px; }
     .item-card {
-      background: var(--card);
-      border-radius: var(--r);
-      padding: 20px;
-      box-shadow: var(--sh-sm);
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--acc);
-      cursor: pointer;
+      background: var(--card); border-radius: var(--r); padding: 20px;
+      box-shadow: var(--sh-sm); border: 1px solid var(--border);
+      border-top: 4px solid var(--acc); cursor: pointer;
       transition: transform .28s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s;
-      position: relative;
-      transform: rotate(var(--tilt));
+      position: relative; transform: rotate(var(--tilt));
     }
-
     .item-card::before {
-      content: '📌';
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 22px;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
-      transition: transform .28s;
-    }
-
-    .item-card:hover {
-      transform: rotate(0deg) translateY(-5px) scale(1.02);
-      box-shadow: var(--sh-lg);
-      z-index: 3;
-    }
-
-    .item-card.found {
-      opacity: 0.65;
-    }
-
-    .status-badge {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 20px;
-      text-transform: uppercase;
-    }
-
-    .status-badge.open {
-      background: rgba(232, 82, 63, 0.12);
-      color: var(--coral);
-    }
-
-    .status-badge.found {
-      background: rgba(58, 158, 122, 0.12);
-      color: var(--green);
-    }
-
-    .card-title {
-      font-family: var(--display);
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 5px;
-    }
-
-    /* ============================== */
-    /* HOMEWORK & HELP TAB            */
-    /* ============================== */
-    .hw-feed {
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-
-    .hw-feed-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    .hw-feed-header h2 {
-      font-family: var(--display);
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--navy);
-      letter-spacing: -0.5px;
-    }
-
-    .hw-feed-header .sub {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .hw-empty {
-      background: var(--card);
-      border-radius: var(--r);
-      padding: 48px 24px;
-      text-align: center;
-      border: 2px dashed var(--border);
-      color: var(--muted);
-    }
-
-    .hw-empty .em {
-      font-size: 42px;
-      margin-bottom: 12px;
-    }
-
-    .hw-empty h4 {
-      font-family: var(--display);
-      font-size: 18px;
-      color: var(--navy);
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-
-    .hw-post {
-      background: var(--card);
-      border-radius: var(--r);
-      box-shadow: var(--sh-sm);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--peri);
-      overflow: hidden;
-      transition: box-shadow .2s;
-    }
-
-    .hw-post:hover {
-      box-shadow: var(--sh-md);
-    }
-
-    .hw-post-head {
-      padding: 18px 22px 12px;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .hw-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--peri), #8794f0);
-      color: #fff;
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .hw-avatar.teacher {
-      background: linear-gradient(135deg, var(--amber), #f5bf57);
-      color: var(--navy);
-    }
-
-    .hw-meta {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .hw-author {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--navy);
-    }
-
-    .hw-author .role-tag {
-      display: inline-block;
-      font-size: 9px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 2px 7px;
-      border-radius: 10px;
-      margin-left: 6px;
-      vertical-align: 2px;
-    }
-
-    .hw-author .role-tag.student {
-      background: rgba(91, 110, 232, 0.15);
-      color: var(--peri);
-    }
-
-    .hw-author .role-tag.teacher {
-      background: rgba(240, 162, 24, 0.18);
-      color: #b87a0a;
-    }
-
-    .hw-time {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 1px;
-    }
-
-    .hw-body {
-      padding: 4px 22px 18px;
-    }
-
-    .hw-topic {
-      font-family: var(--display);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 8px;
-      line-height: 1.25;
-    }
-
-    .hw-details {
-      font-size: 14.5px;
-      line-height: 1.55;
-      color: var(--text);
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .hw-actions {
-      padding: 10px 22px;
-      border-top: 1px solid var(--border);
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .reply-count {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .reply-count strong {
-      color: var(--navy);
-      font-weight: 700;
-    }
-
-    .reply-btn {
-      margin-left: auto;
-      background: var(--navy);
-      color: #fff;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-family: var(--body);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all .18s;
-    }
-
-    .reply-btn:hover {
-      background: #2a3f6b;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(28, 43, 74, 0.28);
-    }
-
-    .reply-btn.alt {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 7px 14px;
-    }
-
-    .reply-btn.alt:hover {
-      background: var(--bg2);
-      color: var(--navy);
-      transform: none;
-      box-shadow: none;
-    }
-
-    .hw-replies {
-      background: var(--bg);
-      padding: 4px 22px 18px;
-      display: none;
-      border-top: 1px solid var(--border);
-    }
-
-    .hw-replies.open {
-      display: block;
-      animation: fadeIn .25s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .reply-item {
-      display: flex;
-      gap: 10px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .reply-item:last-child {
-      border-bottom: none;
-    }
-
-    .reply-avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--green), #5fc498);
-      color: #fff;
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .reply-avatar.teacher {
-      background: linear-gradient(135deg, var(--amber), #f5bf57);
-      color: var(--navy);
-    }
-
-    .reply-content {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .reply-author {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--navy);
-    }
-
-    .reply-author .role-tag {
-      display: inline-block;
-      font-size: 9px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 1px 6px;
-      border-radius: 9px;
-      margin-left: 5px;
-      vertical-align: 2px;
-    }
-
-    .reply-author .role-tag.student {
-      background: rgba(91, 110, 232, 0.15);
-      color: var(--peri);
-    }
-
-    .reply-author .role-tag.teacher {
-      background: rgba(240, 162, 24, 0.18);
-      color: #b87a0a;
-    }
-
-    .reply-time {
-      font-size: 11px;
-      color: var(--muted);
-      margin-left: 4px;
-    }
-
-    .reply-text {
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--text);
-      margin-top: 3px;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .reply-form {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      padding-top: 14px;
-      border-top: 1px dashed var(--border);
-      margin-top: 4px;
-    }
-
-    .reply-form textarea {
-      flex: 1;
-      min-height: 64px;
-      padding: 10px 14px;
-      border-radius: var(--r-sm);
-      border: 2px solid var(--border);
-      font-family: var(--body);
-      font-size: 14px;
-      background: var(--card);
-      outline: none;
-      resize: vertical;
-      transition: border-color .15s;
-    }
-
-    .reply-form textarea:focus {
-      border-color: var(--peri);
-    }
-
-    .reply-form button {
-      background: var(--peri);
-      color: #fff;
-      border: none;
-      padding: 10px 18px;
-      border-radius: var(--r-sm);
-      font-family: var(--body);
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      align-self: stretch;
-      transition: all .18s;
-    }
-
-    .reply-form button:hover {
-      background: #4a5dd6;
-    }
-
-    /* ============================== */
-    /* SUB BOARD                      */
-    /* ============================== */
-    .sub-feed {
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-
-    .sub-feed-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 4px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .sub-feed-header h2 {
-      font-family: var(--display);
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--navy);
-      letter-spacing: -0.5px;
-    }
-
-    .sub-feed-header .sub {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .sub-filters {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-
-    .sub-filter-btn {
-      padding: 6px 14px;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      font-family: var(--body);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all .15s;
-    }
-
-    .sub-filter-btn:hover {
-      background: var(--bg2);
-      color: var(--navy);
-    }
-
-    .sub-filter-btn.active {
-      background: var(--navy);
-      color: #fff;
-      border-color: var(--navy);
-    }
-
-    .sub-post {
-      background: var(--card);
-      border-radius: var(--r);
-      box-shadow: var(--sh-sm);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--amber);
-      overflow: hidden;
-      transition: box-shadow .2s, opacity .2s;
-    }
-
-    .sub-post:hover {
-      box-shadow: var(--sh-md);
-    }
-
-    .sub-post.covered {
-      border-left-color: var(--green);
-      opacity: 0.78;
-    }
-
-    .sub-post-tag-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 22px 0;
-    }
-
-    .sub-tag {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 10px;
-      background: rgba(240, 162, 24, 0.18);
-      color: #b87a0a;
-    }
-
-    .sub-post.covered .sub-tag {
-      background: rgba(58, 158, 122, 0.16);
-      color: var(--green);
-    }
-
-    .sub-status-badge {
-      margin-left: auto;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-
-    .sub-status-badge.pending {
-      background: rgba(232, 82, 63, 0.12);
-      color: var(--coral);
-    }
-
-    .sub-status-badge.covered {
-      background: rgba(58, 158, 122, 0.16);
-      color: var(--green);
-    }
-
-    .sub-post-body {
-      padding: 12px 22px 18px;
-    }
-
-    .sub-class-title {
-      font-family: var(--display);
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--navy);
-      line-height: 1.2;
-      margin-bottom: 6px;
-    }
-
-    .sub-when {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--peri);
-      background: rgba(91, 110, 232, 0.10);
-      padding: 4px 10px;
-      border-radius: 14px;
-      margin-bottom: 14px;
-    }
-
-    .sub-notes {
-      font-size: 14.5px;
-      line-height: 1.6;
-      color: var(--text);
-      white-space: pre-wrap;
-      word-break: break-word;
-      padding: 14px 16px;
-      background: var(--bg);
-      border-radius: var(--r-sm);
-      border: 1px dashed var(--border);
-    }
-
-    .sub-post-footer {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 22px;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .sub-author-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      color: var(--navy);
-    }
-
-    .sub-author-chip .av {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--amber), #f5bf57);
-      color: var(--navy);
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .sub-author-chip .av.student {
-      background: linear-gradient(135deg, var(--peri), #8794f0);
-      color: #fff;
-    }
-
-    .sub-actions {
-      padding: 10px 22px;
-      border-top: 1px solid var(--border);
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .sub-comment-count {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .sub-comment-count strong {
-      color: var(--navy);
-      font-weight: 700;
-    }
-
-    .sub-cover-btn {
-      margin-left: auto;
-      background: var(--green);
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-family: var(--body);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .18s;
-    }
-
-    .sub-cover-btn:hover {
-      background: #2f8767;
-      transform: translateY(-1px);
-    }
-
-    .sub-cover-btn.reopen {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-
-    .sub-cover-btn.reopen:hover {
-      background: var(--bg2);
-      color: var(--navy);
-      transform: none;
-    }
-
-    .sub-comment-btn {
-      background: var(--navy);
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-family: var(--body);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .18s;
-    }
-
-    .sub-comment-btn:hover {
-      background: #2a3f6b;
-      transform: translateY(-1px);
-    }
-
-    .sub-comments {
-      background: var(--bg);
-      padding: 4px 22px 18px;
-      display: none;
-      border-top: 1px solid var(--border);
-    }
-
-    .sub-comments.open {
-      display: block;
-      animation: fadeIn .25s ease;
-    }
+      content: '📌'; position: absolute; top: -15px; left: 50%;
+      transform: translateX(-50%); font-size: 22px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18)); transition: transform .28s;
+    }
+    .item-card:hover { transform: rotate(0deg) translateY(-5px) scale(1.02); box-shadow: var(--sh-lg); z-index: 3; }
+    .item-card.found { opacity: 0.65; }
+    .status-badge { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; }
+    .status-badge.open { background: rgba(232, 82, 63, 0.12); color: var(--coral); }
+    .status-badge.found { background: rgba(58, 158, 122, 0.12); color: var(--green); }
+    .card-title { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+
+    /* HOMEWORK & HELP TAB */
+    .hw-feed { display: flex; flex-direction: column; gap: 22px; }
+    .hw-feed-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+    .hw-feed-header h2 { font-family: var(--display); font-size: 28px; font-weight: 900; color: var(--navy); letter-spacing: -0.5px; }
+    .hw-feed-header .sub { font-size: 13px; color: var(--muted); }
+    .hw-empty { background: var(--card); border-radius: var(--r); padding: 48px 24px; text-align: center; border: 2px dashed var(--border); color: var(--muted); }
+    .hw-empty .em { font-size: 42px; margin-bottom: 12px; }
+    .hw-empty h4 { font-family: var(--display); font-size: 18px; color: var(--navy); margin-bottom: 6px; font-weight: 700; }
+    .hw-post { background: var(--card); border-radius: var(--r); box-shadow: var(--sh-sm); border: 1px solid var(--border); border-left: 4px solid var(--peri); overflow: hidden; transition: box-shadow .2s; }
+    .hw-post:hover { box-shadow: var(--sh-md); }
+    .hw-post-head { padding: 18px 22px 12px; display: flex; gap: 12px; align-items: flex-start; }
+    .hw-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--peri), #8794f0); color: #fff; font-family: var(--display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .hw-avatar.teacher { background: linear-gradient(135deg, var(--amber), #f5bf57); color: var(--navy); }
+    .hw-meta { flex: 1; min-width: 0; }
+    .hw-author { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .hw-author .role-tag, .reply-author .role-tag { display: inline-block; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 10px; margin-left: 6px; vertical-align: 2px; }
+    .role-tag.student { background: rgba(91, 110, 232, 0.15); color: var(--peri); }
+    .role-tag.teacher { background: rgba(240, 162, 24, 0.18); color: #b87a0a; }
+    .hw-time { font-size: 12px; color: var(--muted); margin-top: 1px; }
+    .hw-body { padding: 4px 22px 18px; }
+    .hw-topic { font-family: var(--display); font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.25; }
+    .hw-details { font-size: 14.5px; line-height: 1.55; color: var(--text); white-space: pre-wrap; word-break: break-word; }
+    .hw-actions { padding: 10px 22px; border-top: 1px solid var(--border); background: var(--bg); display: flex; align-items: center; gap: 16px; }
+    .reply-count { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .reply-count strong { color: var(--navy); font-weight: 700; }
+    .reply-btn { margin-left: auto; background: var(--navy); color: #fff; border: none; padding: 8px 18px; border-radius: 20px; font-family: var(--body); font-size: 13px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all .18s; }
+    .reply-btn:hover { background: #2a3f6b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(28, 43, 74, 0.28); }
+    .reply-btn.alt { background: transparent; color: var(--muted); border: 1px solid var(--border); padding: 7px 14px; }
+    .reply-btn.alt:hover { background: var(--bg2); color: var(--navy); transform: none; box-shadow: none; }
+    .hw-replies { background: var(--bg); padding: 4px 22px 18px; display: none; border-top: 1px solid var(--border); }
+    .hw-replies.open { display: block; animation: fadeIn .25s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .reply-item { display: flex; gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .reply-item:last-child { border-bottom: none; }
+    .reply-avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--green), #5fc498); color: #fff; font-family: var(--display); font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .reply-avatar.teacher { background: linear-gradient(135deg, var(--amber), #f5bf57); color: var(--navy); }
+    .reply-content { flex: 1; min-width: 0; }
+    .reply-author { font-size: 13px; font-weight: 700; color: var(--navy); }
+    .reply-time { font-size: 11px; color: var(--muted); margin-left: 4px; }
+    .reply-text { font-size: 14px; line-height: 1.5; color: var(--text); margin-top: 3px; white-space: pre-wrap; word-break: break-word; }
+    .reply-form { display: flex; gap: 10px; align-items: flex-start; padding-top: 14px; border-top: 1px dashed var(--border); margin-top: 4px; }
+    .reply-form textarea { flex: 1; min-height: 64px; padding: 10px 14px; border-radius: var(--r-sm); border: 2px solid var(--border); font-family: var(--body); font-size: 14px; background: var(--card); outline: none; resize: vertical; transition: border-color .15s; }
+    .reply-form textarea:focus { border-color: var(--peri); }
+    .reply-form button { background: var(--peri); color: #fff; border: none; padding: 10px 18px; border-radius: var(--r-sm); font-family: var(--body); font-weight: 700; font-size: 13px; cursor: pointer; align-self: stretch; transition: all .18s; }
+    .reply-form button:hover { background: #4a5dd6; }
 
     /* MODAL */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(28, 43, 74, 0.52);
-      backdrop-filter: blur(4px);
-      z-index: 200;
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .overlay.open {
-      display: flex;
-    }
-
-    .modal {
-      background: var(--bg);
-      border-radius: 24px 24px 0 0;
-      width: 100%;
-      max-width: 680px;
-      max-height: 88vh;
-      overflow-y: auto;
-      padding: 32px;
-      box-shadow: 0 -8px 50px rgba(0, 0, 0, 0.22);
-      animation: slideUp .32s cubic-bezier(.34, 1.56, .64, 1);
-    }
-
-    @keyframes slideUp {
-      from {
-        transform: translateY(50px);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .handle {
-      width: 48px;
-      height: 4px;
-      background: var(--bg2);
-      border-radius: 2px;
-      margin: 0 auto 26px;
-    }
-
-    .modal h3 {
-      font-family: var(--display);
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-
-    .modal-sub {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    .field-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .6px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      margin-top: 6px;
-    }
+    .overlay { position: fixed; inset: 0; background: rgba(28, 43, 74, 0.52); backdrop-filter: blur(4px); z-index: 200; display: none; align-items: flex-end; justify-content: center; }
+    .overlay.open { display: flex; }
+    .modal { background: var(--bg); border-radius: 24px 24px 0 0; width: 100%; max-width: 680px; max-height: 88vh; overflow-y: auto; padding: 32px; box-shadow: 0 -8px 50px rgba(0, 0, 0, 0.22); animation: slideUp .32s cubic-bezier(.34, 1.56, .64, 1); }
+    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .handle { width: 48px; height: 4px; background: var(--bg2); border-radius: 2px; margin: 0 auto 26px; }
+    .modal h3 { font-family: var(--display); font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .field-label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin-bottom: 6px; margin-top: 6px; }
 
     /* ITEM DETAIL MODAL */
-    .detail-hero {
-      text-align: center;
-      padding: 18px 0 22px;
-      background: var(--bg2);
-      border-radius: var(--r);
-      margin-bottom: 18px;
-      position: relative;
-    }
+    .detail-hero { text-align: center; padding: 18px 0 22px; background: var(--bg2); border-radius: var(--r); margin-bottom: 18px; position: relative; }
+    .detail-emoji { font-size: 72px; line-height: 1; margin-bottom: 8px; display: inline-block; }
+    .detail-hero .status-badge { position: absolute; top: 12px; right: 12px; }
+    .detail-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-sm); margin-bottom: 8px; font-size: 14px; color: var(--text); }
+    .detail-row .lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); min-width: 76px; }
+    .sbtn.ghost { background: transparent; color: var(--navy); border: 2px solid var(--border); margin-top: 6px; }
+    .sbtn.ghost:hover { background: var(--bg2); border-color: var(--navy); }
+    .sbtn.coral { background: var(--coral); }
+    .sbtn.coral:hover { background: #d3422f; }
+    .sbtn.green { background: var(--green); }
+    .sbtn.green:hover { background: #2f8767; }
 
-    .detail-emoji {
-      font-size: 72px;
-      line-height: 1;
-      margin-bottom: 8px;
-      display: inline-block;
-    }
-
-    .detail-hero .status-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-    }
-
-    .detail-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--r-sm);
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: var(--text);
-    }
-
-    .detail-row .lbl {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      color: var(--muted);
-      min-width: 76px;
-    }
-
-    .sbtn.ghost {
-      background: transparent;
-      color: var(--navy);
-      border: 2px solid var(--border);
-      margin-top: 6px;
-    }
-
-    .sbtn.ghost:hover {
-      background: var(--bg2);
-      border-color: var(--navy);
-    }
-
-    .sbtn.coral {
-      background: var(--coral);
-    }
-
-    .sbtn.coral:hover {
-      background: #d3422f;
-    }
-
-    .sbtn.green {
-      background: var(--green);
-    }
-
-    .sbtn.green:hover {
-      background: #2f8767;
-    }
-
-    /* BREATHING EXERCISE */
-    .breathe-stage {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 48px 16px 32px;
-      gap: 24px;
-    }
-
-    .breathe-circle {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #8794f0, var(--peri) 70%);
-      box-shadow: 0 12px 50px rgba(91, 110, 232, 0.45);
-      transform: scale(0.5);
-      transition: transform 4s ease-in-out;
-    }
-
-    .breathe-circle.expand {
-      transform: scale(1.15);
-    }
-
-    .breathe-label {
-      font-family: var(--display);
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: 0.5px;
-      min-height: 36px;
-    }
-
-    .breathe-cycle-count {
-      font-size: 13px;
-      color: var(--muted);
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
+    /* BREATHING */
+    .breathe-stage { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 16px 32px; gap: 24px; }
+    .breathe-circle { width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #8794f0, var(--peri) 70%); box-shadow: 0 12px 50px rgba(91, 110, 232, 0.45); transform: scale(0.5); transition: transform 4s ease-in-out; }
+    .breathe-circle.expand { transform: scale(1.15); }
+    .breathe-label { font-family: var(--display); font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; min-height: 36px; }
+    .breathe-cycle-count { font-size: 13px; color: var(--muted); letter-spacing: 0.6px; text-transform: uppercase; font-weight: 600; }
 
     /* GARDEN */
-    .garden-stage {
-      position: relative;
-      width: 100%;
-      height: 360px;
-      border-radius: var(--r);
-      background: linear-gradient(180deg, #c5e8f5 0%, #cfe9b8 55%, #97c976 100%);
-      overflow: hidden;
-      cursor: crosshair;
-      margin-bottom: 14px;
-      box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.08);
-    }
+    .garden-stage { position: relative; width: 100%; height: 360px; border-radius: var(--r); background: linear-gradient(180deg, #c5e8f5 0%, #cfe9b8 55%, #97c976 100%); overflow: hidden; cursor: crosshair; margin-bottom: 14px; box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.08); }
+    .garden-stage::before { content: '☀️'; position: absolute; top: 14px; right: 18px; font-size: 32px; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15)); }
+    .garden-flower { position: absolute; transform: translate(-50%, -50%) scale(0); animation: bloom .55s cubic-bezier(.34, 1.56, .64, 1) forwards; pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18)); user-select: none; }
+    @keyframes bloom { 0% { transform: translate(-50%, -50%) scale(0) rotate(-30deg); } 60% { transform: translate(-50%, -50%) scale(1.2) rotate(8deg); } 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); } }
+    .garden-info { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); }
+    .garden-info .count { background: var(--bg2); padding: 5px 12px; border-radius: 20px; font-weight: 700; color: var(--navy); }
 
-    .garden-stage::before {
-      content: '☀️';
-      position: absolute;
-      top: 14px;
-      right: 18px;
-      font-size: 32px;
-      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
-    }
-
-    .garden-flower {
-      position: absolute;
-      transform: translate(-50%, -50%) scale(0);
-      animation: bloom .55s cubic-bezier(.34, 1.56, .64, 1) forwards;
-      pointer-events: none;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
-      user-select: none;
-    }
-
-    @keyframes bloom {
-      0% { transform: translate(-50%, -50%) scale(0) rotate(-30deg); }
-      60% { transform: translate(-50%, -50%) scale(1.2) rotate(8deg); }
-      100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-    }
-
-    .garden-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .garden-info .count {
-      background: var(--bg2);
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-weight: 700;
-      color: var(--navy);
-    }
-
-    /* CHILL CARD ENHANCEMENTS */
-    .chill-card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .chill-card h3 {
-      font-family: var(--display);
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-
-    .chill-card p {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .chill-card .chill-cta {
-      display: inline-block;
-      margin-top: 14px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--peri);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
+    /* CHILL CARDS */
+    .chill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .chill-card { background: var(--card); border-radius: 20px; padding: 32px 26px; border: 1px solid var(--border); cursor: pointer; transition: transform .2s; position: relative; overflow: hidden; }
+    .chill-card:hover { transform: translateY(-5px); box-shadow: var(--sh-md); }
+    .chill-card h3 { font-family: var(--display); font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .chill-card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+    .chill-card .chill-cta { display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 700; color: var(--peri); letter-spacing: 0.5px; text-transform: uppercase; }
+    .chill-section-title { font-family: var(--display); font-size: 20px; font-weight: 800; color: var(--navy); margin: 28px 0 14px; }
+    .chill-section-title:first-child { margin-top: 0; }
 
     /* FORMS */
-    .finput,
-    .ftextarea,
-    .fselect {
-      width: 100%;
-      padding: 10px 14px;
-      border-radius: var(--r-sm);
-      border: 2px solid var(--border);
-      font-family: var(--body);
-      font-size: 14px;
-      background: var(--card);
-      outline: none;
-      margin-bottom: 10px;
-      transition: border-color .15s;
-    }
+    .finput, .ftextarea, .fselect { width: 100%; padding: 10px 14px; border-radius: var(--r-sm); border: 2px solid var(--border); font-family: var(--body); font-size: 14px; background: var(--card); outline: none; margin-bottom: 10px; transition: border-color .15s; }
+    .finput:focus, .ftextarea:focus { border-color: var(--peri); }
+    .ftextarea { min-height: 120px; resize: vertical; line-height: 1.5; }
+    .sbtn { width: 100%; padding: 14px; border-radius: var(--r); border: none; background: var(--navy); color: #fff; font-weight: 700; cursor: pointer; font-family: var(--body); font-size: 15px; transition: all .18s; margin-top: 8px; }
+    .sbtn:hover { background: #2a3f6b; transform: translateY(-1px); }
 
-    .finput:focus,
-    .ftextarea:focus {
-      border-color: var(--peri);
+    /* ════════════════════════════════════════════
+       MINIGAMES (Logic Grid, Word Ladder, Anagram Sprint)
+    ════════════════════════════════════════════ */
+    .game-back {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--muted); padding: 7px 16px; border-radius: 20px;
+      font-family: var(--body); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all .15s; margin-bottom: 18px;
     }
+    .game-back:hover { background: var(--bg2); color: var(--navy); }
+    .game-header { text-align: center; margin-bottom: 20px; }
+    .game-header h2 { font-family: var(--display); font-size: 30px; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+    .game-header p { font-size: 13px; color: var(--muted); }
+    .game-toolbar { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+    .game-pill { padding: 9px 18px; border-radius: 22px; border: 2px solid var(--border); background: var(--card); font-family: var(--body); font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; transition: all .15s; }
+    .game-pill:hover { background: var(--bg2); }
+    .game-pill.active { border-color: var(--peri); background: var(--peri); color: #fff; }
+    .game-new-btn { padding: 9px 22px; border-radius: 22px; border: none; background: var(--amber); color: var(--navy); font-family: var(--body); font-size: 13px; font-weight: 700; cursor: pointer; transition: all .15s; }
+    .game-new-btn:hover { background: #fbb62a; transform: translateY(-1px); }
+    .game-card { background: var(--card); border-radius: 20px; padding: 28px; box-shadow: var(--sh-md); border: 1px solid var(--border); margin-bottom: 16px; }
+    .game-stats { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 12px; }
+    .game-stats strong { color: var(--navy); }
+    .game-controls { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+    .game-btn { padding: 11px 20px; border-radius: 12px; border: 2px solid var(--border); background: var(--card); color: var(--navy); font-family: var(--body); font-size: 14px; font-weight: 600; cursor: pointer; transition: all .15s; }
+    .game-btn:hover { background: var(--bg2); }
+    .game-btn.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .game-btn.primary:hover { background: #2a3f6b; }
+    .game-btn:disabled { opacity: .4; cursor: not-allowed; }
 
-    .ftextarea {
-      min-height: 120px;
-      resize: vertical;
-      line-height: 1.5;
-    }
+    /* Victory overlay (used by all 3 games) */
+    .game-victory { position: fixed; inset: 0; background: rgba(28, 43, 74, 0.7); backdrop-filter: blur(4px); z-index: 300; display: none; align-items: center; justify-content: center; }
+    .game-victory.show { display: flex; }
+    .game-victory-card { background: var(--card); border-radius: 20px; padding: 40px; text-align: center; max-width: 420px; margin: 16px; animation: pop .4s cubic-bezier(.34, 1.56, .64, 1); }
+    @keyframes pop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: scale(1); } }
+    .game-victory-card h2 { font-family: var(--display); font-size: 32px; color: var(--green); margin-bottom: 8px; }
+    .game-victory-card p { color: var(--muted); margin-bottom: 16px; }
+    .game-victory-card button { background: var(--navy); color: #fff; border: none; padding: 12px 28px; border-radius: 24px; font-family: var(--body); font-size: 14px; font-weight: 700; cursor: pointer; }
+    .game-victory-card button:hover { background: #2a3f6b; }
 
-    .sbtn {
-      width: 100%;
-      padding: 14px;
-      border-radius: var(--r);
-      border: none;
-      background: var(--navy);
-      color: #fff;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: var(--body);
-      font-size: 15px;
-      transition: all .18s;
-      margin-top: 8px;
-    }
+    /* LOGIC GRID specific */
+    .lg-clues { background: var(--bg2); border-radius: 14px; padding: 18px; margin-bottom: 22px; }
+    .lg-clues-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 10px; }
+    .lg-clue-list { list-style: none; counter-reset: clue; }
+    .lg-clue-list li { padding: 6px 0 6px 28px; position: relative; font-size: 14px; line-height: 1.55; counter-increment: clue; }
+    .lg-clue-list li::before { content: counter(clue); position: absolute; left: 0; top: 6px; width: 20px; height: 20px; border-radius: 50%; background: var(--peri); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .lg-grid-wrap { display: flex; justify-content: center; overflow-x: auto; }
+    table.lg-grid { border-collapse: collapse; }
+    table.lg-grid th, table.lg-grid td { border: 1px solid var(--border); width: 50px; height: 50px; text-align: center; vertical-align: middle; }
+    table.lg-grid th { background: var(--bg2); font-size: 11px; font-weight: 700; color: var(--navy); padding: 6px; writing-mode: vertical-rl; transform: rotate(180deg); max-width: 50px; }
+    table.lg-grid th.lg-row-header { writing-mode: horizontal-tb; transform: none; text-align: right; padding-right: 12px; padding-left: 8px; width: auto; max-width: none; min-width: 90px; }
+    table.lg-grid th.lg-corner { background: transparent; border: none; }
+    table.lg-grid td { cursor: pointer; transition: background .15s; font-size: 18px; user-select: none; }
+    table.lg-grid td:hover { background: var(--bg2); }
+    table.lg-grid td.yes { background: rgba(58, 158, 122, 0.18); color: var(--green); font-weight: 700; }
+    table.lg-grid td.no { background: rgba(232, 82, 63, 0.10); color: var(--coral); }
+    .lg-divider { border-right: 3px solid var(--navy) !important; }
+    .lg-hint-box { background: rgba(91, 110, 232, 0.08); border-left: 3px solid var(--peri); padding: 12px 16px; border-radius: 8px; font-size: 13px; color: var(--navy); margin-top: 14px; display: none; }
+    .lg-hint-box.show { display: block; animation: slideDown .3s ease; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+    .lg-legend { font-size: 12px; color: var(--muted); text-align: center; margin-top: 14px; line-height: 1.6; }
+    .lg-legend kbd { background: var(--bg2); border-radius: 4px; padding: 1px 8px; font-family: monospace; border: 1px solid var(--border); }
 
-    .sbtn:hover {
-      background: #2a3f6b;
-      transform: translateY(-1px);
-    }
+    /* WORD LADDER specific */
+    .wl-goal { text-align: center; margin-bottom: 22px; font-size: 14px; color: var(--muted); }
+    .wl-goal strong { color: var(--navy); }
+    .wl-ladder { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 18px; }
+    .wl-rung { display: flex; gap: 6px; padding: 10px 16px; border-radius: 12px; transition: all .25s; animation: rungIn .3s cubic-bezier(.34, 1.56, .64, 1); }
+    @keyframes rungIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    .wl-rung.start { background: rgba(91, 110, 232, 0.10); border: 2px dashed var(--peri); }
+    .wl-rung.target { background: rgba(58, 158, 122, 0.10); border: 2px dashed var(--green); }
+    .wl-rung.history { background: var(--bg2); }
+    .wl-rung.preview { background: rgba(240, 162, 24, 0.08); border: 2px solid var(--amber); }
+    .wl-rung.preview.invalid { background: rgba(232, 82, 63, 0.08); border-color: var(--coral); }
+    .wl-letter { width: 44px; height: 52px; border-radius: 8px; background: var(--card); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 800; font-size: 22px; color: var(--navy); text-transform: uppercase; transition: all .2s; }
+    .wl-letter.changed { background: var(--amber); color: var(--navy); border-color: var(--amber); }
+    .wl-letter input { width: 100%; height: 100%; border: none; background: transparent; font-family: var(--mono); font-weight: 800; font-size: 22px; color: var(--navy); text-align: center; text-transform: uppercase; outline: none; padding: 0; }
+    .wl-arrow { color: var(--muted); font-size: 20px; margin: -2px 0; opacity: .5; }
+    .wl-feedback { text-align: center; margin: 14px 0 0; min-height: 22px; font-size: 14px; font-weight: 600; transition: color .2s; }
+    .wl-feedback.error { color: var(--coral); }
+    .wl-feedback.success { color: var(--green); }
+    .wl-stats-row { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+    .wl-stats-row strong { color: var(--navy); }
+    .wl-info { font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.6; }
+    .wl-word-path { font-family: var(--mono); font-weight: 800; color: var(--peri); font-size: 14px; margin: 16px 0; letter-spacing: 2px; }
 
-    /* CHILL ZONE */
-    .chill-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .chill-card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 32px 26px;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: transform .2s;
-    }
-
-    .chill-card:hover {
-      transform: translateY(-5px);
-    }
+    /* ANAGRAM SPRINT specific */
+    .as-start-row { text-align: center; }
+    .as-diff-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px 0 24px; }
+    .as-diff-card { flex: 1; min-width: 140px; max-width: 200px; padding: 18px 14px; border-radius: 14px; border: 2px solid var(--border); background: var(--bg2); cursor: pointer; transition: all .2s; }
+    .as-diff-card:hover { transform: translateY(-2px); }
+    .as-diff-card.active { border-color: var(--peri); background: var(--card); }
+    .as-diff-card .name { font-family: var(--display); font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .as-diff-card .desc { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .as-start-btn { padding: 14px 36px; border-radius: 26px; border: none; background: var(--navy); color: #fff; font-family: var(--body); font-size: 15px; font-weight: 700; cursor: pointer; transition: all .2s; }
+    .as-start-btn:hover { background: #2a3f6b; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(28, 43, 74, .3); }
+    .as-hi-score { margin-top: 18px; font-size: 13px; color: var(--muted); }
+    .as-hi-score strong { color: var(--amber); }
+    .as-hud { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 14px; }
+    .as-hud-stat { text-align: center; }
+    .as-hud-stat .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 2px; }
+    .as-hud-stat .val { font-family: var(--display); font-size: 26px; font-weight: 800; color: var(--navy); line-height: 1; }
+    .as-hud-stat.timer .val { color: var(--peri); }
+    .as-hud-stat.timer.warn .val { color: var(--coral); animation: pulse .5s ease-in-out infinite alternate; }
+    @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.06); } }
+    .as-letters { display: flex; gap: 10px; justify-content: center; margin: 20px 0; flex-wrap: wrap; }
+    .as-letter-tile { width: 56px; height: 64px; border-radius: 12px; background: linear-gradient(180deg, #ffffff 0%, #f0ebe0 100%); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 800; font-size: 28px; color: var(--navy); text-transform: uppercase; box-shadow: 0 3px 6px rgba(0,0,0,0.08); cursor: pointer; user-select: none; transition: transform .15s, box-shadow .15s; }
+    .as-letter-tile:hover { transform: translateY(-2px); box-shadow: 0 5px 12px rgba(0,0,0,0.12); }
+    .as-letter-tile.used { opacity: 0.3; pointer-events: none; transform: scale(.92); }
+    .as-input-area { display: flex; gap: 8px; justify-content: center; margin-bottom: 14px; }
+    .as-word-input { flex: 1; max-width: 320px; padding: 14px 18px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg2); font-family: var(--mono); font-weight: 700; font-size: 22px; color: var(--navy); text-align: center; text-transform: uppercase; outline: none; letter-spacing: 3px; transition: border-color .2s; }
+    .as-word-input:focus { border-color: var(--peri); background: var(--card); }
+    .as-submit-btn { padding: 14px 24px; border-radius: 12px; border: none; background: var(--peri); color: #fff; font-family: var(--body); font-size: 14px; font-weight: 700; cursor: pointer; transition: all .15s; }
+    .as-submit-btn:hover { background: #4a5dd0; }
+    .as-shuffle-btn { padding: 8px 16px; border-radius: 20px; border: 2px solid var(--border); background: var(--card); color: var(--muted); font-family: var(--body); font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; display: block; margin: 0 auto 14px; }
+    .as-shuffle-btn:hover { background: var(--bg2); color: var(--text); }
+    .as-feedback { text-align: center; min-height: 22px; font-size: 14px; font-weight: 600; margin-bottom: 12px; transition: color .2s; }
+    .as-feedback.error { color: var(--coral); animation: shake .4s; }
+    .as-feedback.success { color: var(--green); animation: bounceIn .4s; }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-5px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(3px); } }
+    @keyframes bounceIn { 0% { transform: translateY(0); } 30% { transform: translateY(-6px); } 100% { transform: translateY(0); } }
+    .as-found-words { margin-top: 16px; padding: 14px; background: var(--bg2); border-radius: 12px; max-height: 200px; overflow-y: auto; }
+    .as-found-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; }
+    .as-found-empty { color: var(--muted); font-size: 13px; font-style: italic; text-align: center; padding: 8px; }
+    .as-found-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .as-found-pill { padding: 4px 10px; border-radius: 14px; background: var(--card); border: 1px solid var(--border); font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--navy); animation: foundIn .35s cubic-bezier(.34,1.56,.64,1); }
+    .as-found-pill.bonus { background: var(--amber); color: var(--navy); border-color: var(--amber); box-shadow: 0 2px 8px rgba(240,162,24,0.4); }
+    @keyframes foundIn { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
+    .as-end-screen { text-align: center; padding: 16px 0; }
+    .as-end-screen h2 { font-family: var(--display); font-size: 30px; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
+    .as-final-score { font-family: var(--display); font-size: 52px; font-weight: 900; color: var(--peri); line-height: 1; margin: 14px 0 4px; }
+    .as-final-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 18px; }
+    .as-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0; }
+    .as-stat-cell { background: var(--bg2); border-radius: 12px; padding: 14px 8px; }
+    .as-stat-cell .n { font-family: var(--display); font-size: 22px; font-weight: 800; color: var(--navy); line-height: 1; }
+    .as-stat-cell .l { font-size: 10px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .5px; }
+    .as-missed-section { margin-top: 18px; text-align: left; background: var(--bg2); border-radius: 12px; padding: 16px; }
+    .as-missed-section .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; }
+    .as-missed-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .as-missed-list .miss { padding: 3px 9px; border-radius: 12px; background: var(--card); border: 1px solid var(--border); font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--muted); }
+    .as-new-high { color: var(--amber); font-weight: 700; }
 
     @media (max-width: 780px) {
-      .lf-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-tab {
-        padding: 8px 12px;
-        font-size: 13px;
-      }
+      .lf-layout { grid-template-columns: 1fr; }
+      .nav-tab { padding: 8px 12px; font-size: 13px; }
+      table.lg-grid th, table.lg-grid td { width: 40px; height: 40px; }
+      table.lg-grid th.lg-row-header { min-width: 70px; font-size: 10px; }
+      .wl-letter { width: 38px; height: 46px; font-size: 18px; }
+      .wl-letter input { font-size: 18px; }
+      .as-letter-tile { width: 46px; height: 54px; font-size: 22px; }
     }
   </style>
 </head>
 
 <body>
-
   <div id="auth-screen">
     <div class="auth-box">
       <div class="auth-logo">📌 Hall<span>Pass</span></div>
       <div class="auth-tagline">Tyee Middle School Community Board</div>
-
       <div class="auth-tabs">
         <button class="auth-tab active" id="tab-login" onclick="authTab('login')">Log In</button>
         <button class="auth-tab" id="tab-signup" onclick="authTab('signup')">Create Account</button>
       </div>
-
       <div id="auth-error" class="auth-error"></div>
-
       <div id="form-login">
-        <div class="auth-form-row">
-          <label class="auth-label">Username</label>
-          <input class="auth-input" id="li-user" type="text" placeholder="e.g. jayden_k">
-        </div>
-        <div class="auth-form-row">
-          <label class="auth-label">Password</label>
-          <input class="auth-input" id="li-pass" type="password" placeholder="••••••••">
-        </div>
+        <div class="auth-form-row"><label class="auth-label">Username</label><input class="auth-input" id="li-user" type="text" placeholder="e.g. jayden_k"></div>
+        <div class="auth-form-row"><label class="auth-label">Password</label><input class="auth-input" id="li-pass" type="password" placeholder="••••••••"></div>
         <button class="auth-submit" onclick="doLogin()">Log In →</button>
       </div>
-
       <div id="form-signup" style="display:none">
         <div class="auth-2col">
-          <div class="auth-form-row">
-            <label class="auth-label">First Name</label>
-            <input class="auth-input" id="su-first" type="text" placeholder="Jayden">
-          </div>
-          <div class="auth-form-row">
-            <label class="auth-label">Last Initial</label>
-            <input class="auth-input" id="su-last" type="text" placeholder="K" maxlength="1">
-          </div>
+          <div class="auth-form-row"><label class="auth-label">First Name</label><input class="auth-input" id="su-first" type="text" placeholder="Jayden"></div>
+          <div class="auth-form-row"><label class="auth-label">Last Initial</label><input class="auth-input" id="su-last" type="text" placeholder="K" maxlength="1"></div>
         </div>
-        <div class="auth-form-row">
-          <label class="auth-label">Username</label>
-          <input class="auth-input" id="su-user" type="text" placeholder="jayden_k">
-        </div>
-        <div class="auth-form-row">
-          <label class="auth-label">Password</label>
-          <input class="auth-input" id="su-pass" type="password" placeholder="Choose password">
-        </div>
-        <div class="auth-form-row">
-          <label class="auth-label">Role</label>
-          <select class="auth-input" id="su-role">
-            <option value="student">Student</option>
-            <option value="teacher">Teacher / Staff</option>
-          </select>
+        <div class="auth-form-row"><label class="auth-label">Username</label><input class="auth-input" id="su-user" type="text" placeholder="jayden_k"></div>
+        <div class="auth-form-row"><label class="auth-label">Password</label><input class="auth-input" id="su-pass" type="password" placeholder="Choose password"></div>
+        <div class="auth-form-row"><label class="auth-label">Role</label>
+          <select class="auth-input" id="su-role"><option value="student">Student</option><option value="teacher">Teacher / Staff</option></select>
         </div>
         <button class="auth-submit" onclick="doSignup()">Create Account →</button>
       </div>
@@ -1636,19 +501,27 @@
         <button class="post-btn" id="post-btn" onclick="openPostModal()">+ Post Item</button>
       </div>
     </header>
-    <main class="container">
-      <div id="app"></div>
-    </main>
+    <main class="container"><div id="app"></div></main>
   </div>
 
   <div id="overlay" class="overlay" onclick="closeModal()">
-    <div class="modal" onclick="event.stopPropagation()">
-      <div id="modal-body"></div>
+    <div class="modal" onclick="event.stopPropagation()"><div id="modal-body"></div></div>
+  </div>
+
+  <!-- Game victory overlay (separate so it can show over the chill zone view) -->
+  <div id="game-victory" class="game-victory" onclick="hideGameVictory()">
+    <div class="game-victory-card" onclick="event.stopPropagation()">
+      <h2 id="gv-title">🎉 Solved!</h2>
+      <p id="gv-msg"></p>
+      <div id="gv-extra"></div>
+      <button onclick="hideGameVictory()">Continue</button>
     </div>
   </div>
 
   <script>
-    // 1. ACCOUNT MANAGER (STORES ALL DATA IN LOCALSTORAGE)
+    // ═══════════════════════════════════════════════
+    // 1. ACCOUNT MANAGER
+    // ═══════════════════════════════════════════════
     class AccountManager {
       constructor() {
         this.storageKey = 'hallpass_accounts_v1';
@@ -1663,11 +536,7 @@
         defaults.forEach(u => this.addAccount(u.username, u));
       }
       addAccount(username, data) {
-        this.accounts[username.toLowerCase()] = {
-          username: username.toLowerCase(),
-          ...data,
-          createdAt: new Date().toISOString()
-        };
+        this.accounts[username.toLowerCase()] = { username: username.toLowerCase(), ...data, createdAt: new Date().toISOString() };
         this.saveToDisk();
       }
       getAccount(username, password) {
@@ -1675,20 +544,21 @@
         return (user && user.password === password) ? user : null;
       }
       saveToDisk() { localStorage.setItem(this.storageKey, JSON.stringify(this.accounts)); }
-      loadFromDisk() {
-        const data = localStorage.getItem(this.storageKey);
-        return data ? JSON.parse(data) : {};
-      }
+      loadFromDisk() { const data = localStorage.getItem(this.storageKey); return data ? JSON.parse(data) : {}; }
     }
 
+    // ═══════════════════════════════════════════════
     // 2. APP STATE
+    // ═══════════════════════════════════════════════
     const manager = new AccountManager();
     let currentUser = null;
     let currentTab = 'lost', filter = 'all', uid = 500;
-    let openReplyBox = null; // tracks which homework post id has its reply form expanded
-    let openSubCommentBox = null; // tracks which sub post id has its comment form expanded
+    let openReplyBox = null;
+    let currentChillView = 'menu';  // 'menu' | 'breathing' | 'garden' | 'logic' | 'ladder' | 'anagram'
 
+    // ═══════════════════════════════════════════════
     // 3. AUTH LOGIC
+    // ═══════════════════════════════════════════════
     function authTab(t) {
       document.getElementById('tab-login').classList.toggle('active', t === 'login');
       document.getElementById('tab-signup').classList.toggle('active', t === 'signup');
@@ -1696,7 +566,6 @@
       document.getElementById('form-signup').style.display = (t === 'signup') ? 'block' : 'none';
       hideErr();
     }
-
     function showErr(m) { const e = document.getElementById('auth-error'); e.textContent = m; e.style.display = 'block'; }
     function hideErr() { document.getElementById('auth-error').style.display = 'none'; }
 
@@ -1707,22 +576,18 @@
       if (!user) { showErr('Incorrect username or password!'); return; }
       loginAs(user);
     }
-
     function doSignup() {
       const first = document.getElementById('su-first').value.trim();
       const last = document.getElementById('su-last').value.trim();
       const u = document.getElementById('su-user').value.trim();
       const p = document.getElementById('su-pass').value;
       const role = document.getElementById('su-role').value;
-
       if (!first || !u || !p) { showErr('Please fill in required fields!'); return; }
       if (manager.accounts[u.toLowerCase()]) { showErr('Username already exists!'); return; }
-
       const newUser = { password: p, first, last, role, points: 0 };
       manager.addAccount(u, newUser);
       loginAs(manager.accounts[u.toLowerCase()]);
     }
-
     function loginAs(user) {
       currentUser = user;
       document.getElementById('auth-screen').style.display = 'none';
@@ -1731,7 +596,6 @@
       document.getElementById('hdr-name').textContent = user.first + " " + (user.last ? user.last + "." : "");
       switchTab(user.role === 'teacher' ? 'sub' : 'lost');
     }
-
     function doLogout() {
       currentUser = null;
       document.getElementById('main-app').style.display = 'none';
@@ -1739,139 +603,85 @@
       authTab('login');
     }
 
-    // 4. NAVIGATION & DATA
+    // ═══════════════════════════════════════════════
+    // 4. NAVIGATION
+    // ═══════════════════════════════════════════════
     function switchTab(t) {
+      // Stop any active games when leaving Chill Zone
+      if (currentTab === 'chill' && t !== 'chill') stopAllGameAnimations();
       currentTab = t;
       openReplyBox = null;
-      openSubCommentBox = null;
+      currentChillView = 'menu';
       document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
       document.getElementById(`btn-${t}`).classList.add('active');
-
-      // Update post button visibility & label per tab
       const postBtn = document.getElementById('post-btn');
-      const labels = {
-        lost: '+ Post Item',
-        homework: '+ Ask for Help',
-        sub: '+ Post Plan'
-      };
-      if (t === 'chill') {
-        postBtn.style.display = 'none';
-      } else {
-        postBtn.style.display = 'block';
-        postBtn.textContent = labels[t] || '+ Post';
-      }
+      if (t === 'chill' || t === 'sub') { postBtn.style.display = 'none'; }
+      else if (t === 'homework') { postBtn.style.display = 'block'; postBtn.textContent = '+ Ask for Help'; }
+      else { postBtn.style.display = 'block'; postBtn.textContent = '+ Post Item'; }
       render();
     }
 
-    // MOCK DATA
+    // ═══════════════════════════════════════════════
+    // 5. MOCK DATA
+    // ═══════════════════════════════════════════════
     let items = [
       { id: 1, title: 'Creeper Keychain', cat: '🔑', loc: 'Office', by: 'Tyler W.', status: 'open', acc: '#3a9e7a', tilt: -2 },
       { id: 2, title: 'Stanley Cup', cat: '🍱', loc: 'Cafeteria', by: 'Priya K.', status: 'found', acc: '#5b6ee8', tilt: 1.5 }
     ];
 
-    // HOMEWORK & HELP DATA - posts have topic, details, author info, replies
     let homeworkPosts = [
       {
         id: 'hw1',
         topic: 'Stuck on quadratic equations — what does "completing the square" actually mean?',
         details: "We're on chapter 4 in Algebra and I can solve them with the quadratic formula but Mr. Liu wants us to show completing the square. I get lost after moving the constant. Anyone have a clear way to think about it?",
-        authorName: 'Jayden K.',
-        authorRole: 'student',
-        timestamp: Date.now() - 1000 * 60 * 60 * 5, // 5h ago
+        authorName: 'Jayden K.', authorRole: 'student',
+        timestamp: Date.now() - 1000 * 60 * 60 * 5,
         replies: [
-          {
-            author: 'Ms. Peterson',
-            role: 'teacher',
-            text: "Great question! Think of it as turning x² + bx into a perfect square. Take half of b, square it, then add AND subtract that number. Want me to walk through one in office hours tomorrow?",
-            timestamp: Date.now() - 1000 * 60 * 60 * 4
-          }
+          { author: 'Ms. Peterson', role: 'teacher', text: "Great question! Think of it as turning x² + bx into a perfect square. Take half of b, square it, then add AND subtract that number. Want me to walk through one in office hours tomorrow?", timestamp: Date.now() - 1000 * 60 * 60 * 4 }
         ]
       },
       {
         id: 'hw2',
         topic: 'Need help citing a YouTube video in MLA format',
         details: "It's for the science fair report. Do I use the channel name or the uploader's real name? And how do I handle the timestamp if I'm only quoting one part?",
-        authorName: 'Priya K.',
-        authorRole: 'student',
-        timestamp: Date.now() - 1000 * 60 * 90, // 90 min ago
+        authorName: 'Priya K.', authorRole: 'student',
+        timestamp: Date.now() - 1000 * 60 * 90,
         replies: []
       }
     ];
 
-    let subFilter = 'all'; // 'all' | 'pending' | 'covered'
-
-    // SUB BOARD DATA - sub plans & class notes, anyone can post
-    let subPosts = [
-      {
-        id: 'sb1',
-        classPeriod: "Ms. Peterson's Algebra 1 — Period 4",
-        when: 'Friday, Nov 8',
-        notes: "I'll be out for a workshop. Students should:\n• Complete worksheet 4.3 (in the blue tray on my desk)\n• Quiet reading after if they finish early\n• No homework collection today — push to Monday\n\nClassroom phone is by the door if you need anything.",
-        authorName: 'Ms. Peterson',
-        authorRole: 'teacher',
-        status: 'pending',
-        timestamp: Date.now() - 1000 * 60 * 60 * 3, // 3h ago
-        comments: []
-      },
-      {
-        id: 'sb2',
-        classPeriod: 'Mr. Liu — Periods 3 & 5',
-        when: 'Tomorrow (Thursday)',
-        notes: "Sub plans: Period 3 has a vocab quiz first 15 min (envelope on podium), then read Ch. 7. Period 5 is silent reading + journal entry. Seating chart is taped inside the top desk drawer.",
-        authorName: 'Mr. Liu',
-        authorRole: 'teacher',
-        status: 'covered',
-        timestamp: Date.now() - 1000 * 60 * 60 * 26, // 26h ago
-        comments: [
-          {
-            author: 'Ms. Peterson',
-            role: 'teacher',
-            text: "Got it — I can pop in during my prep if the sub needs anything. Quiz answer key in the locked file or with you?",
-            timestamp: Date.now() - 1000 * 60 * 60 * 22
-          }
-        ]
-      }
-    ];
-
-    // 5. RENDERING
+    // ═══════════════════════════════════════════════
+    // 6. RENDER ROUTING
+    // ═══════════════════════════════════════════════
     function render() {
       const app = document.getElementById('app');
       if (currentTab === 'lost') app.innerHTML = renderLost();
-      else if (currentTab === 'sub') app.innerHTML = renderSub();
+      else if (currentTab === 'sub') app.innerHTML = `<h2>Sub Board</h2><p style="margin-top:20px; color:var(--muted)">Teacher instructions will appear here.</p>`;
       else if (currentTab === 'homework') app.innerHTML = renderHomework();
-      else app.innerHTML = renderChill();
+      else if (currentTab === 'chill') {
+        app.innerHTML = renderChill();
+        // Initialize active game if needed (after DOM is in place)
+        setTimeout(() => initActiveChillGame(), 20);
+      }
     }
 
     function renderLost() {
       const visible = items.filter(i => filter === 'all' ? true : i.status === filter);
-      const counts = {
-        all: items.length,
-        open: items.filter(i => i.status === 'open').length,
-        found: items.filter(i => i.status === 'found').length
-      };
-
+      const counts = { all: items.length, open: items.filter(i => i.status === 'open').length, found: items.filter(i => i.status === 'found').length };
       const grid = visible.length === 0
         ? `<div class="hw-empty"><div class="em">🔎</div><h4>No items here yet</h4><p>Try a different filter or post one.</p></div>`
-        : `<div class="items-grid">
-            ${visible.map(i => `
-              <div class="item-card ${i.status}" style="--acc:${i.acc}; --tilt:${i.tilt}deg" onclick="openItemDetail(${i.id})">
-                <div class="status-badge ${i.status}">${i.status}</div>
-                <div style="font-size:30px; margin:10px 0">${i.cat}</div>
-                <div class="card-title">${escapeHTML(i.title)}</div>
-                <div style="font-size:12px; color:var(--muted)">📍 ${escapeHTML(i.loc)}</div>
-              </div>
-            `).join('')}
-          </div>`;
-
+        : `<div class="items-grid">${visible.map(i => `
+            <div class="item-card ${i.status}" style="--acc:${i.acc}; --tilt:${i.tilt}deg" onclick="openItemDetail(${i.id})">
+              <div class="status-badge ${i.status}">${i.status}</div>
+              <div style="font-size:30px; margin:10px 0">${i.cat}</div>
+              <div class="card-title">${escapeHTML(i.title)}</div>
+              <div style="font-size:12px; color:var(--muted)">📍 ${escapeHTML(i.loc)}</div>
+            </div>`).join('')}</div>`;
       return `
     <div class="lf-layout">
         <aside class="sidebar">
-            <div class="my-stats">
-                <div class="my-stats-title">Your Balance</div>
-                <div class="my-stat"><div class="n">${currentUser.points}</div><div class="l">HallPass Points</div></div>
-            </div>
-            <div class="scard">
-                <div class="scard-title">Filter</div>
+            <div class="my-stats"><div class="my-stats-title">Your Balance</div><div class="my-stat"><div class="n">${currentUser.points}</div><div class="l">HallPass Points</div></div></div>
+            <div class="scard"><div class="scard-title">Filter</div>
                 <div class="filter-group">
                   <button class="filter-btn ${filter === 'all' ? 'active' : ''}" onclick="applyFilter('all')">All Items <span style="float:right;opacity:.6">${counts.all}</span></button>
                   <button class="filter-btn ${filter === 'open' ? 'active' : ''}" onclick="applyFilter('open')">Still Lost <span style="float:right;opacity:.6">${counts.open}</span></button>
@@ -1883,577 +693,277 @@
     </div>`;
     }
 
-    function applyFilter(f) {
-      filter = f;
-      render();
+    function applyFilter(f) { filter = f; render(); }
+
+    // ═══════════════════════════════════════════════
+    // 7. CHILL ZONE — menu + activity routing
+    // ═══════════════════════════════════════════════
+    function renderChill() {
+      if (currentChillView === 'menu') return renderChillMenu();
+      if (currentChillView === 'breathing') return renderBreathingView();
+      if (currentChillView === 'garden')    return renderGardenView();
+      if (currentChillView === 'logic')     return renderLogicGridView();
+      if (currentChillView === 'ladder')    return renderWordLadderView();
+      if (currentChillView === 'anagram')   return renderAnagramView();
+      return renderChillMenu();
     }
 
-    function renderChill() {
-      const activities = [
+    function renderChillMenu() {
+      const calmActivities = [
         { id: 'breathing', emoji: '🌬️', title: 'Breathing', desc: 'Follow the rhythm. Slow inhale, slow exhale — reset in two minutes.' },
-        { id: 'garden', emoji: '🌸', title: 'Garden', desc: 'Tap anywhere on the grass to plant a flower. No goals, just bloom.' }
+        { id: 'garden',    emoji: '🌸', title: 'Garden',    desc: 'Tap anywhere on the grass to plant a flower. No goals, just bloom.' }
       ];
-      return `
-    <div class="chill-grid">
-      ${activities.map(a => `
+      const brainGames = [
+        { id: 'logic',   emoji: '🧩', title: 'Logic Grid',     desc: 'Use clues to deduce who has what. Three difficulty levels.' },
+        { id: 'ladder',  emoji: '🪜', title: 'Word Ladder',    desc: 'Change one letter at a time. Each step must be a real word.' },
+        { id: 'anagram', emoji: '⚡', title: 'Anagram Sprint', desc: 'Find as many words as you can before the timer runs out!' }
+      ];
+      const cardHTML = a => `
         <div class="chill-card" onclick="openChillActivity('${a.id}')">
           <h3>${a.emoji} ${a.title}</h3>
           <p>${a.desc}</p>
           <span class="chill-cta">Start →</span>
-        </div>
-      `).join('')}
-    </div>`;
-    }
-
-    // ========== HOMEWORK & HELP RENDERING ==========
-    function renderHomework() {
-      const sorted = [...homeworkPosts].sort((a, b) => b.timestamp - a.timestamp);
-
-      const feedHTML = sorted.length === 0
-        ? `<div class="hw-empty">
-              <div class="em">📚</div>
-              <h4>No questions yet</h4>
-              <p>Be the first to ask for help — anyone can post here.</p>
-           </div>`
-        : sorted.map(p => renderHomeworkPost(p)).join('');
-
+        </div>`;
       return `
-        <div class="hw-feed">
-          <div class="hw-feed-header">
-            <h2>Homework & Help</h2>
-            <span class="sub">Stuck on something? Ask the community — students and teachers welcome.</span>
-          </div>
-          ${feedHTML}
-        </div>
-      `;
+        <div class="chill-section-title">🧘 Calm Down</div>
+        <div class="chill-grid">${calmActivities.map(cardHTML).join('')}</div>
+        <div class="chill-section-title">🧠 Brain Games</div>
+        <div class="chill-grid">${brainGames.map(cardHTML).join('')}</div>`;
     }
-
-    function renderHomeworkPost(p) {
-      const initial = p.authorName ? p.authorName.charAt(0).toUpperCase() : '?';
-      const avatarClass = p.authorRole === 'teacher' ? 'hw-avatar teacher' : 'hw-avatar';
-      const roleTag = `<span class="role-tag ${p.authorRole}">${p.authorRole === 'teacher' ? 'Teacher' : 'Student'}</span>`;
-      const formOpen = openReplyBox === p.id;
-
-      const repliesHTML = p.replies.map(r => {
-        const rInit = r.author.charAt(0).toUpperCase();
-        const rAvatar = r.role === 'teacher' ? 'reply-avatar teacher' : 'reply-avatar';
-        const rTag = `<span class="role-tag ${r.role}">${r.role === 'teacher' ? 'Teacher' : 'Student'}</span>`;
-        return `
-          <div class="reply-item">
-            <div class="${rAvatar}">${rInit}</div>
-            <div class="reply-content">
-              <div class="reply-author">${escapeHTML(r.author)} ${rTag}<span class="reply-time">· ${formatTime(r.timestamp)}</span></div>
-              <div class="reply-text">${escapeHTML(r.text)}</div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      const replyFormHTML = formOpen ? `
-        <div class="reply-form">
-          <textarea id="reply-text-${p.id}" placeholder="Share what you know — be helpful and kind."></textarea>
-          <button onclick="submitReply('${p.id}')">Post Reply</button>
-        </div>
-      ` : '';
-
-      // Show the replies block if there are any replies OR the form is open
-      const showBlock = p.replies.length > 0 || formOpen;
-
-      return `
-        <article class="hw-post" id="post-${p.id}">
-          <div class="hw-post-head">
-            <div class="${avatarClass}">${initial}</div>
-            <div class="hw-meta">
-              <div class="hw-author">${escapeHTML(p.authorName)} ${roleTag}</div>
-              <div class="hw-time">${formatTime(p.timestamp)}</div>
-            </div>
-          </div>
-          <div class="hw-body">
-            <div class="hw-topic">${escapeHTML(p.topic)}</div>
-            <div class="hw-details">${escapeHTML(p.details)}</div>
-          </div>
-          <div class="hw-actions">
-            <span class="reply-count">💬 <strong>${p.replies.length}</strong> ${p.replies.length === 1 ? 'reply' : 'replies'}</span>
-            <button class="reply-btn" onclick="toggleReplyForm('${p.id}')">${formOpen ? '✕ Cancel' : '↩ Reply'}</button>
-          </div>
-          <div class="hw-replies ${showBlock ? 'open' : ''}">
-            ${repliesHTML}
-            ${replyFormHTML}
-          </div>
-        </article>
-      `;
-    }
-
-    function toggleReplyForm(postId) {
-      openReplyBox = (openReplyBox === postId) ? null : postId;
-      render();
-      // Auto-focus the newly opened textarea
-      if (openReplyBox === postId) {
-        setTimeout(() => {
-          const ta = document.getElementById(`reply-text-${postId}`);
-          if (ta) ta.focus();
-        }, 30);
-      }
-    }
-
-    function submitReply(postId) {
-      const ta = document.getElementById(`reply-text-${postId}`);
-      if (!ta) return;
-      const text = ta.value.trim();
-      if (!text) {
-        ta.style.borderColor = 'var(--coral)';
-        ta.focus();
-        return;
-      }
-      const post = homeworkPosts.find(p => p.id === postId);
-      if (!post) return;
-
-      post.replies.push({
-        author: currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : ''),
-        role: currentUser.role,
-        text: text,
-        timestamp: Date.now()
-      });
-      openReplyBox = null;
-      render();
-    }
-
-    // ========== SUB BOARD RENDERING ==========
-    function renderSub() {
-      const counts = {
-        all: subPosts.length,
-        pending: subPosts.filter(p => p.status === 'pending').length,
-        covered: subPosts.filter(p => p.status === 'covered').length
-      };
-
-      const visible = [...subPosts]
-        .filter(p => subFilter === 'all' ? true : p.status === subFilter)
-        .sort((a, b) => {
-          // Pending posts first, then by recency
-          if (a.status !== b.status) return a.status === 'pending' ? -1 : 1;
-          return b.timestamp - a.timestamp;
-        });
-
-      const feedHTML = visible.length === 0
-        ? `<div class="hw-empty">
-              <div class="em">📋</div>
-              <h4>${subPosts.length === 0 ? 'No sub plans yet' : 'Nothing matches that filter'}</h4>
-              <p>${subPosts.length === 0 ? 'Post a sub plan or class note to get started.' : 'Try a different filter to see other posts.'}</p>
-           </div>`
-        : visible.map(p => renderSubPost(p)).join('');
-
-      return `
-        <div class="sub-feed">
-          <div class="sub-feed-header">
-            <div>
-              <h2>Sub Board</h2>
-              <div class="sub" style="margin-top:4px">Sub plans, class notes, and coverage requests. Open to everyone.</div>
-            </div>
-          </div>
-          <div class="sub-filters">
-            <button class="sub-filter-btn ${subFilter === 'all' ? 'active' : ''}" onclick="applySubFilter('all')">All <span style="opacity:.6">${counts.all}</span></button>
-            <button class="sub-filter-btn ${subFilter === 'pending' ? 'active' : ''}" onclick="applySubFilter('pending')">Pending <span style="opacity:.6">${counts.pending}</span></button>
-            <button class="sub-filter-btn ${subFilter === 'covered' ? 'active' : ''}" onclick="applySubFilter('covered')">Covered <span style="opacity:.6">${counts.covered}</span></button>
-          </div>
-          ${feedHTML}
-        </div>
-      `;
-    }
-
-    function renderSubPost(p) {
-      const initial = p.authorName ? p.authorName.charAt(0).toUpperCase() : '?';
-      const avClass = p.authorRole === 'teacher' ? 'av' : 'av student';
-      const formOpen = openSubCommentBox === p.id;
-      const isCovered = p.status === 'covered';
-
-      const commentsHTML = p.comments.map(c => {
-        const cInit = c.author.charAt(0).toUpperCase();
-        const cAvatar = c.role === 'teacher' ? 'reply-avatar teacher' : 'reply-avatar';
-        const cTag = `<span class="role-tag ${c.role}">${c.role === 'teacher' ? 'Teacher' : 'Student'}</span>`;
-        return `
-          <div class="reply-item">
-            <div class="${cAvatar}">${cInit}</div>
-            <div class="reply-content">
-              <div class="reply-author">${escapeHTML(c.author)} ${cTag}<span class="reply-time">· ${formatTime(c.timestamp)}</span></div>
-              <div class="reply-text">${escapeHTML(c.text)}</div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      const commentFormHTML = formOpen ? `
-        <div class="reply-form">
-          <textarea id="sub-comment-text-${p.id}" placeholder="Add a clarifying note or question…"></textarea>
-          <button onclick="submitSubComment('${p.id}')">Post Comment</button>
-        </div>
-      ` : '';
-
-      const showBlock = p.comments.length > 0 || formOpen;
-
-      return `
-        <article class="sub-post ${isCovered ? 'covered' : ''}" id="subpost-${p.id}">
-          <div class="sub-post-tag-bar">
-            <span class="sub-tag">📋 Sub Plan</span>
-            <span class="sub-status-badge ${p.status}">${isCovered ? '✓ Covered' : 'Pending'}</span>
-          </div>
-          <div class="sub-post-body">
-            <div class="sub-class-title">${escapeHTML(p.classPeriod)}</div>
-            <span class="sub-when">📅 ${escapeHTML(p.when)}</span>
-            <div class="sub-notes">${escapeHTML(p.notes)}</div>
-          </div>
-          <div class="sub-post-footer">
-            <span class="sub-author-chip">
-              <span class="${avClass}">${initial}</span>
-              ${escapeHTML(p.authorName)}
-            </span>
-            <span style="color:var(--muted)">· ${formatTime(p.timestamp)}</span>
-          </div>
-          <div class="sub-actions">
-            <span class="sub-comment-count">💬 <strong>${p.comments.length}</strong> ${p.comments.length === 1 ? 'comment' : 'comments'}</span>
-            <button class="sub-comment-btn" onclick="toggleSubCommentForm('${p.id}')">${formOpen ? '✕ Cancel' : '💬 Comment'}</button>
-            <button class="sub-cover-btn ${isCovered ? 'reopen' : ''}" onclick="toggleSubStatus('${p.id}')">
-              ${isCovered ? '↻ Reopen' : '✓ Mark Covered'}
-            </button>
-          </div>
-          <div class="sub-comments ${showBlock ? 'open' : ''}">
-            ${commentsHTML}
-            ${commentFormHTML}
-          </div>
-        </article>
-      `;
-    }
-
-    function applySubFilter(f) {
-      subFilter = f;
-      render();
-    }
-
-    function toggleSubStatus(postId) {
-      const post = subPosts.find(p => p.id === postId);
-      if (!post) return;
-      post.status = post.status === 'covered' ? 'pending' : 'covered';
-      render();
-    }
-
-    function toggleSubCommentForm(postId) {
-      openSubCommentBox = (openSubCommentBox === postId) ? null : postId;
-      render();
-      if (openSubCommentBox === postId) {
-        setTimeout(() => {
-          const ta = document.getElementById(`sub-comment-text-${postId}`);
-          if (ta) ta.focus();
-        }, 30);
-      }
-    }
-
-    function submitSubComment(postId) {
-      const ta = document.getElementById(`sub-comment-text-${postId}`);
-      if (!ta) return;
-      const text = ta.value.trim();
-      if (!text) {
-        ta.style.borderColor = 'var(--coral)';
-        ta.focus();
-        return;
-      }
-      const post = subPosts.find(p => p.id === postId);
-      if (!post) return;
-      post.comments.push({
-        author: currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : ''),
-        role: currentUser.role,
-        text: text,
-        timestamp: Date.now()
-      });
-      openSubCommentBox = null;
-      render();
-    }
-
-    // ========== POST CREATION (TAB-AWARE) ==========
-    function openPostModal() {
-      if (currentTab === 'homework') {
-        openHomeworkPostModal();
-      } else if (currentTab === 'sub') {
-        openSubPostModal();
-      } else {
-        openLostItemModal();
-      }
-    }
-
-    function openLostItemModal() {
-      setModal(`
-        <div class="handle"></div>
-        <h3>Post Lost Item</h3>
-        <input class="finput" id="p-title" placeholder="What did you lose?">
-        <textarea class="ftextarea" id="p-desc" placeholder="Details..."></textarea>
-        <button class="sbtn" onclick="submitPost()">Post Item</button>
-      `);
-    }
-
-    function openHomeworkPostModal() {
-      setModal(`
-        <div class="handle"></div>
-        <h3>Ask for Homework Help</h3>
-        <p class="modal-sub">Anyone in the community can answer — be specific so it's easy to help you.</p>
-
-        <label class="field-label">Topic / Subject</label>
-        <input class="finput" id="hw-topic" placeholder="e.g. Algebra — solving for x in word problems" maxlength="160">
-
-        <label class="field-label">More Details</label>
-        <textarea class="ftextarea" id="hw-details" placeholder="What are you stuck on? Include the question, what you've tried, and where you got confused."></textarea>
-
-        <button class="sbtn" onclick="submitHomeworkPost()">Post Question</button>
-      `);
-    }
-
-    function openSubPostModal() {
-      setModal(`
-        <div class="handle"></div>
-        <h3>Post a Sub Plan or Class Note</h3>
-        <p class="modal-sub">Share coverage instructions, classroom updates, or notes for whoever's stepping in.</p>
-
-        <label class="field-label">Class & Period</label>
-        <input class="finput" id="sb-class" placeholder="e.g. Ms. Peterson's Algebra 1 — Period 4" maxlength="120">
-
-        <label class="field-label">When does this apply?</label>
-        <input class="finput" id="sb-when" placeholder="e.g. Friday, Nov 8 — or 'Tomorrow' / 'All week'" maxlength="80">
-
-        <label class="field-label">Plan / Notes</label>
-        <textarea class="ftextarea" id="sb-notes" placeholder="What does the sub need to know? Include materials, where things are, special instructions, etc."></textarea>
-
-        <button class="sbtn" onclick="submitSubPost()">Post Plan</button>
-      `);
-    }
-
-    function submitSubPost() {
-      const classEl = document.getElementById('sb-class');
-      const whenEl = document.getElementById('sb-when');
-      const notesEl = document.getElementById('sb-notes');
-      const classPeriod = classEl.value.trim();
-      const when = whenEl.value.trim();
-      const notes = notesEl.value.trim();
-
-      if (!classPeriod) { classEl.style.borderColor = 'var(--coral)'; classEl.focus(); return; }
-      if (!when) { whenEl.style.borderColor = 'var(--coral)'; whenEl.focus(); return; }
-      if (!notes) { notesEl.style.borderColor = 'var(--coral)'; notesEl.focus(); return; }
-
-      subPosts.unshift({
-        id: 'sb' + (uid++),
-        classPeriod: classPeriod,
-        when: when,
-        notes: notes,
-        authorName: currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : ''),
-        authorRole: currentUser.role,
-        status: 'pending',
-        timestamp: Date.now(),
-        comments: []
-      });
-      closeModal();
-      render();
-    }
-
-    function submitPost() {
-      const title = document.getElementById('p-title').value;
-      if (!title) return;
-      items.unshift({ id: uid++, title, cat: '❓', loc: 'Unknown', by: currentUser.first, status: 'open', acc: '#e8523f', tilt: 1 });
-      closeModal();
-      render();
-    }
-
-    // ========== LOST ITEM DETAIL ==========
-    function openItemDetail(itemId) {
-      const item = items.find(i => i.id === itemId);
-      if (!item) return;
-
-      const isFound = item.status === 'found';
-      const userName = currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : '');
-
-      setModal(`
-        <div class="handle"></div>
-        <div class="detail-hero">
-          <div class="status-badge ${item.status}">${item.status}</div>
-          <div class="detail-emoji">${item.cat}</div>
-        </div>
-        <h3>${escapeHTML(item.title)}</h3>
-        <p class="modal-sub">${isFound ? 'This item has been found and reunited.' : 'Still missing — help out if you spot it!'}</p>
-
-        <div class="detail-row"><span class="lbl">Location</span><span>📍 ${escapeHTML(item.loc)}</span></div>
-        <div class="detail-row"><span class="lbl">Posted by</span><span>👤 ${escapeHTML(item.by)}</span></div>
-        <div class="detail-row"><span class="lbl">Status</span><span>${isFound ? '✅ Found' : '🔍 Still lost'}</span></div>
-
-        <button class="sbtn ${isFound ? 'ghost' : 'green'}" onclick="toggleItemStatus(${item.id})">
-          ${isFound ? 'Mark as Still Lost' : "I Found This — Mark as Found"}
-        </button>
-        <button class="sbtn ghost" onclick="closeModal()">Close</button>
-      `);
-    }
-
-    function toggleItemStatus(itemId) {
-      const item = items.find(i => i.id === itemId);
-      if (!item) return;
-      item.status = item.status === 'open' ? 'found' : 'open';
-      closeModal();
-      render();
-    }
-
-    // ========== CHILL ZONE ACTIVITIES ==========
-    let breathingTimer = null;
-    let gardenFlowers = [];
 
     function openChillActivity(type) {
-      if (type === 'breathing') openBreathing();
-      else if (type === 'garden') openGarden();
+      currentChillView = type;
+      // Reset per-game state
+      if (type === 'logic')   resetLogicGrid();
+      if (type === 'ladder')  resetWordLadder();
+      if (type === 'anagram') resetAnagram();
+      render();
     }
 
-    function openBreathing() {
-      setModal(`
-        <div class="handle"></div>
-        <h3 style="text-align:center">🌬️ Breathing</h3>
-        <p class="modal-sub" style="text-align:center">Follow the circle. 4 in, hold 2, 4 out.</p>
-        <div class="breathe-stage">
-          <div class="breathe-circle" id="breathe-circle"></div>
-          <div class="breathe-label" id="breathe-label">Get ready…</div>
-          <div class="breathe-cycle-count" id="breathe-cycles">Cycle 0</div>
-        </div>
-        <button class="sbtn ghost" onclick="closeModal()">Done</button>
-      `);
-      startBreathingAnim();
+    function backToChillMenu() {
+      stopAllGameAnimations();
+      currentChillView = 'menu';
+      render();
     }
 
+    function initActiveChillGame() {
+      if (currentChillView === 'breathing') startBreathingAnim();
+      if (currentChillView === 'logic')   newLogicPuzzle();
+      if (currentChillView === 'ladder')  newLadderPuzzle();
+      if (currentChillView === 'anagram') anagramShowStart();
+    }
+
+    function stopAllGameAnimations() {
+      stopBreathingAnim();
+      if (asTimer) { clearInterval(asTimer); asTimer = null; }
+    }
+
+    // ═══════════════════════════════════════════════
+    // 8. BREATHING (kept from twin's version, slightly adapted)
+    // ═══════════════════════════════════════════════
+    let breathingTimer = null;
+    function renderBreathingView() {
+      return `
+        <button class="game-back" onclick="backToChillMenu()">← Back to Chill Zone</button>
+        <div class="game-card">
+          <div class="game-header"><h2>🌬️ Breathing</h2><p>Follow the circle. 4 in, hold 2, 4 out.</p></div>
+          <div class="breathe-stage">
+            <div class="breathe-circle" id="breathe-circle"></div>
+            <div class="breathe-label" id="breathe-label">Get ready…</div>
+            <div class="breathe-cycle-count" id="breathe-cycles">Cycle 0</div>
+          </div>
+        </div>`;
+    }
     function startBreathingAnim() {
       const circle = document.getElementById('breathe-circle');
       const label = document.getElementById('breathe-label');
       const cyclesEl = document.getElementById('breathe-cycles');
       if (!circle || !label) return;
-
-      // Phases: inhale 4s -> hold 2s -> exhale 4s -> rest 1s = 11s cycle
       const phases = [
         { text: 'Breathe in…', dur: 4000, expand: true },
-        { text: 'Hold', dur: 2000, expand: true },
-        { text: 'Breathe out…', dur: 4000, expand: false },
-        { text: 'Rest', dur: 1000, expand: false }
+        { text: 'Hold',        dur: 2000, expand: true },
+        { text: 'Breathe out…',dur: 4000, expand: false },
+        { text: 'Rest',        dur: 1000, expand: false }
       ];
-      let phaseIdx = 0;
-      let cycles = 0;
-
+      let phaseIdx = 0, cycles = 0;
       function nextPhase() {
+        if (currentChillView !== 'breathing') return;
         const p = phases[phaseIdx];
-        label.textContent = p.text;
-        circle.classList.toggle('expand', p.expand);
-        if (phaseIdx === 0) {
-          cycles++;
-          cyclesEl.textContent = `Cycle ${cycles}`;
-        }
+        const c2 = document.getElementById('breathe-circle');
+        const l2 = document.getElementById('breathe-label');
+        const cy = document.getElementById('breathe-cycles');
+        if (!c2 || !l2) return;
+        l2.textContent = p.text;
+        c2.classList.toggle('expand', p.expand);
+        if (phaseIdx === 0) { cycles++; if (cy) cy.textContent = `Cycle ${cycles}`; }
         phaseIdx = (phaseIdx + 1) % phases.length;
         breathingTimer = setTimeout(nextPhase, p.dur);
       }
-      // Small delay so transition kicks in cleanly
       breathingTimer = setTimeout(nextPhase, 300);
     }
+    function stopBreathingAnim() { if (breathingTimer) { clearTimeout(breathingTimer); breathingTimer = null; } }
 
-    function stopBreathingAnim() {
-      if (breathingTimer) {
-        clearTimeout(breathingTimer);
-        breathingTimer = null;
-      }
+    // ═══════════════════════════════════════════════
+    // 9. GARDEN (kept from twin's version)
+    // ═══════════════════════════════════════════════
+    let gardenFlowers = [];
+    function renderGardenView() {
+      return `
+        <button class="game-back" onclick="backToChillMenu()">← Back to Chill Zone</button>
+        <div class="game-card">
+          <div class="game-header"><h2>🌸 Garden</h2><p>Tap the grass to plant. Each one stays for the session.</p></div>
+          <div class="garden-stage" id="garden-stage" onclick="plantFlower(event)">
+            ${gardenFlowers.map(f => `<span class="garden-flower" style="left:${f.x}%; top:${f.y}%; font-size:${f.size}px">${f.emoji}</span>`).join('')}
+          </div>
+          <div class="garden-info">
+            <span class="count" id="garden-count">${gardenFlowers.length} planted</span>
+            <span>Each tap blooms a new flower 🌱</span>
+            <button class="reply-btn alt" style="margin-left:auto" onclick="resetGarden()">Clear</button>
+          </div>
+        </div>`;
     }
-
-    function openGarden() {
-      setModal(`
-        <div class="handle"></div>
-        <h3 style="text-align:center">🌸 Garden</h3>
-        <p class="modal-sub" style="text-align:center">Tap the grass to plant. Each one stays for the session.</p>
-        <div class="garden-stage" id="garden-stage" onclick="plantFlower(event)">
-          ${gardenFlowers.map(f => `<span class="garden-flower" style="left:${f.x}%; top:${f.y}%; font-size:${f.size}px">${f.emoji}</span>`).join('')}
-        </div>
-        <div class="garden-info">
-          <span class="count" id="garden-count">${gardenFlowers.length} planted</span>
-          <span>Each tap blooms a new flower 🌱</span>
-          <button class="reply-btn alt" style="margin-left:auto" onclick="resetGarden()">Clear</button>
-        </div>
-      `);
-    }
-
     function plantFlower(event) {
       const stage = document.getElementById('garden-stage');
       if (!stage) return;
       const rect = stage.getBoundingClientRect();
       const x = ((event.clientX - rect.left) / rect.width) * 100;
       const y = ((event.clientY - rect.top) / rect.height) * 100;
-
-      // Keep flowers in the lower 60% (the "grass") for a natural look
       const clampedY = Math.max(35, Math.min(95, y));
-
       const emojis = ['🌸', '🌺', '🌷', '🌻', '🌹', '🌼', '🪷', '💐'];
       const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-      const size = 24 + Math.floor(Math.random() * 18); // 24-42px
-
+      const size = 24 + Math.floor(Math.random() * 18);
       const flower = { x, y: clampedY, emoji, size };
       gardenFlowers.push(flower);
-
-      // Append directly without re-rendering the whole modal (preserves animation)
       const span = document.createElement('span');
       span.className = 'garden-flower';
-      span.style.left = `${x}%`;
-      span.style.top = `${clampedY}%`;
-      span.style.fontSize = `${size}px`;
+      span.style.left = `${x}%`; span.style.top = `${clampedY}%`; span.style.fontSize = `${size}px`;
       span.textContent = emoji;
       stage.appendChild(span);
-
       const counter = document.getElementById('garden-count');
       if (counter) counter.textContent = `${gardenFlowers.length} planted`;
     }
+    function resetGarden() { gardenFlowers = []; render(); }
 
-    function resetGarden() {
-      gardenFlowers = [];
-      openGarden();
+    // ═══════════════════════════════════════════════
+    // 10. HOMEWORK & HELP (kept from twin's version)
+    // ═══════════════════════════════════════════════
+    function renderHomework() {
+      const sorted = [...homeworkPosts].sort((a, b) => b.timestamp - a.timestamp);
+      const feedHTML = sorted.length === 0
+        ? `<div class="hw-empty"><div class="em">📚</div><h4>No questions yet</h4><p>Be the first to ask for help — anyone can post here.</p></div>`
+        : sorted.map(p => renderHomeworkPost(p)).join('');
+      return `
+        <div class="hw-feed">
+          <div class="hw-feed-header"><h2>Homework & Help</h2><span class="sub">Stuck on something? Ask the community — students and teachers welcome.</span></div>
+          ${feedHTML}
+        </div>`;
     }
-
-    function submitHomeworkPost() {
-      const topicEl = document.getElementById('hw-topic');
-      const detailsEl = document.getElementById('hw-details');
-      const topic = topicEl.value.trim();
-      const details = detailsEl.value.trim();
-
-      if (!topic) {
-        topicEl.style.borderColor = 'var(--coral)';
-        topicEl.focus();
-        return;
-      }
-      if (!details) {
-        detailsEl.style.borderColor = 'var(--coral)';
-        detailsEl.focus();
-        return;
-      }
-
-      homeworkPosts.unshift({
-        id: 'hw' + (uid++),
-        topic: topic,
-        details: details,
-        authorName: currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : ''),
-        authorRole: currentUser.role,
-        timestamp: Date.now(),
-        replies: []
-      });
-      closeModal();
+    function renderHomeworkPost(p) {
+      const initial = p.authorName ? p.authorName.charAt(0).toUpperCase() : '?';
+      const avatarClass = p.authorRole === 'teacher' ? 'hw-avatar teacher' : 'hw-avatar';
+      const roleTag = `<span class="role-tag ${p.authorRole}">${p.authorRole === 'teacher' ? 'Teacher' : 'Student'}</span>`;
+      const formOpen = openReplyBox === p.id;
+      const repliesHTML = p.replies.map(r => {
+        const rInit = r.author.charAt(0).toUpperCase();
+        const rAvatar = r.role === 'teacher' ? 'reply-avatar teacher' : 'reply-avatar';
+        const rTag = `<span class="role-tag ${r.role}">${r.role === 'teacher' ? 'Teacher' : 'Student'}</span>`;
+        return `<div class="reply-item"><div class="${rAvatar}">${rInit}</div><div class="reply-content"><div class="reply-author">${escapeHTML(r.author)} ${rTag}<span class="reply-time">· ${formatTime(r.timestamp)}</span></div><div class="reply-text">${escapeHTML(r.text)}</div></div></div>`;
+      }).join('');
+      const replyFormHTML = formOpen ? `<div class="reply-form"><textarea id="reply-text-${p.id}" placeholder="Share what you know — be helpful and kind."></textarea><button onclick="submitReply('${p.id}')">Post Reply</button></div>` : '';
+      const showBlock = p.replies.length > 0 || formOpen;
+      return `<article class="hw-post" id="post-${p.id}">
+          <div class="hw-post-head"><div class="${avatarClass}">${initial}</div><div class="hw-meta"><div class="hw-author">${escapeHTML(p.authorName)} ${roleTag}</div><div class="hw-time">${formatTime(p.timestamp)}</div></div></div>
+          <div class="hw-body"><div class="hw-topic">${escapeHTML(p.topic)}</div><div class="hw-details">${escapeHTML(p.details)}</div></div>
+          <div class="hw-actions"><span class="reply-count">💬 <strong>${p.replies.length}</strong> ${p.replies.length === 1 ? 'reply' : 'replies'}</span><button class="reply-btn" onclick="toggleReplyForm('${p.id}')">${formOpen ? '✕ Cancel' : '↩ Reply'}</button></div>
+          <div class="hw-replies ${showBlock ? 'open' : ''}">${repliesHTML}${replyFormHTML}</div>
+        </article>`;
+    }
+    function toggleReplyForm(postId) {
+      openReplyBox = (openReplyBox === postId) ? null : postId;
+      render();
+      if (openReplyBox === postId) setTimeout(() => { const ta = document.getElementById(`reply-text-${postId}`); if (ta) ta.focus(); }, 30);
+    }
+    function submitReply(postId) {
+      const ta = document.getElementById(`reply-text-${postId}`);
+      if (!ta) return;
+      const text = ta.value.trim();
+      if (!text) { ta.style.borderColor = 'var(--coral)'; ta.focus(); return; }
+      const post = homeworkPosts.find(p => p.id === postId);
+      if (!post) return;
+      post.replies.push({ author: currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : ''), role: currentUser.role, text: text, timestamp: Date.now() });
+      openReplyBox = null;
       render();
     }
 
-    function setModal(html) { document.getElementById('modal-body').innerHTML = html; document.getElementById('overlay').classList.add('open'); }
-    function closeModal() {
-      stopBreathingAnim();
-      document.getElementById('overlay').classList.remove('open');
+    // ═══════════════════════════════════════════════
+    // 11. POST CREATION (tab-aware)
+    // ═══════════════════════════════════════════════
+    function openPostModal() { if (currentTab === 'homework') openHomeworkPostModal(); else openLostItemModal(); }
+    function openLostItemModal() {
+      setModal(`<div class="handle"></div><h3>Post Lost Item</h3>
+        <input class="finput" id="p-title" placeholder="What did you lose?">
+        <textarea class="ftextarea" id="p-desc" placeholder="Details..."></textarea>
+        <button class="sbtn" onclick="submitPost()">Post Item</button>`);
+    }
+    function openHomeworkPostModal() {
+      setModal(`<div class="handle"></div><h3>Ask for Homework Help</h3>
+        <p class="modal-sub">Anyone in the community can answer — be specific so it's easy to help you.</p>
+        <label class="field-label">Topic / Subject</label>
+        <input class="finput" id="hw-topic" placeholder="e.g. Algebra — solving for x in word problems" maxlength="160">
+        <label class="field-label">More Details</label>
+        <textarea class="ftextarea" id="hw-details" placeholder="What are you stuck on? Include the question, what you've tried, and where you got confused."></textarea>
+        <button class="sbtn" onclick="submitHomeworkPost()">Post Question</button>`);
+    }
+    function submitPost() {
+      const title = document.getElementById('p-title').value;
+      if (!title) return;
+      items.unshift({ id: uid++, title, cat: '❓', loc: 'Unknown', by: currentUser.first, status: 'open', acc: '#e8523f', tilt: 1 });
+      closeModal(); render();
+    }
+    function submitHomeworkPost() {
+      const topicEl = document.getElementById('hw-topic');
+      const detailsEl = document.getElementById('hw-details');
+      const topic = topicEl.value.trim(); const details = detailsEl.value.trim();
+      if (!topic) { topicEl.style.borderColor = 'var(--coral)'; topicEl.focus(); return; }
+      if (!details) { detailsEl.style.borderColor = 'var(--coral)'; detailsEl.focus(); return; }
+      homeworkPosts.unshift({ id: 'hw' + (uid++), topic: topic, details: details, authorName: currentUser.first + (currentUser.last ? ' ' + currentUser.last + '.' : ''), authorRole: currentUser.role, timestamp: Date.now(), replies: [] });
+      closeModal(); render();
     }
 
-    // ========== UTILITIES ==========
+    // ═══════════════════════════════════════════════
+    // 12. LOST ITEM DETAIL
+    // ═══════════════════════════════════════════════
+    function openItemDetail(itemId) {
+      const item = items.find(i => i.id === itemId);
+      if (!item) return;
+      const isFound = item.status === 'found';
+      setModal(`<div class="handle"></div>
+        <div class="detail-hero"><div class="status-badge ${item.status}">${item.status}</div><div class="detail-emoji">${item.cat}</div></div>
+        <h3>${escapeHTML(item.title)}</h3>
+        <p class="modal-sub">${isFound ? 'This item has been found and reunited.' : 'Still missing — help out if you spot it!'}</p>
+        <div class="detail-row"><span class="lbl">Location</span><span>📍 ${escapeHTML(item.loc)}</span></div>
+        <div class="detail-row"><span class="lbl">Posted by</span><span>👤 ${escapeHTML(item.by)}</span></div>
+        <div class="detail-row"><span class="lbl">Status</span><span>${isFound ? '✅ Found' : '🔍 Still lost'}</span></div>
+        <button class="sbtn ${isFound ? 'ghost' : 'green'}" onclick="toggleItemStatus(${item.id})">${isFound ? 'Mark as Still Lost' : "I Found This — Mark as Found"}</button>
+        <button class="sbtn ghost" onclick="closeModal()">Close</button>`);
+    }
+    function toggleItemStatus(itemId) {
+      const item = items.find(i => i.id === itemId);
+      if (!item) return;
+      item.status = item.status === 'open' ? 'found' : 'open';
+      closeModal(); render();
+    }
+
+    function setModal(html) { document.getElementById('modal-body').innerHTML = html; document.getElementById('overlay').classList.add('open'); }
+    function closeModal() { document.getElementById('overlay').classList.remove('open'); }
+
+    // ═══════════════════════════════════════════════
+    // 13. UTILITIES
+    // ═══════════════════════════════════════════════
     function escapeHTML(str) {
       if (str == null) return '';
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
-
     function formatTime(ts) {
       const diff = Date.now() - ts;
       const mins = Math.floor(diff / 60000);
@@ -2465,7 +975,743 @@
       if (days < 7) return days + 'd ago';
       return new Date(ts).toLocaleDateString();
     }
+    function showGameVictory(title, msg, extra) {
+      document.getElementById('gv-title').innerHTML = title;
+      document.getElementById('gv-msg').innerHTML = msg;
+      document.getElementById('gv-extra').innerHTML = extra || '';
+      document.getElementById('game-victory').classList.add('show');
+    }
+    function hideGameVictory() { document.getElementById('game-victory').classList.remove('show'); }
+
+    // ═══════════════════════════════════════════════
+    // 14. LOGIC GRID GAME
+    // ═══════════════════════════════════════════════
+    const LG_TEMPLATES = {
+      easy: [
+        { story: "Three students each got a different grade on different subjects.", categories: [
+          { name: 'Student', values: ['Alex', 'Bree', 'Cody'] },
+          { name: 'Subject', values: ['Math', 'Science', 'History'] },
+          { name: 'Grade',   values: ['A', 'B', 'C'] }
+        ]},
+        { story: "Three friends each ordered a different drink at a different cafe.", categories: [
+          { name: 'Friend',  values: ['Maya', 'Noah', 'Olive'] },
+          { name: 'Drink',   values: ['Latte', 'Tea', 'Cocoa'] },
+          { name: 'Cafe',    values: ['Brew', 'Sip', 'Roast'] }
+        ]},
+        { story: "Three classmates each play a different sport with a different jersey color.", categories: [
+          { name: 'Player',  values: ['Riya', 'Sam', 'Theo'] },
+          { name: 'Sport',   values: ['Soccer', 'Tennis', 'Track'] },
+          { name: 'Color',   values: ['Red', 'Blue', 'Green'] }
+        ]}
+      ],
+      medium: [
+        { story: "Four students competed in a science fair, each with a different project and a different rank.", categories: [
+          { name: 'Student', values: ['Ava', 'Ben', 'Cleo', 'Dev'] },
+          { name: 'Project', values: ['Volcano', 'Robot', 'Plant', 'Solar'] },
+          { name: 'Rank',    values: ['1st', '2nd', '3rd', '4th'] }
+        ]},
+        { story: "Four neighbors each own a different pet and live on a different floor.", categories: [
+          { name: 'Neighbor', values: ['Iris', 'Jake', 'Kim', 'Leo'] },
+          { name: 'Pet',      values: ['Cat', 'Dog', 'Bird', 'Fish'] },
+          { name: 'Floor',    values: ['1', '2', '3', '4'] }
+        ]}
+      ],
+      hard: [
+        { story: "Five students each play a different instrument and eat a different lunch.", categories: [
+          { name: 'Student',    values: ['Ari', 'Bo', 'Cal', 'Dia', 'Eli'] },
+          { name: 'Instrument', values: ['Piano', 'Drums', 'Guitar', 'Violin', 'Flute'] },
+          { name: 'Lunch',      values: ['Pizza', 'Salad', 'Sushi', 'Wrap', 'Soup'] }
+        ]}
+      ]
+    };
+
+    let lgDifficulty = 'easy', lgTemplate = null, lgSolution = null, lgClues = null, lgGridState = {};
+    let lgStats = JSON.parse(localStorage.getItem('logicgrid_stats') || '{"solved":0,"hints":0}');
+
+    const lgShuffle = arr => { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=~~(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; };
+    const lgPick    = arr => arr[~~(Math.random()*arr.length)];
+
+    function lgGenerateSolution(template) {
+      const N = template.categories[0].values.length;
+      const sol = [];
+      const shuffled = template.categories.map(c => lgShuffle(c.values));
+      for (let i = 0; i < N; i++) {
+        const row = {};
+        template.categories.forEach((c, ci) => row[c.name] = shuffled[ci][i]);
+        sol.push(row);
+      }
+      return sol;
+    }
+
+    function lgGenerateClues(solution, categories) {
+      const catNames = categories.map(c => c.name);
+      const N = solution.length;
+      const allPositive = [], allNegative = [];
+      for (let i = 0; i < N; i++) {
+        for (let a = 0; a < catNames.length; a++) {
+          for (let b = a+1; b < catNames.length; b++) {
+            allPositive.push({ type:'pos', a:catNames[a], aV:solution[i][catNames[a]], b:catNames[b], bV:solution[i][catNames[b]] });
+          }
+        }
+      }
+      for (let i = 0; i < N; i++) {
+        for (let j = 0; j < N; j++) {
+          if (i === j) continue;
+          for (let a = 0; a < catNames.length; a++) {
+            for (let b = a+1; b < catNames.length; b++) {
+              allNegative.push({ type:'neg', a:catNames[a], aV:solution[i][catNames[a]], b:catNames[b], bV:solution[j][catNames[b]] });
+            }
+          }
+        }
+      }
+      for (let attempt = 0; attempt < 50; attempt++) {
+        const pool = [];
+        const numPos = N === 3 ? 2 : N === 4 ? 3 : 4;
+        const numNeg = N === 3 ? 2 : N === 4 ? 4 : 6;
+        const sP = lgShuffle(allPositive), sN = lgShuffle(allNegative);
+        for (let i = 0; i < numPos && i < sP.length; i++) pool.push(sP[i]);
+        for (let i = 0; i < numNeg && i < sN.length; i++) pool.push(sN[i]);
+        if (lgVerifyUniqueness(pool, categories)) {
+          return pool.map(c => ({ raw: c, text: c.type === 'pos'
+            ? `The ${c.a.toLowerCase()} **${c.aV}** is matched with **${c.bV}**.`
+            : `The ${c.a.toLowerCase()} **${c.aV}** is NOT matched with **${c.bV}**.` }));
+        }
+      }
+      return allPositive.slice(0, 4).map(c => ({ raw: c, text: `The ${c.a.toLowerCase()} **${c.aV}** is matched with **${c.bV}**.` }));
+    }
+
+    function lgVerifyUniqueness(clues, categories) {
+      const N = categories[0].values.length;
+      function permute(arr) {
+        if (arr.length <= 1) return [arr];
+        const result = [];
+        for (let i = 0; i < arr.length; i++) {
+          const rest = [...arr.slice(0, i), ...arr.slice(i+1)];
+          for (const p of permute(rest)) result.push([arr[i], ...p]);
+        }
+        return result;
+      }
+      const anchor = categories[0].values;
+      const otherCats = categories.slice(1);
+      const otherPerms = otherCats.map(c => permute(c.values));
+      function* productGen(arrays, prefix=[]) {
+        if (arrays.length === 0) { yield prefix; return; }
+        const [first, ...rest] = arrays;
+        for (const item of first) yield* productGen(rest, [...prefix, item]);
+      }
+      let validCount = 0;
+      for (const combo of productGen(otherPerms)) {
+        const cand = anchor.map((a, i) => {
+          const row = { [categories[0].name]: a };
+          otherCats.forEach((c, ci) => row[c.name] = combo[ci][i]);
+          return row;
+        });
+        if (lgSatisfiesClues(cand, clues)) {
+          validCount++;
+          if (validCount > 1) return false;
+        }
+      }
+      return validCount === 1;
+    }
+    function lgSatisfiesClues(solution, clues) {
+      for (const c of clues) {
+        const r = c.raw || c;
+        if (r.type === 'pos') {
+          const row = solution.find(row => row[r.a] === r.aV);
+          if (!row || row[r.b] !== r.bV) return false;
+        } else {
+          const row = solution.find(row => row[r.a] === r.aV);
+          if (!row) return false;
+          if (row[r.b] === r.bV) return false;
+        }
+      }
+      return true;
+    }
+
+    function resetLogicGrid() { lgGridState = {}; lgTemplate = null; lgSolution = null; lgClues = null; }
+
+    function setLogicDifficulty(d) {
+      lgDifficulty = d;
+      document.querySelectorAll('.lg-diff-pill').forEach(p => p.classList.toggle('active', p.dataset.diff === d));
+      newLogicPuzzle();
+    }
+
+    function newLogicPuzzle() {
+      lgTemplate = JSON.parse(JSON.stringify(lgPick(LG_TEMPLATES[lgDifficulty])));
+      lgSolution = lgGenerateSolution(lgTemplate);
+      lgClues = lgGenerateClues(lgSolution, lgTemplate.categories);
+      lgGridState = {};
+      const hint = document.getElementById('lg-hint-box');
+      if (hint) hint.classList.remove('show');
+      renderLogicGridContent();
+    }
+
+    function renderLogicGridView() {
+      return `
+        <button class="game-back" onclick="backToChillMenu()">← Back to Chill Zone</button>
+        <div class="game-header"><h2>🧩 Logic Grid</h2><p>Use the clues to figure out who has what. Click cells to mark ✓ yes or ✗ no.</p></div>
+        <div class="game-toolbar">
+          <button class="game-pill lg-diff-pill ${lgDifficulty==='easy'?'active':''}"   data-diff="easy"   onclick="setLogicDifficulty('easy')">Easy · 3×3</button>
+          <button class="game-pill lg-diff-pill ${lgDifficulty==='medium'?'active':''}" data-diff="medium" onclick="setLogicDifficulty('medium')">Medium · 4×4</button>
+          <button class="game-pill lg-diff-pill ${lgDifficulty==='hard'?'active':''}"   data-diff="hard"   onclick="setLogicDifficulty('hard')">Hard · 5×5</button>
+          <button class="game-new-btn" onclick="newLogicPuzzle()">↻ New Puzzle</button>
+        </div>
+        <div class="game-stats">Solved: <strong id="lg-solved">${lgStats.solved}</strong> · Hints used: <strong id="lg-hints">${lgStats.hints}</strong></div>
+        <div class="game-card">
+          <div id="lg-content"></div>
+        </div>`;
+    }
+
+    function renderLogicGridContent() {
+      const el = document.getElementById('lg-content');
+      if (!el || !lgTemplate) return;
+      el.innerHTML = `
+        <div style="font-family:var(--display);font-size:18px;font-weight:700;color:var(--navy);text-align:center;margin-bottom:14px">${lgTemplate.story}</div>
+        <div class="lg-clues">
+          <div class="lg-clues-label">📋 Clues</div>
+          <ol class="lg-clue-list">${lgClues.map(c => `<li>${c.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</li>`).join('')}</ol>
+        </div>
+        <div class="lg-grid-wrap"><table class="lg-grid">${renderLogicGridTable()}</table></div>
+        <div class="lg-hint-box" id="lg-hint-box"></div>
+        <div class="game-controls">
+          <button class="game-btn" onclick="lgToggleHint()">💡 Hint</button>
+          <button class="game-btn" onclick="lgCheckSolution()">✓ Check</button>
+          <button class="game-btn" onclick="lgResetGrid()">⟲ Reset Grid</button>
+        </div>
+        <div class="lg-legend">Click once for <kbd>✓</kbd> · click again for <kbd>✗</kbd> · click again to clear</div>`;
+    }
+
+    function renderLogicGridTable() {
+      const cats = lgTemplate.categories;
+      const rowCat = cats[0]; const colCats = cats.slice(1);
+      let html = '<thead><tr><th class="lg-corner"></th>';
+      colCats.forEach((cc, idx) => {
+        cc.values.forEach((v, vi) => {
+          const cls = (vi === cc.values.length - 1 && idx < colCats.length - 1) ? 'lg-divider' : '';
+          html += `<th class="${cls}">${v}</th>`;
+        });
+      });
+      html += '</tr></thead><tbody>';
+      rowCat.values.forEach(rv => {
+        html += `<tr><th class="lg-row-header">${rv}</th>`;
+        colCats.forEach((cc, ci) => {
+          cc.values.forEach((cv, cvi) => {
+            const key = `${rowCat.name}:${rv}|${cc.name}:${cv}`;
+            const state = lgGridState[key];
+            const symbol = state === 'yes' ? '✓' : state === 'no' ? '✗' : '';
+            const cls = [state || '', (cvi === cc.values.length - 1 && ci < colCats.length - 1) ? 'lg-divider' : ''].join(' ').trim();
+            html += `<td class="${cls}" onclick="lgToggleCell('${key}')">${symbol}</td>`;
+          });
+        });
+        html += '</tr>';
+      });
+      return html + '</tbody>';
+    }
+
+    function lgToggleCell(key) {
+      const cur = lgGridState[key];
+      if (cur === undefined) lgGridState[key] = 'yes';
+      else if (cur === 'yes') lgGridState[key] = 'no';
+      else delete lgGridState[key];
+      if (lgGridState[key] === 'yes') lgAutoPropagate(key);
+      renderLogicGridContent();
+    }
+    function lgAutoPropagate(key) {
+      const [rowPart, colPart] = key.split('|');
+      const [rowCat, rowVal] = rowPart.split(':');
+      const [colCat, colVal] = colPart.split(':');
+      const colCatObj = lgTemplate.categories.find(c => c.name === colCat);
+      colCatObj.values.forEach(v => { if (v === colVal) return; const k = `${rowCat}:${rowVal}|${colCat}:${v}`; if (lgGridState[k] !== 'yes') lgGridState[k] = 'no'; });
+      const rowCatObj = lgTemplate.categories.find(c => c.name === rowCat);
+      rowCatObj.values.forEach(v => { if (v === rowVal) return; const k = `${rowCat}:${v}|${colCat}:${colVal}`; if (lgGridState[k] !== 'yes') lgGridState[k] = 'no'; });
+    }
+    function lgResetGrid() { lgGridState = {}; renderLogicGridContent(); }
+    function lgCheckSolution() {
+      const rowCat = lgTemplate.categories[0]; let correct = 0; let total = 0;
+      for (const row of lgSolution) {
+        for (let ci = 1; ci < lgTemplate.categories.length; ci++) {
+          const cat = lgTemplate.categories[ci];
+          const key = `${rowCat.name}:${row[rowCat.name]}|${cat.name}:${row[cat.name]}`;
+          total++;
+          if (lgGridState[key] === 'yes') correct++;
+        }
+      }
+      if (correct === total) {
+        lgStats.solved++;
+        localStorage.setItem('logicgrid_stats', JSON.stringify(lgStats));
+        showGameVictory('🧩 Solved!', `Perfect deduction — you nailed all ${total} pairs.`, `<button onclick="newLogicPuzzle();hideGameVictory()" style="background:var(--peri)">Next Puzzle →</button>`);
+        document.getElementById('lg-solved').textContent = lgStats.solved;
+      } else {
+        lgFlashHint(`You have ${correct}/${total} correct so far. Keep going!`);
+      }
+    }
+    function lgToggleHint() {
+      const rowCat = lgTemplate.categories[0];
+      for (const row of lgSolution) {
+        for (let ci = 1; ci < lgTemplate.categories.length; ci++) {
+          const cat = lgTemplate.categories[ci];
+          const key = `${rowCat.name}:${row[rowCat.name]}|${cat.name}:${row[cat.name]}`;
+          if (lgGridState[key] !== 'yes') {
+            lgStats.hints++;
+            localStorage.setItem('logicgrid_stats', JSON.stringify(lgStats));
+            document.getElementById('lg-hints').textContent = lgStats.hints;
+            lgFlashHint(`Try this: <strong>${row[rowCat.name]}</strong> goes with <strong>${row[cat.name]}</strong>.`);
+            return;
+          }
+        }
+      }
+      lgFlashHint('Looks like you have everything! Hit Check.');
+    }
+    function lgFlashHint(msg) {
+      const box = document.getElementById('lg-hint-box');
+      if (!box) return;
+      box.innerHTML = msg; box.classList.add('show');
+      setTimeout(() => box.classList.remove('show'), 5000);
+    }
+
+    // ═══════════════════════════════════════════════
+    // 15. WORD LADDER GAME
+    // ═══════════════════════════════════════════════
+    const WL_WORDS = {
+      3: ['CAT','COT','DOT','DOG','BAT','BIT','BIG','PIG','PIT','PAT','PAN','MAN','MAT','MAP','CAP','CUP','PUP','PUN','RUN','SUN','SON','TON','HOE','HOP','HIP','TIP','TAP','TEA','SEA','BED','RED','LED','LET','LOT','HOT','HUT','BUT','BUG','BUS','BAD','SAD','MAD','MUD','HUG','JUG','LOG','BOG','FOG','FIG','FIT','FIN','BIN','BAN','RAN','FAN','TAN','HEN','OUR','OUT','OWN','NOW','NOR','FOR','FAR','BAR','CAR','CAN','BAG','TAG','RAG','RAT','GET','SET','BET','NET','PET','VET','WET','TOP','TOY','BOY','JOY','SHY','TRY','CRY','FLY','BUY','GUY','PEN','TEN','MEN','DEN','BEE','SEE','FEE','TEE','LEG','PEG','BEG','BOX','FOX','SIX','MIX','FIX','PIN','WIN','TIN','SIN'],
+      4: ['BATH','BATE','BATS','GAME','GATE','LATE','MATE','RATE','HATE','DATE','FATE','CAME','LANE','PANE','WANE','BANE','MANE','SANE','VANE','DEAR','BEAR','FEAR','HEAR','NEAR','TEAR','YEAR','GEAR','PEAR','REAR','WEAR','LOVE','MOVE','DOVE','COVE','GAVE','CAVE','RAVE','SAVE','WAVE','PAVE','LAKE','BAKE','CAKE','FAKE','MAKE','RAKE','SAKE','TAKE','WAKE','LIKE','BIKE','HIKE','PIKE','PINE','LINE','MINE','DINE','FINE','VINE','WINE','NINE','PILE','MILE','TILE','FILE','BILE','RILE','RICE','MICE','NICE','DICE','LICE','RIDE','HIDE','SIDE','TIDE','WIDE','BIDE','RIPE','PIPE','WIPE','TYPE','HYPE','HOPE','ROPE','LOPE','MOPE','HOSE','ROSE','NOSE','POSE','DOSE','LOSE','CASE','BASE','EASE','VASE','ROAD','LOAD','GOAD','TOAD','DEAD','HEAD','LEAD','READ','BEAD','MEAD','HAND','LAND','BAND','SAND','WAND','STAR','SPAR','SCAR','STAB','STAG','STAY','SLAY','PLAY','CLAY','GRAY','TRAY','PRAY','BARN','YARN','DARN','EARN','EAST','LAST','MAST','PAST','VAST','WAIT','BAIT','RAIN','GAIN','MAIN','PAIN','VAIN','LAIN','SWAY','SOON','MOON','NOON','BOON','GOOD','HOOD','FOOD','MOOD','WOOD','LOOK','BOOK','COOK','HOOK','NOOK','ROOK','TOOK','HOOP','LOOP','SOAP','SOUL','SOUP','SOUR','HOUR','TOUR','POUR','COLD','BOLD','GOLD','HOLD','TOLD','MOLD','FOLD','SOLD','WORD','WORK','WORM','WORN','WARM','WARP','WART','WARS','PARK','PARE','PART','PARS','PATS','RATS','BATS','HATS','MATS','VATS','OATS','EATS'],
+      5: ['HEART','HEAVE','LEAVE','WEAVE','BRAVE','GRAVE','CRAVE','TRADE','GRADE','SPADE','SHADE','SHARE','SCARE','SCORE','STORM','STARK','START','STEAL','STEAM','STEEL','SLEEP','SLEEK','SLICE','SLATE','SLAVE','SLOPE','PLATE','PLACE','PLANE','PLANT','PRIDE','PRINT','PRUNE','BREAD','BREAK','DREAM','BEACH','PEACH','REACH','TEACH','BEAST','LEAST','FEAST','YEAST','CHASE','PHASE','CHALK','CHART','CHESS','CHEST','GUEST','QUEST','LIGHT','RIGHT','MIGHT','SIGHT','TIGHT','NIGHT','FIGHT','EIGHT','HOUSE','MOUSE','ABOUT','ABOVE','ALONG','ALOUD','BLACK','BLAME','BLANK','BLAST','BLEED','BLINK','BLOCK','BLOND','BLOOD','BLOOM','BOARD','BRAIN','BRAND','BRICK','BRIDE','BRIEF','BRING','BROAD','BROOK','BROOM','BROWN','BUILD','CHAIN','CHAIR','CHAMP','CHEAP','CHEAT','CHECK','CHEEK','CHEER','CHIEF','CHILD','CHILL','CHOSE','CIVIL','CLAIM','CLASS','CLEAN','CLEAR','CLERK','CLICK','CLIFF','CLIMB','CLOCK','CLOSE','CLOTH','CLOUD','COULD','COUNT','COURT','COVER','CRAFT','CRANE','CRASH','CRAZY','CREAM','CREEK','CREPT','CRIED','CRIME','CRISP','CROSS','CROWD','CROWN','CRUEL','CRUSH','CURVE','DAILY','DANCE','DRAFT','DRAIN','DRAMA','DRAWN','DRESS','DRIED','DRIFT','DRINK','DRIVE','DRONE','EARLY','EARTH','ELDER','ELECT','EMPTY','ENEMY','ENJOY','ENTER','ENTRY','EQUAL','EVERY','EXACT','EXIST','EXTRA','FAITH','FALSE','FANCY','FAULT','FAVOR','FENCE','FEVER','FEWER','FIELD','FIFTH','FIFTY','FINAL','FIRST','FLAME','FLASH','FLEET','FLESH','FLOAT','FLOCK','FLOOD','FLOOR','FLOUR','FLUTE','FOCUS','FORCE','FORTH','FORTY','FORUM','FOUND','FRAME','FRESH','FROST','FRUIT','FULLY','GIANT','GLASS','GLOBE','GLORY','GRACE','GRAIN','GRAND','GRANT','GRAPH','GREAT','GREED','GREEN','GRIEF','GROSS','GROUP','GUARD','GUESS','GUIDE','GUILD','HAPPY','HEAVY','HENCE','HORSE','HOTEL','HUMAN','HUMOR','IDEAL','IMAGE','INDEX','INNER','INPUT','ISSUE','JOINT','JUDGE','JUICE','KNIFE','KNOCK','KNOWN','LABEL','LARGE','LASER','LATER','LAUGH','LAYER','LEGAL','LEMON','LEVEL','LIMIT','LINER','LIVER','LOCAL','LODGE','LOOSE','LOWER','LOYAL','LUCKY','LUNAR','LUNCH','MAGIC','MAJOR','MAKER','MARCH','MAYBE','MAYOR','MEDAL','MEDIA','METAL','MINOR','MINUS','MIXED','MODEL','MONEY','MONTH','MORAL','MOTOR','MOUNT','MOUTH','MOVIE','MUSIC','NAVAL','NEEDY','NEVER','NEWLY','NOBLE','NOISE','NORTH','NOTED','NOVEL','NURSE','OCCUR','OFFER','OFTEN','ORDER','OTHER','OUNCE','OUTER','OWNER','PAINT','PAPER','PARTY','PATCH','PEACE','PHONE','PIANO','PIECE','PILOT','PITCH','PLAIN','POINT','POUND','POWER','PRESS','PRICE','PRIME','PRIOR','PRIZE','PROOF','PROUD','PROVE','PUPIL','QUEEN','QUICK','QUIET','QUILT','QUITE','QUOTE','RADAR','RADIO','RAISE','RANCH','RANGE','RAPID','RATIO','READY','REALM','REBEL','REFER','RELAX','REPLY','RIVAL','RIVER','ROBOT','ROUGH','ROUND','ROUTE','ROYAL','RURAL','SAINT','SALAD','SAUCE','SCALE','SCARF','SCENE','SCENT','SCOPE','SENSE','SEVEN','SHAFT','SHAKE','SHALL','SHAME','SHAPE','SHARP','SHEEP','SHEET','SHELF','SHELL','SHIFT','SHINE','SHIRT','SHOCK','SHOOT','SHORE','SHORT','SHOWN','SHRUG','SINCE','SIXTH','SIXTY','SIZED','SKILL','SLIDE','SMALL','SMART','SMILE','SMOKE','SOLID','SOLVE','SORRY','SOUND','SOUTH','SPACE','SPARE','SPEAK','SPEED','SPEND','SPENT','SPILL','SPLIT','SPOIL','SPORT','SPRAY','STAFF','STAGE','STAIN','STAIR','STAKE','STAMP','STAND','STATE','STERN','STICK','STILL','STOCK','STONE','STOOD','STORE','STORY','STRIP','STUDY','STUFF','STYLE','SUGAR','SUITE','SUPER','SWEET','SWIFT','SWING','SWORN','TABLE','TAKEN','TASTE','TAXES','TEETH','TENTH','THANK','THEFT','THEIR','THEME','THERE','THESE','THICK','THIEF','THIGH','THING','THINK','THIRD','THOSE','THREE','THREW','THROW','THUMB','TIMER','TIRED','TITLE','TODAY','TOPIC','TOTAL','TOUCH','TOUGH','TOWER','TRACK','TRAIL','TRAIN','TREAT','TREND','TRIAL','TRIBE','TRICK','TRIED','TRIES','TRUCK','TRULY','TRUNK','TRUST','TRUTH','TWICE','TWIST','UNCLE','UNDER','UNION','UNITY','UNTIL','UPPER','UPSET','URBAN','USAGE','USING','USUAL','VALID','VALUE','VAULT','VENUE','VIDEO','VITAL','VOCAL','VOICE','WASTE','WATCH','WATER','WHEAT','WHEEL','WHERE','WHICH','WHILE','WHITE','WHOLE','WHOSE','WOMAN','WOMEN','WORLD','WORRY','WORSE','WORST','WORTH','WOULD','WOUND','WRIST','WRITE','WRONG','WROTE','YIELD','YOUNG','YOUTH']
+    };
+    Object.keys(WL_WORDS).forEach(k => { WL_WORDS[k] = [...new Set(WL_WORDS[k].map(w => w.toUpperCase()))].filter(w => w.length === +k); });
+    const WL_SETS = {};
+    Object.keys(WL_WORDS).forEach(k => WL_SETS[k] = new Set(WL_WORDS[k]));
+
+    function wlNeighbors(word, wordSet) {
+      const n = [];
+      for (let i = 0; i < word.length; i++) {
+        for (let c = 65; c <= 90; c++) {
+          const letter = String.fromCharCode(c);
+          if (letter === word[i]) continue;
+          const cand = word.slice(0, i) + letter + word.slice(i+1);
+          if (wordSet.has(cand)) n.push(cand);
+        }
+      }
+      return n;
+    }
+    function wlBFS(start, end, wordSet) {
+      if (start === end) return [start];
+      const visited = new Set([start]);
+      const queue = [[start]];
+      while (queue.length) {
+        const path = queue.shift();
+        const node = path[path.length - 1];
+        for (const neigh of wlNeighbors(node, wordSet)) {
+          if (visited.has(neigh)) continue;
+          if (neigh === end) return [...path, neigh];
+          visited.add(neigh);
+          queue.push([...path, neigh]);
+        }
+      }
+      return null;
+    }
+    function wlGenerate(len) {
+      const list = WL_WORDS[len], wordSet = WL_SETS[len];
+      for (let attempt = 0; attempt < 100; attempt++) {
+        const start = list[~~(Math.random() * list.length)];
+        const end = list[~~(Math.random() * list.length)];
+        if (start === end) continue;
+        const path = wlBFS(start, end, wordSet);
+        if (path && path.length >= 4 && path.length <= 8) return { start, end, optimal: path.length - 1 };
+      }
+      if (len === 3) return { start: 'CAT', end: 'DOG', optimal: 3 };
+      if (len === 4) return { start: 'COLD', end: 'WARM', optimal: 4 };
+      return { start: 'HEART', end: 'BEACH', optimal: 5 };
+    }
+
+    let wlLength = 3, wlPuzzle = null, wlHistory = [];
+    let wlSolved = JSON.parse(localStorage.getItem('wordladder_solved') || '0');
+    let wlBest = JSON.parse(localStorage.getItem('wordladder_best') || '{}');
+
+    function resetWordLadder() { wlPuzzle = null; wlHistory = []; }
+
+    function setWlLength(n) {
+      wlLength = n;
+      document.querySelectorAll('.wl-len-pill').forEach(p => p.classList.toggle('active', +p.dataset.len === n));
+      newLadderPuzzle();
+    }
+    function newLadderPuzzle() {
+      wlPuzzle = wlGenerate(wlLength);
+      wlHistory = [wlPuzzle.start];
+      renderWordLadderContent();
+    }
+
+    function renderWordLadderView() {
+      return `
+        <button class="game-back" onclick="backToChillMenu()">← Back to Chill Zone</button>
+        <div class="game-header"><h2>🪜 Word Ladder</h2><p>Change <strong>one letter at a time</strong>. Each step must be a real word.</p></div>
+        <div class="game-toolbar">
+          <button class="game-pill wl-len-pill ${wlLength===3?'active':''}" data-len="3" onclick="setWlLength(3)">3 Letters</button>
+          <button class="game-pill wl-len-pill ${wlLength===4?'active':''}" data-len="4" onclick="setWlLength(4)">4 Letters</button>
+          <button class="game-pill wl-len-pill ${wlLength===5?'active':''}" data-len="5" onclick="setWlLength(5)">5 Letters · Hard</button>
+          <button class="game-new-btn" onclick="newLadderPuzzle()">↻ New Puzzle</button>
+        </div>
+        <div class="game-card">
+          <div id="wl-content"></div>
+        </div>`;
+    }
+
+    function renderWordLadderContent() {
+      const el = document.getElementById('wl-content');
+      if (!el || !wlPuzzle) return;
+      el.innerHTML = `
+        <div class="wl-goal">Get from <strong>${wlPuzzle.start}</strong> to <strong>${wlPuzzle.end}</strong> in as few steps as possible.</div>
+        <div class="wl-ladder" id="wl-ladder"></div>
+        <div class="wl-feedback" id="wl-feedback"></div>
+        <div class="game-controls">
+          <button class="game-btn" onclick="wlUndo()" id="wl-undo">↶ Undo</button>
+          <button class="game-btn" onclick="wlReset()">⟲ Reset</button>
+          <button class="game-btn primary" onclick="wlSubmit()">Submit Step ↵</button>
+        </div>
+        <div class="wl-stats-row">
+          <span>Steps: <strong id="wl-step-count">${wlHistory.length - 1}</strong></span>
+          <span>Best: <strong>${wlBest[wlLength] ?? '—'}</strong></span>
+          <span>Solved: <strong>${wlSolved}</strong></span>
+        </div>
+        <div class="wl-info">Type one letter to change · press <strong>Enter</strong> to submit</div>`;
+      wlRenderLadder();
+    }
+
+    function wlRenderLadder() {
+      const ladder = document.getElementById('wl-ladder');
+      if (!ladder) return;
+      ladder.innerHTML = '';
+      ladder.appendChild(wlRungEl(wlPuzzle.start, 'start', null));
+      for (let i = 1; i < wlHistory.length; i++) {
+        ladder.appendChild(wlArrowEl());
+        ladder.appendChild(wlRungEl(wlHistory[i], 'history', wlHistory[i-1]));
+      }
+      const lastWord = wlHistory[wlHistory.length - 1];
+      if (lastWord !== wlPuzzle.end) {
+        ladder.appendChild(wlArrowEl());
+        ladder.appendChild(wlPreviewRowEl(lastWord));
+        ladder.appendChild(wlArrowEl());
+      }
+      ladder.appendChild(wlRungEl(wlPuzzle.end, 'target', null));
+      const undoBtn = document.getElementById('wl-undo');
+      if (undoBtn) undoBtn.disabled = wlHistory.length <= 1;
+      document.getElementById('wl-step-count').textContent = wlHistory.length - 1;
+      const firstInput = document.querySelector('.wl-preview-input');
+      if (firstInput) firstInput.focus();
+    }
+    function wlRungEl(word, type, compareWord) {
+      const div = document.createElement('div');
+      div.className = `wl-rung ${type}`;
+      for (let i = 0; i < word.length; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'wl-letter';
+        if (compareWord && word[i] !== compareWord[i]) cell.classList.add('changed');
+        cell.textContent = word[i];
+        div.appendChild(cell);
+      }
+      return div;
+    }
+    function wlArrowEl() { const a = document.createElement('div'); a.className = 'wl-arrow'; a.textContent = '↓'; return a; }
+    function wlPreviewRowEl(prevWord) {
+      const div = document.createElement('div');
+      div.className = 'wl-rung preview';
+      for (let i = 0; i < prevWord.length; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'wl-letter';
+        const inp = document.createElement('input');
+        inp.className = 'wl-preview-input';
+        inp.maxLength = 1;
+        inp.value = prevWord[i];
+        inp.dataset.idx = i;
+        inp.addEventListener('input', wlOnLetterInput);
+        inp.addEventListener('keydown', wlOnLetterKey);
+        cell.appendChild(inp);
+        div.appendChild(cell);
+      }
+      return div;
+    }
+    function wlOnLetterInput(e) {
+      const v = e.target.value.toUpperCase().replace(/[^A-Z]/g, '');
+      e.target.value = v;
+      wlValidatePreview();
+      if (v && +e.target.dataset.idx < wlLength - 1) {
+        const next = document.querySelector(`.wl-preview-input[data-idx="${+e.target.dataset.idx + 1}"]`);
+        if (next) next.focus();
+      }
+    }
+    function wlOnLetterKey(e) {
+      if (e.key === 'Enter') { e.preventDefault(); wlSubmit(); }
+      else if (e.key === 'Backspace' && !e.target.value) {
+        const prev = document.querySelector(`.wl-preview-input[data-idx="${+e.target.dataset.idx - 1}"]`);
+        if (prev) prev.focus();
+      } else if (e.key === 'ArrowLeft') {
+        const prev = document.querySelector(`.wl-preview-input[data-idx="${+e.target.dataset.idx - 1}"]`);
+        if (prev) { e.preventDefault(); prev.focus(); }
+      } else if (e.key === 'ArrowRight') {
+        const next = document.querySelector(`.wl-preview-input[data-idx="${+e.target.dataset.idx + 1}"]`);
+        if (next) { e.preventDefault(); next.focus(); }
+      }
+    }
+    function wlReadPreview() {
+      return Array.from(document.querySelectorAll('.wl-preview-input')).map(i => i.value || '_').join('');
+    }
+    function wlValidatePreview() {
+      const candidate = wlReadPreview();
+      const prev = wlHistory[wlHistory.length - 1];
+      const row = document.querySelector('.wl-rung.preview');
+      if (!row) return;
+      if (candidate.includes('_')) { row.classList.remove('invalid'); return; }
+      let diffs = 0;
+      for (let i = 0; i < prev.length; i++) if (prev[i] !== candidate[i]) diffs++;
+      row.querySelectorAll('.wl-letter').forEach((cell, i) => cell.classList.toggle('changed', candidate[i] !== prev[i]));
+      row.classList.toggle('invalid', diffs !== 1);
+    }
+    function wlSubmit() {
+      const candidate = wlReadPreview();
+      const prev = wlHistory[wlHistory.length - 1];
+      const fb = document.getElementById('wl-feedback');
+      if (candidate.includes('_') || candidate.length !== wlLength) { fb.textContent = 'Fill in all letters first.'; fb.className = 'wl-feedback error'; return; }
+      let diffs = 0;
+      for (let i = 0; i < prev.length; i++) if (prev[i] !== candidate[i]) diffs++;
+      if (diffs === 0) { fb.textContent = 'You need to change exactly one letter.'; fb.className = 'wl-feedback error'; return; }
+      if (diffs > 1) { fb.textContent = `That changes ${diffs} letters — only 1 allowed!`; fb.className = 'wl-feedback error'; return; }
+      if (!WL_SETS[wlLength].has(candidate)) { fb.textContent = `"${candidate}" isn't in our word list — try another.`; fb.className = 'wl-feedback error'; return; }
+      if (wlHistory.includes(candidate)) { fb.textContent = 'You already used that word!'; fb.className = 'wl-feedback error'; return; }
+      wlHistory.push(candidate);
+      fb.textContent = ''; fb.className = 'wl-feedback';
+      wlRenderLadder();
+      if (candidate === wlPuzzle.end) wlVictory();
+    }
+    function wlVictory() {
+      const steps = wlHistory.length - 1;
+      wlSolved++;
+      localStorage.setItem('wordladder_solved', JSON.stringify(wlSolved));
+      const key = `${wlLength}`;
+      const prevBest = wlBest[key];
+      if (!prevBest || steps < prevBest) { wlBest[key] = steps; localStorage.setItem('wordladder_best', JSON.stringify(wlBest)); }
+      let extra = '';
+      if (steps === wlPuzzle.optimal) extra = ' That\'s the optimal path! 🌟';
+      else if (steps <= wlPuzzle.optimal + 1) extra = ' Excellent work!';
+      else extra = ` (Optimal was ${wlPuzzle.optimal} — try again!)`;
+      showGameVictory('🪜 You did it!',
+        `You climbed the ladder in <strong>${steps}</strong> step${steps!==1?'s':''}.${extra}`,
+        `<div class="wl-word-path">${wlHistory.join(' → ')}</div><button onclick="newLadderPuzzle();hideGameVictory()" style="background:var(--peri)">Next Puzzle →</button>`);
+    }
+    function wlUndo() { if (wlHistory.length > 1) { wlHistory.pop(); wlRenderLadder(); } }
+    function wlReset() { wlHistory = [wlPuzzle.start]; wlRenderLadder(); document.getElementById('wl-feedback').textContent = ''; }
+
+    // ═══════════════════════════════════════════════
+    // 16. ANAGRAM SPRINT GAME
+    // ═══════════════════════════════════════════════
+    const AS_RAW = `ace act add age ago aid aim air all and any ape apt arc are arm art ash ask ate bad bag bar bat bay bed bee beg bet bid big bit boy bug bun bus but buy bye cab can cap car cat cop cow cry cub cue cup cut dad day den did die dig dim dip dog dot dry due dug dye ear eat eel egg elf elm end era eye fan far fat fed fee few fig fin fit fix flu fly fog for fox fry fun fur gap gas gel gem get got gum gun guy had ham has hat hay her hex hid him hip hit hop hot how hub hue hug hum hut ice icy ill ink inn ire jab jam jaw jet job jog joy key kid kin kit lab lad lap law lay led leg let lid lie lip log lot low mad man map mat may men met mid mix mob mom mop mud mug nap net new nil nip nod nor not now nut oak oar odd oil old one our out owe owl own pad pal pan paw pay pea pen pet pie pig pin pit pop pot pro pry pub pug pun put rag ram ran rap rat raw red rib rid rim rip rob rod rot row rub rug run rye sad sap sat saw say sea see set sew she shy sin sip sit six sky sly sob son sow soy spa spy sub sue sum sun tab tag tan tap tar tax tea ten the tie tin tip toe ton too top toy try tug ugh use vet via vie vow wad wag war was wax way web wed wet who why wig win wit woe won yak yam yap yes yet yew you zap zip zoo able acid aged ages ahem aide aids aims airy ajar akin alas also amid amok arch arms arts atom auto away back bait bake band bang bank bare barn base bath bead beam bean bear beat beds beef been beer bell belt bend best bias bide bike bill bind bird bite bits blew blob blot blue boar boat body boil bold bolt bomb bone book boom boot bore boss both bowl brag brat brew brim brow buds bulb bull bump burn bury bush busy cage cake calf call calm came camp cane cape card care carp cart case cash cast cave cell cent chap chat chef chin chip chop city clad clan clap claw clay clip clog club clue coal coat code coin cold come cone cook cool cope copy cord core corn cost cosy cove crab cram crew crib crop crow cube cuff curb cure curl curt cute dame damp dare dark dash data date dawn days daze dead deaf deal dean dear debt deck deed deep deer deft deli dell dent deny desk dial dice diet dime dine ding dire dirt disc dish dive dock does dome done doom door dope dose dote dots dove down doze drab drag draw drew drop drug drum duck duds duel dues duet duke dull dune dunk dusk dust duty dyed dyes each earl earn ease east easy eats ebbs echo edge edgy edit eels effs eggs egos eked elks else emir ends envy epic eras errs etch even ever eves evil exam exit eyed eyes face fact fade fail fair fake fall fame farm fast fate feat feed feel feet fell felt fern fest feud fiat fife file fill film find fine fink fins fire firm fish fist fits five fizz flag flak flap flat flaw flax flea fled flee flex flip floe flop flow flue flux foal foam foes fold folk fond food fool foot fore fork form fort foul four fowl frat fray free fret frog from full fume fund funk furs fury fuse fuss gain gait gala gale gall game gang gape garb gash gate gave gaze gear geek gels gems gent germ gift gild gill gilt girl gist give glad glee glen glib glow glue gnat goad goal goat gold golf gone good goof goon gore gory gosh gout gown grab gram gray grew grid grim grin grip grit grow grub guff gulf gull gulp gums guns guru gush gust guts guys gyms gyps hack hail hair hale half hall halo halt hand hang hard hare hark harm harp hash hate haul have hawk haze hazy head heal heap hear heat heel heft heir held hell helm help hemp hens herb herd here hero hers hewn hick hide high hike hill hilt hind hint hips hire hiss hits hive hoax hobo hoes hogs hold hole holy home hone honk hood hoof hook hoop hoot hope hops horn hose host hour howl huff hugs huge hulk hull hump hung hunk hunt hurl hurt hush husk hymn hype iced ices icon idea idle idly idol iffy ilks ills imps inch info ions iota ired iris irks iron isle item itch jabs jack jade jail jamb jams jars jaws jays jazz jeep jeer jell jerk jest jets jibe jibs jinx jive jobs jock joey jogs john joke jolt josh joys jugs juke jump junk jury just jute juts keel keen keep kelp kept keys khan kick kids kiln kilo kilt kind king kink kins kips kiss kite kits kiwi knee knit knob knot know labs lace lack lacy lads lady lain lair lake lamb lame lamp land lane laps lard lark lash lass last late laud lava laws lazy lead leaf leak lean leap leek leer legs lend lens lent less lest lets levy liar lice lick lids lied lien lies life lift like lilt lily limb lime limp line link lint lion lips lira list live load loaf loam loan lobe lobs lock loft logs lone long look loom loon loop loot lord lore lose loss lost loud lout love luck luge luff lugs lull lump lung lure lurk lush lust lute luxe lynx lyre mace made magi maid mail maim main make male mall malt mama mane many maps mare mark marl mart mash mask mass mast mate math mats matt maul maws mayo maze mead meal mean meat meek meet mega meld melt memo mend menu meow mere mesa mesh mess meta mete mews mica mice mike mild mile milk mill mils mime mind mine mini mink mint minx mire miss mist mite mitt moan moat mock mode mold mole moll moms monk mood moon moor moos moot mope morn most mote moth move mown mows much muck muff mugs muse mush musk mute myth nabs nags nail name nape naps nary nave navy nays neap near neat neck need nerd ness nest nets news newt next nibs nice nick nine nips nock node nods none nook noon nope norm nose nosh nosy note noun nova nubs nude nuke null numb nuns nuts oafs oaks oars oast oath oats obey obit oboe odds odes ogle ogre oils oily okay okra olds omen once ones only onto onyx ooze oozy opal open opts opus oral orbs orgy ouch ours oust ouzo oval oven over owed owes owls owns oxen pace pack pact pads page paid pail pain pair pale pall palm pals pane pang pant papa para pard pare park parr part pass past pate path pawn paws pays peak peal pear peas peat peck peed peek peel peep peer pegs pelt pent peon perk perp pert pest pets pews pick pied pier pies pigs pike pile pill pimp pine ping pink pint pipe pity plan plat play plea pled plod plop plot plow plug plum plus poem poet pogo poke pole poll polo pomp pond pony pool poop poor pope pops pore pork porn port pose posh post posy pots pour pout pram pray prep prey prim prop prow puce puck puff pugs puke pull pulp puma pump puns punk punt pupa pups pure purl purr push puss putt quad quay quid quip quit quiz race rack racy rage rags raid rail rain rake ramp rams rang rank rant raps rapt rare rash rasp rate rats rave razz read real reap rear redo reds reed reef reek reel rein rely rend rent reps rest revs rice rich ride rids rife riff rift rigs rile rill rime rims rind ring rink riot ripe rips rise risk rite road roam roar robs rock rode rods role roll romp rood roof rook room root rope rose rosy rote rots rout rove rows rube rubs ruby ruck rude rued rues ruff rugs ruin rule rump rune rung runs runt ruse rush rust ruts sack sacs safe saga sage said sail sake sale salt same sand sane sang sank saps sash sass sate save sawn says scab scad scam scan scar scat scon scot scow scud scum scut seal seam sear seas seat sect seed seek seem seen seep seer sees self sell send sent sept serf sets sewn sexy shad shag sham shed shew shim shin ship shod shoe shoo shop shot show shun shut sick side sift sigh sign silk sill silo silt sims sing sink sins sips sire sirs site sits size skid skim skin skip skis slab slag slam slap slat slaw slay sled slew slid slim slip slit slob sloe slog slop slot slow slug slum slur smog smug snag snap snip snit snob snot snow snub snug soak soap soar sobs sock soda sods sofa soft soil sold sole solo some song sons soon soot sops sore sort sots soul soup sour sown soya span spar spas spat spec sped spew spin spit spot spry spud spun spur stab stag star stat stay stem step stew stir stop stow stub stud stun stye such suck suds suet sues suit sulk sumo sumps sums sung sunk suns sups sure surf swab swag swam swan swap swat sway swig swim tabs tack taco tact tags tail take tale talk tall tame tamp tank taps tape tare tarp tart task tats taut taxi teal team tear teas teat teed teem teen tees tell tend tens tent term test text than that thaw them then they thin this thus tick tide tidy tied tier ties tiff tile till tilt time tine tins tint tiny tips tire toad toed toes toff togs toil toke told toll tomb tome toms tone tong tons took tool toot tops tore tort toss tote tots tour tout town tows toys tram trap tray tree trek trim trip trod true tsks tuba tube tubs tuck tuft tugs tune tusk tuts twin twit ugly ulna umps undo unit upon urge used user uses vain vale vamp vane vans vary vase vast veal veep veer veil vein vend vent verb very vest veto vets vial vibe vice vied vies view vile vine viny visa void vote vows wack wade wads waft wage wags waif wail wait wake wale walk wall wand wane want ward ware warm warn warp wart wary wash wasp watt wave wavy waxy ways weak wean wear weds weed week weep weft weir weld well welt wend went wept were west whap what when whet whew whey whim whip whir whit whoa whom whop wick wide wife wigs wild wile will wilt wily wimp wind wine wing wink wins wipe wire wiry wise wish wisp with wits wive woes woke wold wolf wont wood woof wool woos word wore work worm worn wort wove wows wrap wren writ wuss yack yams yank yaps yard yarn yawn yawp yeah year yeas yell yelp yens yips yoga yogi yoke yolk yore your yowl zany zaps zeal zebu zero zest zinc zing zips zone zoom zoos`;
+    const AS_VALID = new Set(AS_RAW.trim().split(/\s+/).map(w => w.toUpperCase()));
+
+    const AS_POOLS = {
+      easy:   ['STAR', 'NEAT', 'PALE', 'CARE', 'TIME', 'ROSE', 'NOTE', 'LIME', 'TEAR', 'DEAL'],
+      medium: ['STARE', 'TRAIN', 'PLATE', 'HEART', 'STONE', 'TABLE', 'GRACE', 'BREAD', 'CHEAT', 'NORTH', 'STEAM', 'TRADE', 'PLANE', 'LATER', 'EARTH', 'SHARE'],
+      hard:   ['TRAINS', 'LISTEN', 'STREAM', 'SPRINT', 'MASTER', 'PARENT', 'PLATES', 'STARED', 'CASTLE', 'LEADER', 'STAINS', 'POSTER']
+    };
+
+    function asCanForm(word, letters) {
+      const counts = {};
+      for (const c of letters) counts[c] = (counts[c] || 0) + 1;
+      for (const c of word) { if (!counts[c]) return false; counts[c]--; }
+      return true;
+    }
+    function asFindAllValid(letters) {
+      const result = [];
+      for (const word of AS_VALID) {
+        if (word.length < 3) continue;
+        if (word.length > letters.length) continue;
+        if (asCanForm(word, letters)) result.push(word);
+      }
+      return result.sort((a, b) => b.length - a.length || a.localeCompare(b));
+    }
+    function asPickPool(diff) {
+      const pools = AS_POOLS[diff];
+      for (let attempt = 0; attempt < 8; attempt++) {
+        const candidate = pools[~~(Math.random() * pools.length)];
+        const valid = asFindAllValid(candidate);
+        const min = diff === 'easy' ? 6 : diff === 'medium' ? 12 : 18;
+        if (valid.length >= min) return { letters: candidate, valid };
+      }
+      const candidate = pools[0];
+      return { letters: candidate, valid: asFindAllValid(candidate) };
+    }
+    function asPointsFor(word) {
+      const len = word.length;
+      if (len === 3) return 1;
+      if (len === 4) return 3;
+      if (len === 5) return 6;
+      if (len === 6) return 10;
+      if (len === 7) return 15;
+      return 20;
+    }
+
+    let asDifficulty = 'medium', asPool = '', asValid = [], asFound = [], asScore = 0;
+    let asTimeLeft = 60, asTimer = null, asView = 'start';
+    const asHi = JSON.parse(localStorage.getItem('anagram_hi') || '{}');
+
+    function resetAnagram() { asView = 'start'; if (asTimer) { clearInterval(asTimer); asTimer = null; } asFound = []; asScore = 0; }
+
+    function renderAnagramView() {
+      return `
+        <button class="game-back" onclick="backToChillMenu()">← Back to Chill Zone</button>
+        <div class="game-header"><h2>⚡ Anagram Sprint</h2><p>Find as many words as you can — beat the clock!</p></div>
+        <div class="game-card" id="as-content"></div>`;
+    }
+
+    function anagramShowStart() {
+      asView = 'start';
+      const el = document.getElementById('as-content');
+      if (!el) return;
+      const hi = asHi[asDifficulty] || 0;
+      el.innerHTML = `
+        <div class="as-start-row">
+          <p style="color:var(--muted);margin-bottom:6px">Pick your difficulty</p>
+          <div class="as-diff-row">
+            <div class="as-diff-card ${asDifficulty==='easy'?'active':''}" onclick="setAsDiff('easy')">
+              <div class="name">🌱 Easy</div><div class="desc">4 letters · 90 sec<br>Middle school friendly</div>
+            </div>
+            <div class="as-diff-card ${asDifficulty==='medium'?'active':''}" onclick="setAsDiff('medium')">
+              <div class="name">⚡ Medium</div><div class="desc">5 letters · 75 sec<br>The classic mode</div>
+            </div>
+            <div class="as-diff-card ${asDifficulty==='hard'?'active':''}" onclick="setAsDiff('hard')">
+              <div class="name">🔥 Hard</div><div class="desc">6 letters · 60 sec<br>For word lovers</div>
+            </div>
+          </div>
+          <button class="as-start-btn" onclick="anagramStart()">Start Sprint →</button>
+          <div class="as-hi-score">High score (${asDifficulty}): <strong>${hi}</strong> points</div>
+        </div>`;
+    }
+    function setAsDiff(d) { asDifficulty = d; anagramShowStart(); }
+
+    function anagramStart() {
+      const setup = asPickPool(asDifficulty);
+      asPool = setup.letters.split('').sort(() => Math.random() - 0.5).join('');
+      asValid = setup.valid;
+      asFound = []; asScore = 0;
+      asTimeLeft = asDifficulty === 'easy' ? 90 : asDifficulty === 'medium' ? 75 : 60;
+      asView = 'play';
+      anagramRenderGame();
+      if (asTimer) clearInterval(asTimer);
+      asTimer = setInterval(() => {
+        asTimeLeft--;
+        const tEl = document.getElementById('as-time');
+        if (tEl) tEl.textContent = asTimeLeft;
+        if (asTimeLeft <= 10) document.getElementById('as-hud-timer')?.classList.add('warn');
+        if (asTimeLeft <= 0) anagramEnd();
+      }, 1000);
+    }
+
+    function anagramRenderGame() {
+      const el = document.getElementById('as-content');
+      if (!el) return;
+      const tilesHTML = asPool.split('').map((c, i) => `<div class="as-letter-tile" data-idx="${i}" onclick="asAddLetter(${i})">${c}</div>`).join('');
+      el.innerHTML = `
+        <div class="as-hud">
+          <div class="as-hud-stat"><div class="label">Score</div><div class="val" id="as-score">${asScore}</div></div>
+          <div class="as-hud-stat"><div class="label">Found</div><div class="val" id="as-found">${asFound.length} / ${asValid.length}</div></div>
+          <div class="as-hud-stat timer" id="as-hud-timer"><div class="label">Time</div><div class="val" id="as-time">${asTimeLeft}</div></div>
+        </div>
+        <div class="as-letters" id="as-letters">${tilesHTML}</div>
+        <button class="as-shuffle-btn" onclick="asShuffle()">🔀 Shuffle</button>
+        <div class="as-input-area">
+          <input type="text" class="as-word-input" id="as-input" placeholder="Type a word…" autocomplete="off" oninput="asTyping()" onkeydown="asKey(event)">
+          <button class="as-submit-btn" onclick="asSubmit()">Submit</button>
+        </div>
+        <div class="as-feedback" id="as-feedback"></div>
+        <div class="as-found-words"><div class="as-found-label">Words found</div><div id="as-found-list" class="as-found-list"></div></div>`;
+      const inp = document.getElementById('as-input');
+      if (inp) inp.focus();
+      asRefreshFound();
+    }
+    function asTyping() {
+      const input = document.getElementById('as-input');
+      if (!input) return;
+      const v = input.value.toUpperCase().replace(/[^A-Z]/g, '');
+      input.value = v;
+      const used = {};
+      for (const c of v) used[c] = (used[c] || 0) + 1;
+      const tiles = document.querySelectorAll('.as-letter-tile');
+      const seen = {};
+      tiles.forEach(t => { const c = t.textContent; seen[c] = (seen[c] || 0) + 1; t.classList.toggle('used', seen[c] <= (used[c] || 0)); });
+    }
+    function asKey(e) { if (e.key === 'Enter') { e.preventDefault(); asSubmit(); } }
+    function asAddLetter(idx) {
+      const input = document.getElementById('as-input');
+      const tiles = document.querySelectorAll('.as-letter-tile');
+      const tile = tiles[idx];
+      if (tile.classList.contains('used')) return;
+      input.value = (input.value + asPool[idx]).toUpperCase();
+      asTyping();
+      input.focus();
+    }
+    function asSubmit() {
+      const input = document.getElementById('as-input');
+      const word = input.value.toUpperCase().trim();
+      if (!word) return;
+      if (word.length < 3) { asShowFb('Words must be at least 3 letters.', 'error'); return; }
+      if (!asCanForm(word, asPool)) { asShowFb(`Can't make "${word}" from those letters.`, 'error'); return; }
+      if (asFound.includes(word)) { asShowFb(`Already found "${word}"!`, 'error'); return; }
+      if (!AS_VALID.has(word)) { asShowFb(`"${word}" isn't in our word list.`, 'error'); return; }
+      const pts = asPointsFor(word);
+      asFound.push(word);
+      asScore += pts;
+      document.getElementById('as-score').textContent = asScore;
+      document.getElementById('as-found').textContent = `${asFound.length} / ${asValid.length}`;
+      const isPangram = word.length === asPool.length;
+      asShowFb(`+${pts} points · ${word}${isPangram ? ' · PANGRAM! 🌟' : ''}`, 'success');
+      input.value = ''; asTyping(); asRefreshFound();
+      if (asFound.length === asValid.length) anagramEnd();
+    }
+    function asShowFb(msg, cls) {
+      const fb = document.getElementById('as-feedback');
+      if (!fb) return;
+      fb.textContent = msg; fb.className = `as-feedback ${cls}`;
+      setTimeout(() => { if (fb.textContent === msg) fb.className = 'as-feedback'; }, 1200);
+    }
+    function asRefreshFound() {
+      const list = document.getElementById('as-found-list');
+      if (!list) return;
+      if (asFound.length === 0) { list.innerHTML = '<div class="as-found-empty">Find your first word to get started…</div>'; return; }
+      const sorted = [...asFound].sort((a, b) => b.length - a.length || a.localeCompare(b));
+      list.innerHTML = sorted.map(w => `<span class="as-found-pill ${w.length === asPool.length ? 'bonus' : ''}">${w}</span>`).join('');
+    }
+    function asShuffle() {
+      const arr = asPool.split('');
+      for (let i = arr.length - 1; i > 0; i--) { const j = ~~(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; }
+      asPool = arr.join('');
+      const ltrs = document.getElementById('as-letters');
+      if (ltrs) ltrs.innerHTML = asPool.split('').map((c, i) => `<div class="as-letter-tile" data-idx="${i}" onclick="asAddLetter(${i})">${c}</div>`).join('');
+      asTyping();
+    }
+    function anagramEnd() {
+      if (asTimer) { clearInterval(asTimer); asTimer = null; }
+      const isHi = (asHi[asDifficulty] || 0) < asScore;
+      if (isHi) { asHi[asDifficulty] = asScore; localStorage.setItem('anagram_hi', JSON.stringify(asHi)); }
+      const missed = asValid.filter(w => !asFound.includes(w));
+      const missedHTML = missed.length
+        ? missed.slice(0, 30).map(w => `<span class="miss">${w}</span>`).join('')
+        : '<span style="color:var(--green);font-weight:600">You found them all! 🌟</span>';
+      const el = document.getElementById('as-content');
+      if (!el) return;
+      el.innerHTML = `
+        <div class="as-end-screen">
+          <h2>${asFound.length === asValid.length ? '🏆 Perfect!' : "⏰ Time's up!"}</h2>
+          <div class="as-final-score">${asScore}</div>
+          <div class="as-final-label">Final Score${isHi ? ' · <span class="as-new-high">NEW HIGH! ⭐</span>' : ''}</div>
+          <div class="as-stat-grid">
+            <div class="as-stat-cell"><div class="n">${asFound.length}</div><div class="l">Words Found</div></div>
+            <div class="as-stat-cell"><div class="n">${asValid.length}</div><div class="l">Total Possible</div></div>
+            <div class="as-stat-cell"><div class="n">${Math.round(asFound.length / asValid.length * 100)}%</div><div class="l">Completion</div></div>
+          </div>
+          <div class="as-missed-section">
+            <div class="label">${missed.length ? `Words you missed (showing ${Math.min(missed.length, 30)} of ${missed.length})` : 'Status'}</div>
+            <div class="as-missed-list">${missedHTML}</div>
+          </div>
+          <button class="as-start-btn" style="margin-top:16px" onclick="anagramShowStart()">Play Again →</button>
+        </div>`;
+    }
   </script>
 </body>
-
 </html>
